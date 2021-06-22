@@ -13,5 +13,5 @@ it('Navbar loads correctly', () => {
       </Router>
     </Provider>
   )
-  cy.contains('ShopJS')
+  cy.contains('Gloo')
 })

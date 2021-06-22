@@ -14,5 +14,5 @@ it('Footer loads correctly', () => {
     </Provider>
   )
 
-  cy.contains('Copyright © ShopJS')
+  cy.contains('Copyright © Gloo')
 })
