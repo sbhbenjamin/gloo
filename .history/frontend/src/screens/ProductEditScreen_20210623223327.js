@@ -22,7 +22,9 @@ const ProductEditScreen = ({ match, history }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  // const [brand, setBrand] = useState('')
   const [category, setCategory] = useState("");
+  // const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
 
@@ -45,13 +47,8 @@ const ProductEditScreen = ({ match, history }) => {
     success: successDelete,
   } = productDelete;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/");
-    } else if (successUpdate) {
+    if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       history.goBack();
     } else if (successDelete) {
@@ -64,19 +61,13 @@ const ProductEditScreen = ({ match, history }) => {
         setName(product.name);
         setPrice(product.price);
         setImage(product.image);
+        // setBrand(product.brand)
         setCategory(product.category);
+        // setCountInStock(product.countInStock)
         setDescription(product.description);
       }
     }
-  }, [
-    dispatch,
-    history,
-    productId,
-    product,
-    successUpdate,
-    successDelete,
-    userInfo,
-  ]);
+  }, [dispatch, history, productId, product, successUpdate, successDelete]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -109,8 +100,10 @@ const ProductEditScreen = ({ match, history }) => {
         name,
         price,
         image,
+        // brand,
         category,
         description,
+        // countInStock,
       })
     );
   };
@@ -141,7 +134,6 @@ const ProductEditScreen = ({ match, history }) => {
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control
-                data-testid="edit-name"
                 type="name"
                 placeholder="Enter name"
                 value={name}
@@ -151,7 +143,6 @@ const ProductEditScreen = ({ match, history }) => {
             <Form.Group controlId="price">
               <Form.Label>Price</Form.Label>
               <Form.Control
-                data-testid="edit-price"
                 type="number"
                 placeholder="Enter price"
                 value={price}
@@ -161,7 +152,6 @@ const ProductEditScreen = ({ match, history }) => {
             <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                data-testid="edit-image"
                 type="text"
                 placeholder="Enter image url"
                 value={image}
@@ -175,10 +165,27 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.File>
               {uploading && <Loader />}
             </Form.Group>
+            {/* <Form.Group controlId='brand'>
+              <Form.Label>Brand</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter brand'
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId='countInStock'>
+              <Form.Label>Count in Stock</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter count in stock'
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
+              ></Form.Control>
+            </Form.Group> */}
             <Form.Group controlId="category">
               <Form.Label>Category</Form.Label>
               <Form.Control
-                data-testid="edit-category"
                 type="text"
                 placeholder="Enter category"
                 value={category}
@@ -188,23 +195,16 @@ const ProductEditScreen = ({ match, history }) => {
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
               <Form.Control
-                data-testid="edit-description"
                 type="text"
                 placeholder="Enter description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Button
-              data-testid="edit-submit"
-              type="submit"
-              variant="success"
-              className="mt-2 me-2"
-            >
+            <Button type="submit" variant="success" className="mt-2 me-2">
               Update
             </Button>
             <Button
-              data-testid="edit-delete"
               type="button"
               variant="danger"
               className="mt-2"

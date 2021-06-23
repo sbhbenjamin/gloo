@@ -12,7 +12,9 @@ const ProductCreateScreen = ({ match, history }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  // const [brand, setBrand] = useState('')
   const [category, setCategory] = useState("");
+  // const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
 
@@ -70,7 +72,9 @@ const ProductCreateScreen = ({ match, history }) => {
         name,
         price,
         image,
+        // brand,
         category,
+        // countInStock,
         description,
       })
     );
@@ -78,11 +82,7 @@ const ProductCreateScreen = ({ match, history }) => {
 
   return (
     <>
-      <Button
-        data-testid="navigate-back-btn"
-        onClick={history.goBack}
-        variant="outline-secondary"
-      >
+      <Button onClick={history.goBack} variant="outline-secondary">
         Go Back
       </Button>
       <FormContainer>
@@ -93,7 +93,6 @@ const ProductCreateScreen = ({ match, history }) => {
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
-              data-testid="product-name"
               type="name"
               placeholder="Enter name"
               value={name}
@@ -104,7 +103,6 @@ const ProductCreateScreen = ({ match, history }) => {
           <Form.Group controlId="price">
             <Form.Label>Price</Form.Label>
             <Form.Control
-              data-testid="product-price"
               type="number"
               placeholder="Enter price"
               value={price}
@@ -115,7 +113,6 @@ const ProductCreateScreen = ({ match, history }) => {
           <Form.Group controlId="image">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              data-testid="product-image"
               type="text"
               placeholder="Enter image url"
               value={image}
@@ -133,15 +130,14 @@ const ProductCreateScreen = ({ match, history }) => {
           {/* <Form.Group controlId='brand'>
             <Form.Label>Brand</Form.Label>
             <Form.Control
-            
               type='text'
               placeholder='Enter brand'
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
             ></Form.Control>
-          </Form.Group> */}
+          </Form.Group>
 
-          {/* <Form.Group controlId='countInStock'>
+          <Form.Group controlId='countInStock'>
             <Form.Label>Count in Stock</Form.Label>
             <Form.Control
               type='text'
@@ -154,7 +150,6 @@ const ProductCreateScreen = ({ match, history }) => {
           <Form.Group controlId="category">
             <Form.Label>Category</Form.Label>
             <Form.Control
-              data-testid="product-category"
               type="text"
               placeholder="Enter category"
               value={category}
@@ -165,7 +160,6 @@ const ProductCreateScreen = ({ match, history }) => {
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              data-testid="product-description"
               type="text"
               placeholder="Enter description"
               value={description}
@@ -173,12 +167,7 @@ const ProductCreateScreen = ({ match, history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Button
-            data-testid="product-submit"
-            className="mt-2"
-            type="submit"
-            variant="primary"
-          >
+          <Button className="mt-2" type="submit" variant="primary">
             Create
           </Button>
         </Form>
