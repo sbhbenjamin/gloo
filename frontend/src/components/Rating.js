@@ -15,19 +15,39 @@ const Rating = ({ value, text, color }) => {
   return (
     <div className='rating'>
       <span>
-        <i style={{ color }} className={starClass(1, 0.5)}></i>
+        <i
+          data-testid='star-1'
+          style={{ color }}
+          className={starClass(1, 0.5)}
+        ></i>
       </span>
       <span>
-        <i style={{ color }} className={starClass(2, 1.5)}></i>
+        <i
+          data-testid='star-2'
+          style={{ color }}
+          className={starClass(2, 1.5)}
+        ></i>
       </span>
       <span>
-        <i style={{ color }} className={starClass(3, 2.5)}></i>
+        <i
+          data-testid='star-3'
+          style={{ color }}
+          className={starClass(3, 2.5)}
+        ></i>
       </span>
       <span>
-        <i style={{ color }} className={starClass(4, 3.5)}></i>
+        <i
+          data-testid='star-4'
+          style={{ color }}
+          className={starClass(4, 3.5)}
+        ></i>
       </span>
       <span>
-        <i style={{ color }} className={starClass(5, 4.5)}></i>
+        <i
+          data-testid='star-5'
+          style={{ color }}
+          className={starClass(5, 4.5)}
+        ></i>
       </span>
       <span>{text && text}</span>
     </div>

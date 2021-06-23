@@ -36,9 +36,13 @@ h3 {
   margin: 0.1rem;
 }
 
-a {
+.card-body a {
   text-decoration: none;
   color: black;
+}
+
+a {
+  text-decoration: none;
 }
 
 .profile-btn {

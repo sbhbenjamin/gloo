@@ -26,14 +26,20 @@ const Header = () => {
       >
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand className='navbar-brand'>Gloo</Navbar.Brand>
+            <Navbar.Brand className='navbar-brand' data-testid='navbar-brand'>
+              Gloo
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='ms-auto'>
               {userInfo && (
-                <LinkContainer disabled to='/favourites'>
+                <LinkContainer
+                  disabled
+                  to='/favourites'
+                  data-testid='navbar-favourites'
+                >
                   <Nav.Link>
                     <i className='fas fa-heart'></i>
                     Favourites
@@ -41,7 +47,7 @@ const Header = () => {
                 </LinkContainer>
               )}
 
-              <LinkContainer to='/cart'>
+              <LinkContainer to='/cart' data-testid='navbar-cart'>
                 <Nav.Link>
                   <i className='fas fa-shopping-cart'></i>
                   Cart
@@ -56,16 +62,25 @@ const Header = () => {
                 </LinkContainer>
               )} */}
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
+                <NavDropdown
+                  title={userInfo.name}
+                  id='username'
+                  data-testid='navbar-username'
+                >
                   <LinkContainer to='/profile'>
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                    <NavDropdown.Item data-testid='navbar-profile'>
+                      Profile
+                    </NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
+                  <NavDropdown.Item
+                    onClick={logoutHandler}
+                    data-testid='navbar-logout'
+                  >
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to='/login'>
+                <LinkContainer to='/login' data-testid='navbar-signin'>
                   <Nav.Link>
                     <i className='fas fa-user'></i>
                     Sign In
@@ -75,13 +90,19 @@ const Header = () => {
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
                   <LinkContainer to='/admin/userlist'>
-                    <NavDropdown.Item>Users</NavDropdown.Item>
+                    <NavDropdown.Item data-testid='admin-users'>
+                      Users
+                    </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to='/admin/productlist'>
-                    <NavDropdown.Item>Products</NavDropdown.Item>
+                    <NavDropdown.Item data-testid='admin-products'>
+                      Products
+                    </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to='/admin/orderlist'>
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                    <NavDropdown.Item data-testid='admin-orders'>
+                      Orders
+                    </NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}
@@ -91,7 +112,9 @@ const Header = () => {
           {userInfo && (
             <LinkContainer to='/new'>
               <Nav.Link>
-                <Button variant='primary'>Add Product</Button>
+                <Button variant='primary' data-testid='navbar-addproduct'>
+                  Add Product
+                </Button>
               </Nav.Link>
             </LinkContainer>
           )}

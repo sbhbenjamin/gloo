@@ -59,7 +59,11 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <>
-      <Link className='btn btn-outline-secondary my-3' to='/'>
+      <Link
+        data-testid='back-btn'
+        className='btn btn-outline-secondary my-3'
+        to='/'
+      >
         Go Back
       </Link>
       {loading ? (
@@ -117,7 +121,7 @@ const ProductScreen = ({ history, match }) => {
                   <ListGroup.Item>
                     <Row>
                       <Col>Status: </Col>
-                      <Col>
+                      <Col data-testid='availability'>
                         {product.available ? 'In Stock' : 'Out Of Stock'}
                       </Col>
                     </Row>
@@ -152,6 +156,7 @@ const ProductScreen = ({ history, match }) => {
                       <ListGroup.Item className='d-grid gap-2'>
                         <div className='d-grid gap-2'>
                           <Button
+                            data-testid='listing-edit-btn'
                             onClick={editHandler}
                             className='btn btn-success'
                             type='button'
@@ -164,6 +169,7 @@ const ProductScreen = ({ history, match }) => {
                       <ListGroup.Item className='d-grid gap-2'>
                         <div className='d-grid gap-2'>
                           <Button
+                            data-testid='addtocart-btn'
                             onClick={addToCartHandler}
                             className='btn'
                             type='button'
@@ -191,6 +197,7 @@ const ProductScreen = ({ history, match }) => {
                     <Form.Group controlId='rating'>
                       <Form.Label>Rating</Form.Label>
                       <Form.Control
+                        data-testid='rating-selector'
                         as='select'
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
@@ -206,13 +213,18 @@ const ProductScreen = ({ history, match }) => {
                     <Form.Group controlId='comment'>
                       <Form.Label>Comment</Form.Label>
                       <Form.Control
+                        data-testid='rating-input'
                         as='textarea'
                         row='3'
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                       ></Form.Control>
                     </Form.Group>
-                    <Button type='submit' variant='primary'>
+                    <Button
+                      data-testid='rating-submit'
+                      type='submit'
+                      variant='primary'
+                    >
                       Submit
                     </Button>
                   </Form>

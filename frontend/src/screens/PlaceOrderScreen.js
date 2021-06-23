@@ -60,23 +60,30 @@ const PlaceOrderScreen = ({ history }) => {
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>Shipping</h2>
-              <p>
-                <strong>Address:</strong> {cart.shippingAddress.address},{' '}
-                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},{' '}
-                {cart.shippingAddress.country}
+              <p data-testid='order-address'>
+                <strong>Address:</strong>{' '}
+                <span data-testid='order-address'>
+                  {cart.shippingAddress.address}, {cart.shippingAddress.city},{' '}
+                  {cart.shippingAddress.postalCode},{' '}
+                  {cart.shippingAddress.country}
+                </span>
               </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <strong>Method: </strong>
-              {cart.paymentMethod}
+              <span data-testid='order-paymentmethod'>
+                {cart.paymentMethod}
+              </span>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Order Items</h2>
               {cart.cartItems.length === 0 ? (
-                <Message>Your cart is empty</Message>
+                <Message data-testid='order-message'>
+                  Your cart is empty
+                </Message>
               ) : (
                 <ListGroup variant='flush'>
                   {cart.cartItems.map((item, index) => (
@@ -84,6 +91,7 @@ const PlaceOrderScreen = ({ history }) => {
                       <Row>
                         <Col md={1}>
                           <Image
+                            data-testid='order-image'
                             src={item.image}
                             alt={item.name}
                             fluid
@@ -91,7 +99,10 @@ const PlaceOrderScreen = ({ history }) => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/product/${cart.product}`}>
+                          <Link
+                            data-testid='order-name'
+                            to={`/product/${cart.product}`}
+                          >
                             {item.name}
                           </Link>
                         </Col>
@@ -118,37 +129,46 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col data-testid='order-products-price'>
+                    ${cart.itemsPrice}
+                  </Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col data-testid='order-shipping-price'>
+                    ${cart.shippingPrice}
+                  </Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col data-testid='order-tax-price'>${cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col data-testid='order-total-price'>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                {error && <Message variant='danger'>{error}</Message>}
-              </ListGroup.Item>
+              {error && (
+                <ListGroup.Item>
+                  <Message data-testid='order-message' variant='danger'>
+                    {error}
+                  </Message>
+                </ListGroup.Item>
+              )}
 
               <ListGroup.Item>
                 <Button
+                  data-testid='order-submit-btn'
                   type='button'
                   size='lg'
                   disabled={cart.cartItems === 0}

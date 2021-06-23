@@ -63,6 +63,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
+              data-testid='update-name'
               type='name'
               placeholder='Enter Name'
               value={name}
@@ -73,6 +74,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='email'>
             <Form.Label>Email Address</Form.Label>
             <Form.Control
+              data-testid='update-email'
               type='email'
               placeholder='Enter Email'
               value={email}
@@ -83,6 +85,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='password'>
             <Form.Label>Password</Form.Label>
             <Form.Control
+              data-testid='update-password'
               type='password'
               placeholder='Enter Password'
               value={password}
@@ -93,6 +96,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='confirmPassword'>
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
+              data-testid='update-confirmpassword'
               type='password'
               placeholder='Confirm Password'
               value={confirmPassword}
@@ -101,6 +105,7 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Button
+            data-testid='update-submit'
             type='submit'
             variant='outline-primary'
             className='profile-btn'
@@ -149,7 +154,11 @@ const ProfileScreen = ({ location, history }) => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button variant='outline-secondary' className='btn-sm'>
+                      <Button
+                        data-testid='order-details'
+                        variant='outline-secondary'
+                        className='btn-sm'
+                      >
                         Details
                       </Button>
                     </LinkContainer>

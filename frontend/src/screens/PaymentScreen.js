@@ -32,6 +32,7 @@ const PaymentScreen = ({ history }) => {
           <Form.Label as='legend'>Select Method</Form.Label>
           <Col>
             <Form.Check
+              data-testid='payment-radio'
               type='radio'
               label='PayPal or Credit Card'
               id='PayPal'
@@ -51,7 +52,11 @@ const PaymentScreen = ({ history }) => {
           </Col>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
+        <Button
+          data-testid='payment-continue-btn'
+          type='submit'
+          variant='primary'
+        >
           Continue
         </Button>
       </Form>

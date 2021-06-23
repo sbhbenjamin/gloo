@@ -46,6 +46,7 @@ const RegisterScreen = ({ location, history }) => {
         <Form.Group controlId='name'>
           <Form.Label>Name</Form.Label>
           <Form.Control
+            data-testid='register-name'
             type='name'
             placeholder='Enter Name'
             value={name}
@@ -56,6 +57,7 @@ const RegisterScreen = ({ location, history }) => {
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
+            data-testid='register-email'
             type='email'
             placeholder='Enter Email'
             value={email}
@@ -66,6 +68,7 @@ const RegisterScreen = ({ location, history }) => {
         <Form.Group controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
+            data-testid='register-password'
             type='password'
             placeholder='Enter Password'
             value={password}
@@ -76,6 +79,7 @@ const RegisterScreen = ({ location, history }) => {
         <Form.Group controlId='confirmPassword'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
+            data-testid='register-confirmpassword'
             type='password'
             placeholder='Confirm Password'
             value={confirmPassword}
@@ -83,7 +87,12 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button className='mt-2' type='submit' variant='primary'>
+        <Button
+          data-testid='register-btn'
+          className='mt-2'
+          type='submit'
+          variant='primary'
+        >
           Register
         </Button>
       </Form>
@@ -91,7 +100,10 @@ const RegisterScreen = ({ location, history }) => {
       <Row className='py-3'>
         <Col>
           Have an Account?{' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+          <Link
+            data-testid='login-redirect'
+            to={redirect ? `/login?redirect=${redirect}` : '/login'}
+          >
             Login
           </Link>
         </Col>

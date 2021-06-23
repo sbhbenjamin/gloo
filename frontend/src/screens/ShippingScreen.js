@@ -30,6 +30,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='address'>
           <Form.Label>Address</Form.Label>
           <Form.Control
+            data-testid='shipping-address'
             type='text'
             placeholder='Enter Address'
             value={address}
@@ -41,6 +42,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='city'>
           <Form.Label>City</Form.Label>
           <Form.Control
+            data-testid='shipping-city'
             type='text'
             placeholder='Enter City'
             value={city}
@@ -52,6 +54,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='postalCode'>
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
+            data-testid='shipping-postalcode'
             type='text'
             placeholder='Enter Postal Code'
             value={postalCode}
@@ -63,6 +66,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='country'>
           <Form.Label>Country</Form.Label>
           <Form.Control
+            data-testid='shipping-country'
             type='text'
             placeholder='Enter Country'
             value={country}
@@ -71,7 +75,11 @@ const ShippingScreen = ({ history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
+        <Button
+          data-testid='shipping-continue-btn'
+          type='submit'
+          variant='primary'
+        >
           Continue
         </Button>
       </Form>

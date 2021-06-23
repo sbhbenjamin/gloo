@@ -38,6 +38,7 @@ const LoginScreen = ({ location, history }) => {
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
+            data-testid='login-email'
             type='email'
             placeholder='Enter Email'
             value={email}
@@ -48,6 +49,7 @@ const LoginScreen = ({ location, history }) => {
         <Form.Group controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
+            data-testid='login-password'
             type='password'
             placeholder='Enter Password'
             value={password}
@@ -55,7 +57,12 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button className='mt-2' type='submit' variant='primary'>
+        <Button
+          data-testid='login-btn'
+          className='mt-2'
+          type='submit'
+          variant='primary'
+        >
           Sign In
         </Button>
       </Form>
@@ -63,7 +70,10 @@ const LoginScreen = ({ location, history }) => {
       <Row className='py-3'>
         <Col>
           New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+          <Link
+            data-testid='register-redirect'
+            to={redirect ? `/register?redirect=${redirect}` : '/register'}
+          >
             Register
           </Link>
         </Col>
