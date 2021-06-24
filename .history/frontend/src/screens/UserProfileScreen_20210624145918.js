@@ -27,9 +27,6 @@ const UserProfileScreen = ({ match }) => {
     products,
   } = productListUser;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   useEffect(() => {
     dispatch(listUserProducts(userId));
     dispatch(getUserDetailsPublic(userId));
@@ -37,6 +34,7 @@ const UserProfileScreen = ({ match }) => {
 
   return (
     <>
+      {products.length}
       <Meta title={userId} />
       {loadingUserDetails ? (
         <Loader />
@@ -53,26 +51,11 @@ const UserProfileScreen = ({ match }) => {
         <Message variant="danger">{errorProducts}</Message>
       ) : (
         <Row>
-          {products.length === 0 ? (
-            <p>
-              {userInfo
-                ? userInfo._id === user._id
-                  ? "You do not have any listings"
-                  : "This user does not currently have any listings"
-                : "This user does not currently have any listings"}
-            </p>
-          ) : (
-            products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
-              </Col>
-            ))
-          )}
-          {/* {products.map((product) => (
+          {products.map((product) => (
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
               <Product product={product} />
             </Col>
-          ))} */}
+          ))}
         </Row>
       )}
     </>

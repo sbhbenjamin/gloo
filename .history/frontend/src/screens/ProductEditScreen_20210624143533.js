@@ -223,7 +223,7 @@ const ProductEditScreen = ({ match, history }) => {
       </Message>
     )
   ) : (
-    ""
+    "Please Login to view this page"
   );
 };
 

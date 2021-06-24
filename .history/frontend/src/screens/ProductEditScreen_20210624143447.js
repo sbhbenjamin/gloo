@@ -219,11 +219,11 @@ const ProductEditScreen = ({ match, history }) => {
       </>
     ) : (
       <Message variant="danger">
-        Unauthorised Access of Product Edit Page
+        Unauthorised access of product edit page
       </Message>
     )
   ) : (
-    ""
+    "Please Login to view this page"
   );
 };
 

@@ -57,7 +57,7 @@ const Product = ({ product }) => {
   };
 
   return (
-    <Card className="my-3 rounded d-flex flex-column">
+    <Card className="my-3 rounded d-flex flex-column h-80">
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant="top" />
       </Link>

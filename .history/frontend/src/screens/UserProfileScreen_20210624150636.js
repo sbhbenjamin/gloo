@@ -27,9 +27,6 @@ const UserProfileScreen = ({ match }) => {
     products,
   } = productListUser;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   useEffect(() => {
     dispatch(listUserProducts(userId));
     dispatch(getUserDetailsPublic(userId));
@@ -54,12 +51,8 @@ const UserProfileScreen = ({ match }) => {
       ) : (
         <Row>
           {products.length === 0 ? (
-            <p>
-              {userInfo
-                ? userInfo._id === user._id
-                  ? "You do not have any listings"
-                  : "This user does not currently have any listings"
-                : "This user does not currently have any listings"}
+            <p paddingTop="500px">
+              This user does not currently have any listings
             </p>
           ) : (
             products.map((product) => (

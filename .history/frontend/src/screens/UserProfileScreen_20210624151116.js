@@ -55,10 +55,8 @@ const UserProfileScreen = ({ match }) => {
         <Row>
           {products.length === 0 ? (
             <p>
-              {userInfo
-                ? userInfo._id === user._id
-                  ? "You do not have any listings"
-                  : "This user does not currently have any listings"
+              {userInfo._id === user._id
+                ? "You do not have any listings"
                 : "This user does not currently have any listings"}
             </p>
           ) : (
