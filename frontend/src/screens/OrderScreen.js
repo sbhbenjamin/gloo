@@ -111,11 +111,19 @@ const OrderScreen = ({ match, history }) => {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant='success'>
+                <Message
+                  data-testid='order-delivermessage-success'
+                  variant='success'
+                >
                   Delivered on {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant='danger'>Not Delivered</Message>
+                <Message
+                  data-testid='order-delivermessage-fail'
+                  variant='danger'
+                >
+                  Not Delivered
+                </Message>
               )}
             </ListGroup.Item>
 
@@ -126,9 +134,19 @@ const OrderScreen = ({ match, history }) => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant='success'>Paid on {order.paidAt}</Message>
+                <Message
+                  data-testid='order-paymentmessage-success'
+                  variant='success'
+                >
+                  Paid on {order.paidAt}
+                </Message>
               ) : (
-                <Message variant='danger'>Not Paid</Message>
+                <Message
+                  data-testid='order-paymentmessage-fail'
+                  variant='danger'
+                >
+                  Not Paid
+                </Message>
               )}
             </ListGroup.Item>
 
@@ -154,8 +172,8 @@ const OrderScreen = ({ match, history }) => {
                             {item.name}
                           </Link>
                         </Col>
-                        <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                        <Col data-testid='order-product-price' md={4}>
+                          ${item.price}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -174,25 +192,45 @@ const OrderScreen = ({ match, history }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>
+                    $
+                    <span data-testid='order-summary-price'>
+                      {order.itemsPrice}
+                    </span>
+                  </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>
+                    $
+                    <span data-testid='order-summary-shipping'>
+                      {order.shippingPrice}
+                    </span>
+                  </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>
+                    $
+                    <span data-testid='order-summary-tax'>
+                      {order.taxPrice}
+                    </span>
+                  </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>
+                    $
+                    <span data-testid='order-summary-total'>
+                      {order.totalPrice}
+                    </span>
+                  </Col>
                 </Row>
               </ListGroup.Item>
               {!order.isPaid && (
