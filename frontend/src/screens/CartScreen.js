@@ -96,6 +96,7 @@ const CartScreen = ({ match, location, history }) => {
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
+                data-testid='cart-checkout-btn'
                 type='button'
                 className='btn-block'
                 disabled={cartItems.length === 0}

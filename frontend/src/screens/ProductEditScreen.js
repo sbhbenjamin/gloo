@@ -45,8 +45,13 @@ const ProductEditScreen = ({ match, history }) => {
     success: successDelete,
   } = productDelete
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
-    if (successUpdate) {
+    if (!userInfo) {
+      history.push('/')
+    } else if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET })
       history.goBack()
     } else if (successDelete) {
@@ -63,7 +68,15 @@ const ProductEditScreen = ({ match, history }) => {
         setDescription(product.description)
       }
     }
-  }, [dispatch, history, productId, product, successUpdate, successDelete])
+  }, [
+    dispatch,
+    history,
+    productId,
+    product,
+    successUpdate,
+    successDelete,
+    userInfo,
+  ])
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
