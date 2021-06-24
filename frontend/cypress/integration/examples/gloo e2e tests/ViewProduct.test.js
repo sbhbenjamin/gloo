@@ -29,7 +29,7 @@ describe("View Cardilac Plumbing Services", () => {
     cy.contains("Cardilac Plumbing Services").click();
   });
   it("Redirected to product page url", () => {
-    cy.url().should("include", "/product/60d1f9dc60045566909f0068");
+    cy.url().should("include", "/product");
     cy.contains("Cardilac Plumbing Services").should("exist");
   });
   it("Image should load", () => {
@@ -40,6 +40,6 @@ describe("View Cardilac Plumbing Services", () => {
   });
 
   it("Conditional Rendering of Add To Cart works", () => {
-    cy.contains("Add To Cart");
+    cy.get("[data-testid=addtocart-btn]").should("exist");
   });
 });
