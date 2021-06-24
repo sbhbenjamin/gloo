@@ -80,6 +80,7 @@ const ProductScreen = ({ history, match }) => {
             <Col md={3}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
+                  <p className='product-category'>{product.category}</p>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>

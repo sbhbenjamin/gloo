@@ -19,7 +19,7 @@ const getProducts = asyncHandler(async (req, res) => {
             },
           },
           {
-            brand: {
+            category: {
               $regex: req.query.keyword,
               $options: 'i',
             },
@@ -75,17 +75,14 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // @route       POST /api/products
 // @access      Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, price, image, brand, category, countInStock, description } =
-    req.body
+  const { name, price, image, category, description } = req.body
 
   const product = new Product({
     user: req.user._id,
     name,
     price,
     image,
-    brand,
     category,
-    countInStock,
     numReviews: 0,
     description,
   })
@@ -98,8 +95,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route       PUT /api/products/:id
 // @access      Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, brand, category, countInStock } =
-    req.body
+  const { name, price, description, image, category } = req.body
 
   const product = await Product.findById(req.params.id)
 
@@ -108,9 +104,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.price = price
     product.description = description
     product.image = image
-    product.brand = brand
     product.category = category
-    product.countInStock = countInStock
 
     const updatedProduct = await product.save()
     res.json(updatedProduct)

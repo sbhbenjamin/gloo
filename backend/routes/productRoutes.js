@@ -17,12 +17,14 @@ router
   .post(protect, createProduct)
   .post(protect, admin, createProduct)
 router.get('/top', getTopProducts)
+
 router.route('/:id/reviews').post(protect, createProductReview)
+
 router
   .route('/:id')
   .get(getProductById)
+  .put(protect, updateProduct)
   .delete(protect, deleteProduct)
   .delete(protect, admin, deleteProduct)
-  .put(protect, admin, updateProduct)
 
 export default router

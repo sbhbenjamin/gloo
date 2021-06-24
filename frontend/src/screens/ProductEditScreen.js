@@ -22,9 +22,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
-  const [brand, setBrand] = useState('')
   const [category, setCategory] = useState('')
-  const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState('')
   const [uploading, setUploading] = useState(false)
 
@@ -61,9 +59,7 @@ const ProductEditScreen = ({ match, history }) => {
         setName(product.name)
         setPrice(product.price)
         setImage(product.image)
-        setBrand(product.brand)
         setCategory(product.category)
-        setCountInStock(product.countInStock)
         setDescription(product.description)
       }
     }
@@ -100,10 +96,8 @@ const ProductEditScreen = ({ match, history }) => {
         name,
         price,
         image,
-        brand,
         category,
         description,
-        countInStock,
       })
     )
   }
