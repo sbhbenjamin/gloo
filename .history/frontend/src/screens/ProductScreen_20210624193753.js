@@ -88,12 +88,7 @@ const ProductScreen = ({ history, match }) => {
             <Col md={3}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <p
-                    className="product-category"
-                    data-testid="product-category"
-                  >
-                    {product.category}
-                  </p>
+                  <p className="product-category">{product.category}</p>
                   <h3 data-testid="product-name">{product.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -107,7 +102,7 @@ const ProductScreen = ({ history, match }) => {
                   Price: $
                   <span data-testid='product-price'>{product.price}</span>
                 </ListGroup.Item> */}
-                <ListGroup.Item data-testid="product-description">
+                <ListGroup.Item>
                   Description: {product.description}
                 </ListGroup.Item>
               </ListGroup>

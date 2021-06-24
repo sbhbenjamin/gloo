@@ -98,7 +98,7 @@ const ProductScreen = ({ history, match }) => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
-                    data-testid="product-rating"
+                    data-testid="product-name"
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
                   />
@@ -107,7 +107,7 @@ const ProductScreen = ({ history, match }) => {
                   Price: $
                   <span data-testid='product-price'>{product.price}</span>
                 </ListGroup.Item> */}
-                <ListGroup.Item data-testid="product-description">
+                <ListGroup.Item>
                   Description: {product.description}
                 </ListGroup.Item>
               </ListGroup>
