@@ -221,9 +221,9 @@ describe("Logout of Jane Account and Login to John Account", () => {
 
 describe("View Add Product Using Image URL Edited", () => {
   it("Search for newly created product", () => {
-    // cy.get("[data-testid=search-input]").type(
-    //   "Add Product Using Image URL Edited{enter}"
-    // );
+    cy.get("[data-testid=search-input]").type(
+      "Add Product Using Image URL Edited"
+    );
     cy.get("[data-testid=search-submit]").click();
     cy.contains("Add Product Using Image URL Edited", {
       timeout: 30 * 1000,
@@ -241,7 +241,7 @@ describe("View Add Product Using Image URL Edited", () => {
   it("Image should load", () => {
     cy.get("div[class='col-md-6']")
       .find("img")
-      .should("have.attr", "alt", "Add Product Using Image URL Edited")
+      .should("have.attr", "alt", "Add Product Using Image URL")
       .should("be.visible");
   });
 });

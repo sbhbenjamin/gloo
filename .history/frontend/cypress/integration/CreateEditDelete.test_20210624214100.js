@@ -26,7 +26,7 @@ describe("Login feature works as expected", () => {
     cy.get("[data-testid=login-btn]").should("have.text", "Sign In").click();
     cy.contains("Invalid Email or Password").should("not.exist");
     cy.get("[data-testid=navbar-username]")
-      .should("include.text", "John Doe")
+      .should("have.text", "John Doe")
       .click();
     cy.get("[data-testid=navbar-profile]").should("have.text", "Profile");
     cy.get("[data-testid=navbar-logout]").should("have.text", "Logout");
@@ -68,7 +68,7 @@ describe("View Add Product Using Image URL", () => {
   it("Search for newly created product", () => {
     cy.get("[data-testid=search-input]").type("Add Product Using Image URL");
     cy.get("[data-testid=search-submit]").click();
-    cy.contains("Add Product Using Image URL", { timeout: 8 * 1000 }).click();
+    cy.contains("Add Product Using Image URL").click();
   });
 
   it("Redirected to product page url", () => {
@@ -89,7 +89,7 @@ describe("View Add Product Using Image URL", () => {
 describe("View My Listings", () => {
   it("My Listings button can be clicked", () => {
     cy.get("[data-testid=navbar-username]")
-      .should("include.text", "John Doe")
+      .should("have.text", "John Doe")
       .click();
     cy.get("[data-testid=navbar-listings]").click();
   });
@@ -145,7 +145,7 @@ describe("Redirect to product page", () => {
 describe("Check if logged out users are able to view updated title", () => {
   it("Logout", () => {
     cy.get("[data-testid=navbar-username]")
-      .should("include.text", "John Doe")
+      .should("have.text", "John Doe")
       .click();
 
     cy.get("[data-testid=navbar-logout]").should("have.text", "Logout").click();
@@ -194,18 +194,10 @@ describe("Check if other logged in users are able to view updated title", () => 
 describe("Logout of Jane Account and Login to John Account", () => {
   it("Logout of Jane", () => {
     cy.get("[data-testid=navbar-username]")
-      .should("include.text", "Jane Doe")
+      .should("have.text", "Jane Doe")
       .click();
 
     cy.get("[data-testid=navbar-logout]").should("have.text", "Logout").click();
-  });
-
-  it("Sign in button can be clicked", () => {
-    cy.get("[data-testid=navbar-signin]").click();
-  });
-
-  it("Redirected to Sign In page", () => {
-    cy.url().should("include", "/login");
   });
 
   it("Login to John", () => {
@@ -214,20 +206,18 @@ describe("Logout of Jane Account and Login to John Account", () => {
     cy.get("[data-testid=login-btn]").should("have.text", "Sign In").click();
     cy.contains("Invalid Email or Password").should("not.exist");
     cy.get("[data-testid=navbar-username]")
-      .should("include.text", "John Doe")
+      .should("have.text", "John Doe")
       .click();
   });
 });
 
 describe("View Add Product Using Image URL Edited", () => {
   it("Search for newly created product", () => {
-    // cy.get("[data-testid=search-input]").type(
-    //   "Add Product Using Image URL Edited{enter}"
-    // );
+    cy.get("[data-testid=search-input]").type(
+      "Add Product Using Image URL Edited"
+    );
     cy.get("[data-testid=search-submit]").click();
-    cy.contains("Add Product Using Image URL Edited", {
-      timeout: 30 * 1000,
-    }).click();
+    cy.contains("Add Product Using Image URL Edited").click();
   });
 
   it("Redirected to product page url", () => {
@@ -241,7 +231,7 @@ describe("View Add Product Using Image URL Edited", () => {
   it("Image should load", () => {
     cy.get("div[class='col-md-6']")
       .find("img")
-      .should("have.attr", "alt", "Add Product Using Image URL Edited")
+      .should("have.attr", "alt", "Add Product Using Image URL")
       .should("be.visible");
   });
 });

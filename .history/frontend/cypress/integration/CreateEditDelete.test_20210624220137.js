@@ -241,7 +241,7 @@ describe("View Add Product Using Image URL Edited", () => {
   it("Image should load", () => {
     cy.get("div[class='col-md-6']")
       .find("img")
-      .should("have.attr", "alt", "Add Product Using Image URL Edited")
+      .should("have.attr", "alt", "Add Product Using Image URL")
       .should("be.visible");
   });
 });

@@ -200,14 +200,6 @@ describe("Logout of Jane Account and Login to John Account", () => {
     cy.get("[data-testid=navbar-logout]").should("have.text", "Logout").click();
   });
 
-  it("Sign in button can be clicked", () => {
-    cy.get("[data-testid=navbar-signin]").click();
-  });
-
-  it("Redirected to Sign In page", () => {
-    cy.url().should("include", "/login");
-  });
-
   it("Login to John", () => {
     cy.get("[data-testid=login-email]").type("john@example.com");
     cy.get("[data-testid=login-password]").type("123456");
@@ -221,13 +213,11 @@ describe("Logout of Jane Account and Login to John Account", () => {
 
 describe("View Add Product Using Image URL Edited", () => {
   it("Search for newly created product", () => {
-    // cy.get("[data-testid=search-input]").type(
-    //   "Add Product Using Image URL Edited{enter}"
-    // );
+    cy.get("[data-testid=search-input]").type(
+      "Add Product Using Image URL Edited"
+    );
     cy.get("[data-testid=search-submit]").click();
-    cy.contains("Add Product Using Image URL Edited", {
-      timeout: 30 * 1000,
-    }).click();
+    cy.contains("Add Product Using Image URL Edited").click();
   });
 
   it("Redirected to product page url", () => {
@@ -241,7 +231,7 @@ describe("View Add Product Using Image URL Edited", () => {
   it("Image should load", () => {
     cy.get("div[class='col-md-6']")
       .find("img")
-      .should("have.attr", "alt", "Add Product Using Image URL Edited")
+      .should("have.attr", "alt", "Add Product Using Image URL")
       .should("be.visible");
   });
 });
