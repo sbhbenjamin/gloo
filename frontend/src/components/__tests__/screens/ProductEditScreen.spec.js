@@ -93,6 +93,7 @@ describe('it should load, edit and delete successfully for owner', () => {
   })
 
   it('should delete product successfully', async () => {
+    window.confirm = jest.fn(() => true)
     renderWithOwnership(<ProductEditScreen match={match} history={history} />)
 
     await waitFor(() => {
