@@ -16,7 +16,7 @@ import {
 } from '../constants/userConstants'
 
 const Product = ({ product }) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   // const userFavourites = useSelector((state) => state.userFavourites);
   // const { products } = userFavourites;
@@ -27,8 +27,8 @@ const Product = ({ product }) => {
   // const favouriteRemove = useSelector((state) => state.favouriteRemove);
   // const { success: successRemove } = favouriteRemove;
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  // const userLogin = useSelector((state) => state.userLogin)
+  // const { userInfo } = userLogin
 
   // useEffect(() => {
   //   if (userInfo) {
@@ -59,13 +59,17 @@ const Product = ({ product }) => {
   return (
     <Card className='my-3 rounded d-flex flex-column'>
       <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant='top' />
+        <Card.Img
+          data-testid='product-image'
+          src={product.image}
+          variant='top'
+        />
       </Link>
 
       <Card.Body className='d-flex flex-column'>
         <Link to={`/product/${product._id}`}>
           <Card.Title as='div'>
-            <strong>{product.name}</strong>
+            <strong data-testid='product-name'>{product.name}</strong>
           </Card.Title>
         </Link>
 
@@ -73,12 +77,15 @@ const Product = ({ product }) => {
           <Rating
             value={product.rating}
             text={`${product.numReviews} reviews`}
+            data-testid='product-reviews'
           />
         </Card.Text>
 
         <Card.Text as='h3' style={{ paddingBottom: 0 }}>
           <Row>
-            <Col>${product.price}</Col>
+            <Col>
+              $<span data-testid='product-price'>{product.price}</span>
+            </Col>
             {/* <Col className="text-end">
               {userInfo &&
                 (checkFavourited() ? (

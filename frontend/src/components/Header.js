@@ -1,55 +1,55 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { LinkContainer } from "react-router-bootstrap";
-import { Button, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import SearchBox from "./SearchBox";
-import { logout } from "../actions/userActions";
+import React from 'react'
+import { Route } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Button, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import SearchBox from './SearchBox'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   const logoutHandler = () => {
-    dispatch(logout());
-  };
+    dispatch(logout())
+  }
   return (
     <header>
       <Navbar
-        className="p-3 navbar"
-        bg="light"
-        variant="light"
-        expand="lg"
+        className='p-3 navbar'
+        bg='light'
+        variant='light'
+        expand='lg'
         collapseOnSelect
       >
         <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand className="navbar-brand" data-testid="navbar-brand">
+          <LinkContainer to='/'>
+            <Navbar.Brand className='navbar-brand' data-testid='navbar-brand'>
               Gloo
             </Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
             <Route render={({ history }) => <SearchBox history={history} />} />
-            <Nav className="ms-auto">
+            <Nav className='ms-auto'>
               {userInfo && (
                 <LinkContainer
                   disabled
-                  to="/favourites"
-                  data-testid="navbar-favourites"
+                  to='/favourites'
+                  data-testid='navbar-favourites'
                 >
                   <Nav.Link>
-                    <i className="fas fa-heart"></i>
+                    <i className='fas fa-heart'></i>
                     Favourites
                   </Nav.Link>
                 </LinkContainer>
               )}
 
-              <LinkContainer to="/cart" data-testid="navbar-cart">
+              <LinkContainer to='/cart' data-testid='navbar-cart'>
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>
+                  <i className='fas fa-shopping-cart'></i>
                   Cart
                 </Nav.Link>
               </LinkContainer>
@@ -64,48 +64,48 @@ const Header = () => {
               {userInfo ? (
                 <NavDropdown
                   title={userInfo.name}
-                  id="username"
-                  data-testid="navbar-username"
+                  id='username'
+                  data-testid='navbar-username'
                 >
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item data-testid="navbar-profile">
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item data-testid='navbar-profile'>
                       Profile
                     </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to={`/user/${userInfo._id}/listings`}>
-                    <NavDropdown.Item data-testid="navbar-listings">
+                    <NavDropdown.Item data-testid='navbar-listings'>
                       My Listings
                     </NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item
                     onClick={logoutHandler}
-                    data-testid="navbar-logout"
+                    data-testid='navbar-logout'
                   >
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/login" data-testid="navbar-signin">
+                <LinkContainer to='/login' data-testid='navbar-signin'>
                   <Nav.Link>
-                    <i className="fas fa-user"></i>
+                    <i className='fas fa-user'></i>
                     Sign In
                   </Nav.Link>
                 </LinkContainer>
               )}
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title="Admin" id="adminmenu">
-                  <LinkContainer to="/admin/userlist">
-                    <NavDropdown.Item data-testid="admin-users">
+                <NavDropdown title='Admin' id='adminmenu'>
+                  <LinkContainer to='/admin/userlist'>
+                    <NavDropdown.Item data-testid='admin-users'>
                       Users
                     </NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/admin/productlist">
-                    <NavDropdown.Item data-testid="admin-products">
+                  <LinkContainer to='/admin/productlist'>
+                    <NavDropdown.Item data-testid='admin-products'>
                       Products
                     </NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/admin/orderlist">
-                    <NavDropdown.Item data-testid="admin-orders">
+                  <LinkContainer to='/admin/orderlist'>
+                    <NavDropdown.Item data-testid='admin-orders'>
                       Orders
                     </NavDropdown.Item>
                   </LinkContainer>
@@ -115,9 +115,9 @@ const Header = () => {
           </Navbar.Collapse>
 
           {userInfo && (
-            <LinkContainer to="/new">
+            <LinkContainer to='/new'>
               <Nav.Link>
-                <Button variant="primary" data-testid="navbar-addproduct">
+                <Button variant='primary' data-testid='navbar-addproduct'>
                   Add Product
                 </Button>
               </Nav.Link>
@@ -126,7 +126,7 @@ const Header = () => {
         </Container>
       </Navbar>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
