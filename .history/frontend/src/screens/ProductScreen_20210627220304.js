@@ -125,11 +125,7 @@ const ProductScreen = ({ history, match }) => {
                       <Row>
                         <Col>Seller: </Col>
                         <Col>
-                          <Link
-                            to={`/user/${product.user._id}/listings`}
-                            className="product-seller"
-                            data-testid="product-seller"
-                          >
+                          <Link to={`/user/${product.user._id}/listings`}>
                             {product.user.name}
                           </Link>
                         </Col>

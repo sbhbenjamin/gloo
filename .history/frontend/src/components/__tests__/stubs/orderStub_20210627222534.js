@@ -1,4 +1,4 @@
-export const sampleOrderArray = [
+export const samplePaidOrder = [
   {
     shippingAddress: {
       address: "26 College Ave East",

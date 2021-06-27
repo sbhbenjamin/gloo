@@ -20,13 +20,12 @@ const RegisterScreen = ({ location, history }) => {
   const { loading, error } = userRegister;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (userInfo) {
       history.push("/");
     }
-  }, [history, userInfo, redirect]);
+  }, [history, userInfo]);
 
   // const submitHandler = (e) => {
   //   e.preventDefault()
@@ -143,9 +142,7 @@ const RegisterScreen = ({ location, history }) => {
     }
   };
 
-  return userInfo ? (
-    <Message variant="success">You are already logged in</Message>
-  ) : (
+  return (
     <FormContainer>
       <h1>Sign Up</h1>
       {message && <Message variant="danger">{message}</Message>}

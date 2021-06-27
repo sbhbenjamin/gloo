@@ -143,9 +143,7 @@ const RegisterScreen = ({ location, history }) => {
     }
   };
 
-  return userInfo ? (
-    <Message variant="success">You are already logged in</Message>
-  ) : (
+  return (
     <FormContainer>
       <h1>Sign Up</h1>
       {message && <Message variant="danger">{message}</Message>}
