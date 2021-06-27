@@ -24,9 +24,14 @@ const PaymentScreen = ({ history }) => {
     history.push('/placeorder')
   }
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
-    console.log(cart)
-  })
+    if (!userInfo) {
+      history.push('/login')
+    }
+  }, [history, userInfo])
 
   return (
     <>

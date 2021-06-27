@@ -23,6 +23,15 @@ const ShippingScreen = ({ history }) => {
     history.push('/payment')
   }
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
+  }, [history, userInfo])
+
   return (
     <>
       {cart.cartItems.length === 0 ? (

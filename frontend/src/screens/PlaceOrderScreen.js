@@ -9,6 +9,7 @@ import { createOrder } from '../actions/orderActions'
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
+  console.log(cart)
 
   // calculate prices
   const addDecimals = (num) => {
@@ -28,14 +29,19 @@ const PlaceOrderScreen = ({ history }) => {
   ).toFixed(2)
   // cart.paymentMethod = true
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const orderCreate = useSelector((state) => state.orderCreate)
   const { order, success, error } = orderCreate
 
   useEffect(() => {
-    if (success) {
+    if (!userInfo) {
+      history.push('/login')
+    } else if (success) {
       history.push(`order/${order._id}`)
     }
-  }, [history, success, cart, order])
+  }, [history, success, cart, order, userInfo])
 
   const placeOrderHandler = () => {
     dispatch(
@@ -53,7 +59,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
-      {cart.cartItems.length === 0 || !order ? (
+      {cart.cartItems.length === 0 ? (
         <Message variant='danger'>
           Order does not exist. <a href='/'>Go back.</a>
         </Message>
