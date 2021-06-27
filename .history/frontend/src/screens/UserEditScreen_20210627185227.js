@@ -33,7 +33,8 @@ const UserEditScreen = ({ match, history }) => {
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
       history.push("/");
-    } else if (successUpdate) {
+    }
+    if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET });
       history.push("/admin/userlist");
     } else {
@@ -45,7 +46,7 @@ const UserEditScreen = ({ match, history }) => {
         setIsAdmin(user.isAdmin);
       }
     }
-  }, [dispatch, userId, user, successUpdate, history, userInfo]);
+  }, [dispatch, userId, user, successUpdate, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
