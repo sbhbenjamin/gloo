@@ -72,6 +72,11 @@ function render(
   ui,
   {
     preloadedState,
+    // = {
+    //   userLogin: {
+    //     userInfo: {},
+    //   },
+    // }
     store = configureStore({
       reducer,
       preloadedState,

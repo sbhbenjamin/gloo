@@ -39,7 +39,7 @@ const OrderScreen = ({ match, history }) => {
   const orderCreate = useSelector((state) => state.orderCreate)
   const { success } = orderCreate
 
-  if (!loading) {
+  if (!loading && order) {
     //   Calculate prices
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2)
@@ -101,24 +101,31 @@ const OrderScreen = ({ match, history }) => {
     </Message>
   ) : (
     <>
-      <h1>Order {order._id}</h1>
+      <h1>
+        Order <span data-testid='order-id'>{order._id}</span>
+      </h1>
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Name: </strong> {order.user.name}
+                <strong>Name: </strong>
+                <span data-testid='order-username'>{order.user.name}</span>
               </p>
               <p>
                 <strong>Email: </strong>{' '}
-                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+                <a href={`mailto:${order.user.email}`}>
+                  <span data-testid='order-email'>{order.user.email}</span>
+                </a>
               </p>
               <p>
                 <strong>Address:</strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city}{' '}
-                {order.shippingAddress.postalCode},{' '}
-                {order.shippingAddress.country}
+                <span data-testid='order-address'>
+                  {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
+                  {order.shippingAddress.postalCode},{' '}
+                  {order.shippingAddress.country}
+                </span>
               </p>
               {order.isDelivered ? (
                 <Message
@@ -141,7 +148,9 @@ const OrderScreen = ({ match, history }) => {
               <h2>Payment Method</h2>
               <p>
                 <strong>Method: </strong>
-                {order.paymentMethod}
+                <span data-testid='order-paymentmethod'>
+                  {order.paymentMethod}
+                </span>
               </p>
               {order.isPaid ? (
                 <Message
@@ -179,11 +188,16 @@ const OrderScreen = ({ match, history }) => {
                         </Col>
                         <Col>
                           <Link to={`/product/${item.product}`}>
-                            {item.name}
+                            <span data-testid='order-product-name'>
+                              {item.name}
+                            </span>
                           </Link>
                         </Col>
-                        <Col data-testid='order-product-price' md={4}>
-                          ${item.price}
+                        <Col md={4}>
+                          $
+                          <span data-testid='order-product-price'>
+                            {item.price}
+                          </span>
                         </Col>
                       </Row>
                     </ListGroup.Item>

@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
-import { cleanup, within } from '@testing-library/react'
+import { cleanup, waitFor } from '@testing-library/react'
 import {
   render,
   screen,
@@ -10,21 +10,19 @@ import {
   renderWithCartFull,
 } from '../test-utils'
 import PlaceOrderScreen from '../../../screens/PlaceOrderScreen'
-import { waitFor } from '@testing-library/react'
+import { createMemoryHistory } from 'history'
 
-const mockPush = jest.fn()
-const mockGoBack = jest.fn()
+let history
 
-const history = {
-  push: mockPush,
-  goBack: mockGoBack,
-}
+beforeEach(() => {
+  history = createMemoryHistory()
+})
 
 afterEach(cleanup)
 
-it('should be blank if not logged in', async () => {
+it('should redirect user to home screen if not logged in', async () => {
   render(<PlaceOrderScreen history={history} />)
-  // check that page is empty
+  expect(history.location.pathname).toBe('/login')
 })
 
 describe('should restrict access if logged in without items in cart', () => {

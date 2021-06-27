@@ -1,50 +1,48 @@
-import React from "react";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
-import { render, fireEvent, screen } from "../test-utils";
-import LoginScreen from "../../../screens/LoginScreen";
-import "@testing-library/jest-dom/extend-expect";
+import React from 'react'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
+import { render, fireEvent, screen } from '../test-utils'
+import LoginScreen from '../../../screens/LoginScreen'
+import '@testing-library/jest-dom/extend-expect'
+import { createMemoryHistory } from 'history'
 
 export const handlers = [
-  rest.post("/api/users/login", (req, res, ctx) => {
+  rest.post('/api/users/login', (req, res, ctx) => {
     return res(
       ctx.json({
-        _id: "60d55c4cd97a74d6bd80cb1f",
-        name: "Admin user",
-        email: "admin@example.com",
+        _id: '60d55c4cd97a74d6bd80cb1f',
+        name: 'Admin user',
+        email: 'admin@example.com',
         isAdmin: true,
         token: process.env.USER_TOKEN,
       }),
       ctx.delay(150)
-    );
+    )
   }),
-];
+]
 
-const server = setupServer(...handlers);
+let history
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+const server = setupServer(...handlers)
 
-test("Loader is displayed after successful login", async () => {
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+test('Login successfully redirects user to home page', async () => {
+  history = createMemoryHistory()
   const location = {
-    search: "",
-  };
+    search: '',
+  }
 
-  const pushMock = (arg) => arg;
+  render(<LoginScreen location={location} history={history} />)
 
-  const history = {
-    push: pushMock,
-  };
+  const username = screen.getByTestId('login-email')
+  fireEvent.change(username, { target: { value: 'john@example.com' } })
+  const password = screen.getByTestId('login-password')
+  fireEvent.change(password, { target: { value: '123456.com' } })
+  const loginBtn = screen.getByTestId('login-btn')
+  fireEvent.click(loginBtn)
 
-  render(<LoginScreen location={location} history={history} />);
-
-  const username = screen.getByTestId("login-email");
-  fireEvent.change(username, { target: { value: "john@example.com" } });
-  const password = screen.getByTestId("login-password");
-  fireEvent.change(password, { target: { value: "123456.com" } });
-  const loginBtn = screen.getByTestId("login-btn");
-  fireEvent.click(loginBtn);
-
-  expect(screen.getByRole("status")).toBeInTheDocument();
-});
+  expect(history.location.pathname).toBe('/')
+})

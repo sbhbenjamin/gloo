@@ -4,17 +4,17 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, screen, renderWithLogin, renderWithCart } from '../test-utils'
 import PaymentScreen from '../../../screens/PaymentScreen'
 import { waitFor } from '@testing-library/react'
+import { createMemoryHistory } from 'history'
 
-const mockPush = jest.fn()
-const mockGoBack = jest.fn()
+let history
 
-const history = {
-  push: mockPush,
-  goBack: mockGoBack,
-}
+beforeEach(() => {
+  history = createMemoryHistory()
+})
 
-it('should render empty document if not logged in', async () => {
+it('should redirect user to home screen if not logged in', async () => {
   render(<PaymentScreen history={history} />)
+  expect(history.location.pathname).toBe('/login')
 })
 
 describe('should restrict access if logged in without items in cart', () => {

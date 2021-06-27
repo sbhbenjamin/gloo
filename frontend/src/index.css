@@ -36,13 +36,14 @@ h3 {
   margin: 0.1rem;
 }
 
-.card-body a {
-  text-decoration: none;
-  color: black;
+.product-seller {
+  text-decoration: underline;
+  /* color: blue; */
 }
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 .profile-btn {

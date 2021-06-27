@@ -5,8 +5,8 @@ import '@testing-library/jest-dom/extend-expect'
 import { setupServer } from 'msw/node'
 import { render, renderWithLogin, screen, fireEvent } from '../test-utils'
 import ProductCreateScreen from '../../../screens/ProductCreateScreen'
-import { waitFor } from '@testing-library/react'
 import { createProductStub } from '../stubs/productStub'
+import { createMemoryHistory } from 'history'
 
 export const handlers = [
   rest.post('/api/products/', (req, res, ctx) => {
@@ -20,15 +20,18 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-const mockPush = jest.fn()
-const mockGoBack = jest.fn()
+let history
 
-const history = {
-  push: mockPush,
-  goBack: mockGoBack,
-}
+beforeEach(() => {
+  history = createMemoryHistory()
+})
 
-it('should render if logged in', async () => {
+it('should redirect user to login screen if not logged in', async () => {
+  render(<ProductCreateScreen history={history} />)
+  expect(history.location.pathname).toBe('/login')
+})
+
+it('form should render if logged in', async () => {
   render(<ProductCreateScreen history={history} />)
 
   expect(screen.getByText('Create Product')).toBeInTheDocument()
@@ -57,8 +60,4 @@ it('should create product successfully', async () => {
     },
   })
   fireEvent.click(screen.getByTestId('product-submit'))
-})
-
-it('should redirect to login page if not logged in', async () => {
-  renderWithLogin(<ProductCreateScreen history={history} />)
 })
