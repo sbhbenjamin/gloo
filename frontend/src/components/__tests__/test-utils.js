@@ -151,7 +151,105 @@ function renderWithOwnership(
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
+function renderWithCartFull(
+  ui,
+  {
+    preloadedState = {
+      userLogin: {
+        userInfo: {
+          _id: '60d55c4cd97a74d6bd80cb1f',
+          name: 'Admin user',
+          email: 'admin@example.com',
+          isAdmin: true,
+          token: process.env.OWNER_TOKEN,
+        },
+      },
+      cart: {
+        cartItems: [
+          {
+            image: '/images/electrical.jpg',
+            name: '1st Solution Electrical',
+            price: 89.99,
+            product: '60d55c4cd97a74d6bd80cb22',
+            qty: 1,
+          },
+        ],
+        shippingAddress: {
+          address: '11 Main St',
+          city: 'Oregon',
+          country: 'USA',
+          postalCode: '110534',
+        },
+        paymentMethod: 'PayPal',
+      },
+    },
+    store = configureStore({
+      reducer,
+      preloadedState,
+    }),
+    ...renderOptions
+  } = {}
+) {
+  function Wrapper({ children }) {
+    return (
+      <Provider store={store}>
+        <Router>{children}</Router>
+      </Provider>
+    )
+  }
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
+}
+
+function renderWithCart(
+  ui,
+  {
+    preloadedState = {
+      userLogin: {
+        userInfo: {
+          _id: '60d55c4cd97a74d6bd80cb1f',
+          name: 'Admin user',
+          email: 'admin@example.com',
+          isAdmin: true,
+          token: process.env.OWNER_TOKEN,
+        },
+      },
+      cart: {
+        cartItems: [
+          {
+            image: '/images/aircon.jpg',
+            name: '24hrs Shadin Air-conditioning',
+            price: 929.99,
+            product: '60d55c4cd97a74d6bd80cb24',
+            qty: 1,
+          },
+        ],
+        shippingAddress: {},
+      },
+    },
+    store = configureStore({
+      reducer,
+      preloadedState,
+    }),
+    ...renderOptions
+  } = {}
+) {
+  function Wrapper({ children }) {
+    return (
+      <Provider store={store}>
+        <Router>{children}</Router>
+      </Provider>
+    )
+  }
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
+}
+
 // re-export everything
 export * from '@testing-library/react'
 // override render method
-export { render, renderWithLogin, renderWithOwnership }
+export {
+  render,
+  renderWithLogin,
+  renderWithOwnership,
+  renderWithCartFull,
+  renderWithCart,
+}
