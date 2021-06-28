@@ -27,6 +27,7 @@ import {
   PRODUCT_LIST_USER_REQUEST,
   PRODUCT_LIST_USER_SUCCESS,
   PRODUCT_LIST_USER_FAIL,
+  PRODUCT_DETAILS_RESET,
 } from '../constants/productConstants'
 
 // reducer(initial state, action)
@@ -59,6 +60,8 @@ export const productDetailsReducer = (
       return { loading: false, product: action.payload }
     case PRODUCT_DETAILS_FAIL:
       return { loading: false, error: action.payload }
+    case PRODUCT_DETAILS_RESET:
+      return { product: { reviews: [] } }
     default:
       return state
   }
