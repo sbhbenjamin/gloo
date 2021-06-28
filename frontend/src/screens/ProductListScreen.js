@@ -1,11 +1,11 @@
-import React, { useEffect } from "react"
-import { LinkContainer } from "react-router-bootstrap"
-import { Table, Button, Row, Col } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import Paginate from "../components/Paginate"
-import { listProducts, deleteProduct } from "../actions/productActions"
+import React, { useEffect } from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button, Row, Col } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
+import { listProducts, deleteProduct } from '../actions/productActions'
 
 const ProductListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1
@@ -27,32 +27,25 @@ const ProductListScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
-      history.push("/login")
+      history.push('/login')
     }
-    dispatch(listProducts("", pageNumber))
+    dispatch(listProducts('', pageNumber))
   }, [dispatch, history, userInfo, successDelete, pageNumber])
 
   const deleteHandler = (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm('Are you sure?')) {
       dispatch(deleteProduct(id))
     }
   }
 
   const createProductHandler = () => {
-    history.push("/new")
+    history.push('/new')
   }
 
   return userInfo && userInfo.isAdmin ? (
     <>
       <Row className='align-items-center'>
-        <Col>
-          <h1>Products</h1>
-        </Col>
-        <Col className='text-end'>
-          <Button className='my-3' onClick={createProductHandler}>
-            <i className='fas fa-plus'></i> Create Product
-          </Button>
-        </Col>
+        <h1>Products</h1>
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
@@ -102,7 +95,7 @@ const ProductListScreen = ({ history, match }) => {
     </>
   ) : (
     <Message variant='danger'>
-      {" "}
+      {' '}
       You need to be logged in as an Admin to view this page
     </Message>
   )
