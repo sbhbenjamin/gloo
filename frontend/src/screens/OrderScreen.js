@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
-import { PayPalButton } from "react-paypal-button-v2"
-import { Link } from "react-router-dom"
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { PayPalButton } from 'react-paypal-button-v2'
+import { Link } from 'react-router-dom'
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
 import {
   getOrderDetails,
   payOrder,
   deliverOrder,
-} from "../actions/orderActions"
+} from '../actions/orderActions'
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
   ORDER_CREATE_RESET,
-} from "../constants/orderConstants"
+} from '../constants/orderConstants'
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
@@ -51,13 +51,13 @@ const OrderScreen = ({ match, history }) => {
     dispatch({ type: ORDER_CREATE_RESET })
 
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login')
     }
 
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal")
-      const script = document.createElement("script")
-      script.type = "text/javascript"
+      const { data: clientId } = await axios.get('/api/config/paypal')
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
       script.async = true
       script.onload = () => {
@@ -112,16 +112,16 @@ const OrderScreen = ({ match, history }) => {
                 <span data-testid='order-username'>{order.user.name}</span>
               </p>
               <p>
-                <strong>Email: </strong>{" "}
+                <strong>Email: </strong>{' '}
                 <a href={`mailto:${order.user.email}`}>
                   <span data-testid='order-email'>{order.user.email}</span>
                 </a>
               </p>
               <p>
-                <strong>Address:</strong>
+                <strong>Address:</strong>{' '}
                 <span data-testid='order-address'>
-                  {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
-                  {order.shippingAddress.postalCode},{" "}
+                  {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
+                  {order.shippingAddress.postalCode},{' '}
                   {order.shippingAddress.country}
                 </span>
               </p>
