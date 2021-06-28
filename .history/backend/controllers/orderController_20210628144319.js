@@ -147,5 +147,4 @@ export {
   getMySellerOrders,
   getOrders,
   updateOrderToDelivered,
-  deleteOrder,
 }

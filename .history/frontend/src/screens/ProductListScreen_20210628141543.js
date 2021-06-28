@@ -26,7 +26,7 @@ const ProductListScreen = ({ history, match }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    if (!userInfo || !userInfo.isAdmin) {
+    if (!userInfo.isAdmin) {
       history.push("/login")
     }
     dispatch(listProducts("", pageNumber))

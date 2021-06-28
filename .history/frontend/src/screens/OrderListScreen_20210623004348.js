@@ -1,10 +1,10 @@
-import React, { useEffect } from "react"
-import { LinkContainer } from "react-router-bootstrap"
-import { Table, Button, Row, Col } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { deleteOrder, listOrders } from "../actions/orderActions"
+import React, { useEffect } from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button, Row, Col } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listOrders } from '../actions/orderActions'
 
 const OrderListScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -15,25 +15,17 @@ const OrderListScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const productDelete = useSelector((state) => state.productDelete)
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = productDelete
-
   useEffect(() => {
-    if (!userInfo || !userInfo.isAdmin) {
-      history.push("/login")
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders())
+    } else {
+      history.push('/login')
     }
-    dispatch(listOrders())
-  }, [dispatch, history, userInfo, successDelete])
+  }, [dispatch, history, userInfo])
 
-  const deleteHandler = (id) => {
-    if (window.confirm("Are you sure?")) {
-      dispatch(deleteOrder(id))
-    }
-  }
+  // const deleteHandler = (id) => {
+  //   // delete order
+  // }
 
   const createOrderHandler = () => {
     // create order
@@ -51,8 +43,6 @@ const OrderListScreen = ({ history }) => {
           </Button>
         </Col>
       </Row>
-      {loadingDelete && <Loader />}
-      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -81,14 +71,14 @@ const OrderListScreen = ({ history }) => {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
@@ -97,16 +87,6 @@ const OrderListScreen = ({ history }) => {
                       Details
                     </Button>
                   </LinkContainer>
-                </td>
-                <td>
-                  {" "}
-                  <Button
-                    variant='danger'
-                    className='btn-sm'
-                    onClick={() => deleteHandler(order._id)}
-                  >
-                    <i className='fas fa-trash'></i>
-                  </Button>
                 </td>
               </tr>
             ))}

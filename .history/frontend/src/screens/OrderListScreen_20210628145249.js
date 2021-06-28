@@ -15,19 +15,13 @@ const OrderListScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const productDelete = useSelector((state) => state.productDelete)
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = productDelete
-
   useEffect(() => {
-    if (!userInfo || !userInfo.isAdmin) {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders())
+    } else {
       history.push("/login")
     }
-    dispatch(listOrders())
-  }, [dispatch, history, userInfo, successDelete])
+  }, [dispatch, history, userInfo])
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -51,8 +45,6 @@ const OrderListScreen = ({ history }) => {
           </Button>
         </Col>
       </Row>
-      {loadingDelete && <Loader />}
-      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (

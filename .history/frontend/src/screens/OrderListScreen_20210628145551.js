@@ -23,10 +23,11 @@ const OrderListScreen = ({ history }) => {
   } = productDelete
 
   useEffect(() => {
-    if (!userInfo || !userInfo.isAdmin) {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders())
+    } else {
       history.push("/login")
     }
-    dispatch(listOrders())
   }, [dispatch, history, userInfo, successDelete])
 
   const deleteHandler = (id) => {
