@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { PayPalButton } from 'react-paypal-button-v2'
-import { Link } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import { PayPalButton } from "react-paypal-button-v2"
+import { Link } from "react-router-dom"
+import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
 import {
   getOrderDetails,
   payOrder,
   deliverOrder,
-} from '../actions/orderActions'
+} from "../actions/orderActions"
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
   ORDER_CREATE_RESET,
-} from '../constants/orderConstants'
+} from "../constants/orderConstants"
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
@@ -36,9 +36,6 @@ const OrderScreen = ({ match, history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const orderCreate = useSelector((state) => state.orderCreate)
-  const { success } = orderCreate
-
   if (!loading && order) {
     //   Calculate prices
     const addDecimals = (num) => {
@@ -54,13 +51,13 @@ const OrderScreen = ({ match, history }) => {
     dispatch({ type: ORDER_CREATE_RESET })
 
     if (!userInfo) {
-      history.push('/login')
+      history.push("/login")
     }
 
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get('/api/config/paypal')
-      const script = document.createElement('script')
-      script.type = 'text/javascript'
+      const { data: clientId } = await axios.get("/api/config/paypal")
+      const script = document.createElement("script")
+      script.type = "text/javascript"
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
       script.async = true
       script.onload = () => {
@@ -86,7 +83,6 @@ const OrderScreen = ({ match, history }) => {
     console.log(paymentResult)
     dispatch(payOrder(orderId, paymentResult))
   }
-
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
   }
@@ -95,7 +91,9 @@ const OrderScreen = ({ match, history }) => {
     <Loader />
   ) : error ? (
     <Message variant='danger'>{error}</Message>
-  ) : !userInfo || !order || userInfo._id !== order.user._id ? (
+  ) : (!userInfo || !order || userInfo._id !== order.user._id) &&
+    userInfo &&
+    !userInfo.isAdmin ? (
     <Message variant='danger'>
       You are unauthorised to access this page. <a href='/'>Go back.</a>
     </Message>
@@ -114,7 +112,7 @@ const OrderScreen = ({ match, history }) => {
                 <span data-testid='order-username'>{order.user.name}</span>
               </p>
               <p>
-                <strong>Email: </strong>{' '}
+                <strong>Email: </strong>{" "}
                 <a href={`mailto:${order.user.email}`}>
                   <span data-testid='order-email'>{order.user.email}</span>
                 </a>
@@ -122,8 +120,8 @@ const OrderScreen = ({ match, history }) => {
               <p>
                 <strong>Address:</strong>
                 <span data-testid='order-address'>
-                  {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
-                  {order.shippingAddress.postalCode},{' '}
+                  {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
+                  {order.shippingAddress.postalCode},{" "}
                   {order.shippingAddress.country}
                 </span>
               </p>
