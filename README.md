@@ -23,6 +23,7 @@ npm install
 cd client
 npm install
 ```
+
 ### Run
 ```
 # Run frontend (:3000) & backend (:5000)
@@ -32,15 +33,7 @@ npm run dev
 npm run server
 ```
 
-## Build and Deploy
-```
-# Create frontend prod build
-cd frontend
-npm run build
-```
-There is a Heroku postbuild script in the directory. Pushing to Heroku enables automatic building.
-
-### Seed
+### Seeding Data
 You can use the following commands to seed the database with sample users and products, as well as destroy all data
 ```
 # Import data
