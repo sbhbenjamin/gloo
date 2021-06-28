@@ -3,6 +3,15 @@ import { render, renderWithLogin, screen } from '../test-utils'
 import Header from '../../Header'
 import '@testing-library/jest-dom/extend-expect'
 
+it('should render navbar links', () => {
+  render(<Header />)
+  expect(screen.getByTestId('navbar-brand')).toHaveTextContent('Gloo')
+  expect(screen.getByTestId('search-input')).toBeInTheDocument()
+  expect(screen.getByTestId('search-submit')).toHaveTextContent('Search')
+  expect(screen.getByPlaceholderText('Search Products...')).toBeInTheDocument()
+  expect(screen.getByTestId('navbar-cart')).toHaveTextContent('Cart')
+})
+
 it('should render login button if not logged in', async () => {
   render(<Header />)
   expect(screen.queryByText('John Doe')).toBe(null)
