@@ -34,7 +34,7 @@ const Header = () => {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='ms-auto'>
-              {userInfo && (
+              {/* {userInfo && (
                 <LinkContainer
                   disabled
                   to='/favourites'
@@ -45,7 +45,7 @@ const Header = () => {
                     Favourites
                   </Nav.Link>
                 </LinkContainer>
-              )}
+              )} */}
 
               <LinkContainer to='/cart' data-testid='navbar-cart'>
                 <Nav.Link>
