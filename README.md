@@ -1,7 +1,10 @@
 # gloo
 https://gloo-fixr.herokuapp.com/
 
-A web-based consumer to consumer and business to consumer marketplace for buying and selling general utility services. Built on MERN with Redux, deployed on Heroku.
+The COVID-19 pandemic and work-from-home arrangement have fuelled a growth in the home maintenance industry in Singapore. From experience, home maintenance services are typically sourced through word-of-mouth or unverified websites which may result in unsatisfactory service quality. Similarly, many skilled technicians source for clients through verbal recommendations. 
+
+With the development of our consolidated platform, we aim to streamline this process by bridging the gap between consumers and service providers. Digitalising the home maintenance industry can not only ensure more reliable options for consumers, but also help to increase revenue streams for freelance service providers. 
+
 
 ## Usage
 ### ES Modules 
