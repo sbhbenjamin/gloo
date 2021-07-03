@@ -27,6 +27,13 @@ const userSchema = mongoose.Schema(
         ref: "Product",
       },
     ],
+    certs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Cert",
+      },
+    ],
   },
   {
     timestamps: true,

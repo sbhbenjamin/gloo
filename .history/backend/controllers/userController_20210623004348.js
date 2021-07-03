@@ -1,8 +1,7 @@
-import asyncHandler from "express-async-handler"
-import generateToken from "../utils/generateToken.js"
-import User from "../models/userModel.js"
-import Product from "../models/productModel.js"
-import Cert from "../models/certModel.js"
+import asyncHandler from 'express-async-handler'
+import generateToken from '../utils/generateToken.js'
+import User from '../models/userModel.js'
+import Product from '../models/productModel.js'
 
 // @desc        Auth user & get token
 // @route       POST /api/users/login
@@ -22,7 +21,7 @@ const authUser = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(401) // unauthorised
-    throw new Error("Invalid Email or Password")
+    throw new Error('Invalid Email or Password')
   }
 })
 
@@ -36,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400) // bad request
-    throw new Error("User already exists")
+    throw new Error('User already exists')
   }
 
   // create is sugar for save
@@ -57,7 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }) // something was created
   } else {
     res.status(400)
-    throw new Error("Invalid user data")
+    throw new Error('Invalid user data')
   }
 })
 
@@ -74,7 +73,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(404)
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -93,7 +92,7 @@ const getUserProfileAdmin = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(404)
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -121,7 +120,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(404)
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -141,10 +140,10 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   if (user) {
     await user.remove()
-    res.json({ message: "User removed" })
+    res.json({ message: 'User removed' })
   } else {
     res.status(404) // unauthorized
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -152,13 +151,13 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/:id
 // @access  Private/Admin
 const getUserById = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select("-password")
+  const user = await User.findById(req.params.id).select('-password')
 
   if (user) {
     res.json(user)
   } else {
     res.status(404) // unauthorized
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -183,7 +182,7 @@ const updateUser = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(404)
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -195,25 +194,17 @@ const getUserProducts = asyncHandler(async (req, res) => {
   res.json(products)
 })
 
-// @desc        Fetch certs belonging to user
-// @route       GET /api/:id/certs
-// @access      Public
-const getUserCerts = asyncHandler(async (req, res) => {
-  const certs = await Cert.find({ user: req.params.id })
-  res.json(certs)
-})
-
 // @desc        Fetch user favourite products
 // @route       GET /api/:id/favourites
 // @access      Private
 const getUserFavouriteProducts = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).populate("favouriteProducts")
+  const user = await User.findById(req.params.id).populate('favouriteProducts')
 
   if (user) {
     res.json(user.favouriteProducts)
   } else {
     res.status(404)
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -221,8 +212,8 @@ const getUserFavouriteProducts = asyncHandler(async (req, res) => {
 // @route       GET /api/:id/favourites
 // @access      Private
 const getUserFavouriteProductsById = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.url.split("/")[1]).populate(
-    "favouriteProducts"
+  const user = await User.findById(req.url.split('/')[1]).populate(
+    'favouriteProducts'
   )
 
   if (user) {
@@ -233,7 +224,7 @@ const getUserFavouriteProductsById = asyncHandler(async (req, res) => {
     )
   } else {
     res.status(404)
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -251,7 +242,7 @@ const addToFavouriteProducts = asyncHandler(async (req, res) => {
 
   if (alreadyFavourited) {
     res.status(400)
-    throw new Error("Product already Favourited")
+    throw new Error('Product already Favourited')
   } else if (user) {
     await user.favouriteProducts.push(req.body._id)
     await user.save()
@@ -259,7 +250,7 @@ const addToFavouriteProducts = asyncHandler(async (req, res) => {
     // res.status(201).json({ message: 'Product added to favourites' })
   } else {
     res.status(404)
-    throw new Error("User not found")
+    throw new Error('User not found')
   }
 })
 
@@ -267,21 +258,21 @@ const addToFavouriteProducts = asyncHandler(async (req, res) => {
 // @route       DELETE /api/:id/favourites
 // @access      Private
 const deleteFromFavouriteProducts = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.url.split("/")[1])
+  const user = await User.findById(req.url.split('/')[1])
   // .populate(
   //   'favouriteProducts'
   // )
 
   if (user) {
     user.favouriteProducts = user.favouriteProducts.filter(
-      (p) => p.toString() !== req.url.split("/")[3]
+      (p) => p.toString() !== req.url.split('/')[3]
     )
     await user.save()
     res.json(user.favouriteProducts)
     //   res.status(201).json({ message: 'Product removed from favourites' })
   } else {
     res.status(404)
-    throw new Error("Product not found")
+    throw new Error('Product not found')
   }
 })
 
@@ -296,7 +287,6 @@ export {
   getUserById,
   updateUser,
   getUserProducts,
-  getUserCerts,
   getUserFavouriteProducts,
   getUserFavouriteProductsById,
   addToFavouriteProducts,

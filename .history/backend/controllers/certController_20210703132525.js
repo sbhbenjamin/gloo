@@ -1,69 +1,46 @@
 import asyncHandler from "express-async-handler"
-import Product from "../models/productModel.js"
+import { product } from "../../frontend/src/components/__tests__/stubs/productStub.js"
+import Cert from "../models/certModel.js"
 import User from "../models/userModel.js"
 
-// @desc        Fetch all products
-// @route       GET /api/products
-// @access      Public
-const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
+// @desc        Fetch all certs
+// @route       GET /api/certs
+// @access      Private Admin
+const getCerts = asyncHandler(async (req, res) => {
+  const certs = await Cert.find().populate("user")
 
-  const keyword = req.query.keyword
-    ? {
-        $or: [
-          {
-            name: {
-              $regex: req.query.keyword,
-              $options: "i",
-            },
-          },
-          {
-            category: {
-              $regex: req.query.keyword,
-              $options: "i",
-            },
-          },
-        ],
-      }
-    : {}
-
-  const count = await Product.countDocuments({ ...keyword })
-  const products = await Product.find({ ...keyword })
-    .populate("user", "id name")
-    .limit(pageSize)
-    .skip(pageSize * (page - 1))
-
-  res.json({ products, page, pages: Math.ceil(count / pageSize) })
+  res.json({ products })
 })
 
-// @desc        Fetch single product
-// @route       GET /api/products/:id
-// @access      Public
-const getProductById = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id).populate(
-    "user",
-    "id name"
-  )
+// @desc        Fetch single cert
+// @route       GET /api/certs/:id
+// @access      Private
+const getCertById = asyncHandler(async (req, res) => {
+  const cert = await Cert.findById(req.params.id).populate("user")
 
-  if (product) {
-    res.json(product)
+  if (cert) {
+    if (req.user._id == product.user._id) {
+      res.json(cert)
+    } else {
+      res.status(403)
+      throw new Error("Unauthorised attempt to view Certificate")
+    }
   } else {
     res.status(404)
     throw new Error("Product not found")
   }
 })
 
-// @desc        Delete a product
-// @route       DELETE /api/products/:id
+// @desc        Delete a cert
+// @route       DELETE /api/certs/:id
 // @access      Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id)
+  const cert = await Cert.findById(req.params.id)
 
-  if (product) {
+  if (cert) {
     // if you want only the creator to delete, you should check
     // req.user._id == product.user._id
-    await product.remove()
+    await cert.remove()
     res.json({ message: "Product removed" })
   } else {
     res.status(404)
@@ -71,28 +48,27 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc        Create a product
-// @route       POST /api/products
-// @access      Private/Admin
+// @desc        Create a cert
+// @route       POST /api/certs
+// @access      Public
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, price, image, category, description } = req.body
+  const { name, status, issuer, date, image, user } = req.body
 
   const product = new Product({
-    user: req.user._id,
     name,
-    price,
+    status: "Pending",
+    issuer,
+    date,
     image,
-    category,
-    numReviews: 0,
-    description,
+    user: req.user._id,
   })
 
-  const createdProduct = await product.save()
-  res.status(201).json(createdProduct)
+  const createdCert = await cert.save()
+  res.status(201).json(createdCert)
 })
 
-// @desc        Update a product
-// @route       PUT /api/products/:id
+// @desc        Update a cert
+// @route       PUT /api/certs/:id
 // @access      Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
   const { name, price, description, image, category } = req.body

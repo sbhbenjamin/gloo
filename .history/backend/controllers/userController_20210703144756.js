@@ -2,7 +2,6 @@ import asyncHandler from "express-async-handler"
 import generateToken from "../utils/generateToken.js"
 import User from "../models/userModel.js"
 import Product from "../models/productModel.js"
-import Cert from "../models/certModel.js"
 
 // @desc        Auth user & get token
 // @route       POST /api/users/login
@@ -10,7 +9,7 @@ import Cert from "../models/certModel.js"
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ email }).populate("certs")
 
   if (user && (await user.matchPassword(password))) {
     res.json({
@@ -19,6 +18,7 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
+      certs: user.certs,
     })
   } else {
     res.status(401) // unauthorised
@@ -30,7 +30,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route       POST /api/users
 // @access      Private
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body
+  const { name, email, password, certs } = req.body
 
   const userExists = await User.findOne({ email })
 
@@ -45,6 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    certs,
   })
 
   if (user) {
@@ -54,6 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
+      certs: user.certs,
     }) // something was created
   } else {
     res.status(400)
@@ -65,12 +67,13 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/:id/profile
 // @access  Public
 const getUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id)
+  const user = await User.findById(req.params.id).populate("certs")
 
   if (user) {
     res.json({
       _id: user._id,
       name: user.name,
+      certs: user.certs,
     })
   } else {
     res.status(404)
@@ -82,7 +85,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @route   GET /api/users/profile
 // @access  Private
 const getUserProfileAdmin = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id)
+  const user = await User.findById(req.user._id).populate("certs")
 
   if (user) {
     res.json({
@@ -90,6 +93,7 @@ const getUserProfileAdmin = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      certs: user.certs,
     })
   } else {
     res.status(404)
@@ -129,7 +133,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @route   GET /api/users
 // @access  Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({})
+  const users = await User.find({}).populate("certs")
   res.json(users)
 })
 
@@ -193,14 +197,6 @@ const updateUser = asyncHandler(async (req, res) => {
 const getUserProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({ user: req.params.id })
   res.json(products)
-})
-
-// @desc        Fetch certs belonging to user
-// @route       GET /api/:id/certs
-// @access      Public
-const getUserCerts = asyncHandler(async (req, res) => {
-  const certs = await Cert.find({ user: req.params.id })
-  res.json(certs)
 })
 
 // @desc        Fetch user favourite products
@@ -296,7 +292,6 @@ export {
   getUserById,
   updateUser,
   getUserProducts,
-  getUserCerts,
   getUserFavouriteProducts,
   getUserFavouriteProductsById,
   addToFavouriteProducts,

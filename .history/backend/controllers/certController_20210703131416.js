@@ -1,53 +1,30 @@
 import asyncHandler from "express-async-handler"
-import Product from "../models/productModel.js"
+import { product } from "../../frontend/src/components/__tests__/stubs/productStub.js"
+import Cert from "../models/certModel.js"
 import User from "../models/userModel.js"
 
-// @desc        Fetch all products
-// @route       GET /api/products
-// @access      Public
-const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
+// @desc        Fetch all certs
+// @route       GET /api/certs
+// @access      Private Admin
+const getCerts = asyncHandler(async (req, res) => {
+  const certs = await Cert.find().populate("user")
 
-  const keyword = req.query.keyword
-    ? {
-        $or: [
-          {
-            name: {
-              $regex: req.query.keyword,
-              $options: "i",
-            },
-          },
-          {
-            category: {
-              $regex: req.query.keyword,
-              $options: "i",
-            },
-          },
-        ],
-      }
-    : {}
-
-  const count = await Product.countDocuments({ ...keyword })
-  const products = await Product.find({ ...keyword })
-    .populate("user", "id name")
-    .limit(pageSize)
-    .skip(pageSize * (page - 1))
-
-  res.json({ products, page, pages: Math.ceil(count / pageSize) })
+  res.json({ products })
 })
 
-// @desc        Fetch single product
-// @route       GET /api/products/:id
-// @access      Public
-const getProductById = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id).populate(
-    "user",
-    "id name"
-  )
+// @desc        Fetch single cert
+// @route       GET /api/certs/:id
+// @access      Private
+const getCertById = asyncHandler(async (req, res) => {
+  const cert = await Cert.findById(req.params.id).populate("user")
 
-  if (product) {
-    res.json(product)
+  if (cert) {
+    if (req.user._id == product.user._id) {
+      res.json(cert)
+    } else {
+      res.status(403)
+      throw new Error("Unauthorised attempt to view Certificate")
+    }
   } else {
     res.status(404)
     throw new Error("Product not found")
