@@ -44,11 +44,8 @@ app.get("/api/config/paypal", (req, res) =>
 )
 
 const __dirname = path.resolve()
-app.use("/uploads", express.static(path.join(__dirname, "/frontend/uploads")))
-app.use(
-  "/certUploads",
-  express.static(path.join(__dirname, "/frontend/certUploads"))
-)
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
+app.use("/certUploads", express.static(path.join(__dirname, "/certUploads")))
 
 // deployment
 if (process.env.NODE_ENV === "production") {

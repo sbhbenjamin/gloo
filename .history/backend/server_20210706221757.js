@@ -13,7 +13,6 @@ import uploadRoutes from "./routes/uploadRoutes.js"
 import conversationRoutes from "./routes/conversationRoutes.js"
 import messageRoutes from "./routes/messageRoutes.js"
 import certRoutes from "./routes/certRoutes.js"
-import certUploadRoutes from "./routes/certUploadRoutes.js"
 
 import { createServer } from "http"
 import { Server } from "socket.io"
@@ -36,7 +35,6 @@ app.use("/api/orders", orderRoutes)
 app.use("/api/upload", uploadRoutes)
 app.use("/api/conversations", conversationRoutes)
 app.use("/api/messages", messageRoutes)
-app.use("/api/certUpload", certUploadRoutes)
 app.use("/api/certs", certRoutes)
 
 app.get("/api/config/paypal", (req, res) =>
@@ -44,11 +42,7 @@ app.get("/api/config/paypal", (req, res) =>
 )
 
 const __dirname = path.resolve()
-app.use("/uploads", express.static(path.join(__dirname, "/frontend/uploads")))
-app.use(
-  "/certUploads",
-  express.static(path.join(__dirname, "/frontend/certUploads"))
-)
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 
 // deployment
 if (process.env.NODE_ENV === "production") {

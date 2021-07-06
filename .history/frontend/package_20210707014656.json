@@ -58,12 +58,12 @@
     "@cypress/react": "^5.9.1",
     "@cypress/webpack-dev-server": "^1.4.0",
     "@tailwindcss/postcss7-compat": "^2.2.4",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "latest",
     "cypress": "^7.5.0",
     "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-jest-dom": "^3.9.0",
-    "postcss": "^7.0.36",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4",
+    "postcss": "latest",
+    "tailwindcss": "latest",
     "webpack-dev-server": "^3.11.1"
   }
 }

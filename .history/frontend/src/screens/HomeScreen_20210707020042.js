@@ -28,7 +28,7 @@ const HomeScreen = ({ match }) => {
     <>
       <Meta />
 
-      <h1>Latest Products</h1>
+      <h1>Latest Product</h1>
       {/* {errorFavourite && <Message variant='danger'>{errorFavourite}</Message>} */}
       {loading ? (
         <Loader />
