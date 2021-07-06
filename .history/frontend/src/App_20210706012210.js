@@ -1,4 +1,3 @@
-import "tailwindcss/tailwind.css"
 import React from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { Container } from "react-bootstrap"
@@ -24,7 +23,6 @@ import ProductCreateScreen from "./screens/ProductCreateScreen"
 import FavouritesScreen from "./screens/FavouritesScreen"
 import UserCertsScreen from "./screens/UserCertsScreen"
 import CertScreen from "./screens/CertScreen"
-import CertCreateScreen from "./screens/CertCreateScreen"
 
 const App = () => {
   return (
@@ -49,7 +47,6 @@ const App = () => {
           <Route path='/user/:id/listings' component={UserProfileScreen} />
           <Route path='/user/certs' component={UserCertsScreen} exact />
           <Route path='/user/certs/:id' component={CertScreen} exact />
-          <Route path='/user/newcert' component={CertCreateScreen} exact />
           <Route
             path='/admin/productlist'
             component={ProductListScreen}

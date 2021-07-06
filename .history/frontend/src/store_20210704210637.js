@@ -73,12 +73,6 @@ const reducer = combineReducers({
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
-  certList: certListReducer,
-  certDetails: certDetailsReducer,
-  certDelete: certDeleteReducer,
-  certCreate: certCreateReducer,
-  certUpdate: certUpdateReducer,
-  certListUser: certListUserReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
