@@ -1,7 +1,8 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { Row, Col, Image, ListGroup } from "react-bootstrap"
+import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
+import Rating from "../components/Rating"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
 import Meta from "../components/Meta"
@@ -17,8 +18,8 @@ const CertScreen = ({ history, match }) => {
   const certDetails = useSelector((state) => state.certDetails)
   const { loading, error, cert } = certDetails
 
-  //   const userLogin = useSelector((state) => state.userLogin)
-  //   const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   useEffect(() => {
     if (
