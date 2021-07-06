@@ -44,12 +44,9 @@ app.get("/api/config/paypal", (req, res) =>
 )
 
 const __dirname = path.resolve()
+app.use("/uploads", express.static(path.join(__dirname, "/frontend/uploads")))
 app.use(
-  "/frontend/uploads",
-  express.static(path.join(__dirname, "/frontend/uploads"))
-)
-app.use(
-  "/frontend/certUploads",
+  "/certUploads",
   express.static(path.join(__dirname, "/frontend/certUploads"))
 )
 

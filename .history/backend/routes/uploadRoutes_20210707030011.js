@@ -5,12 +5,14 @@ const router = express.Router()
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, "frontend/uploads/")
+    cb(null, "frontend/uploads")
   },
   filename(req, file, cb) {
     cb(
       null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+      `frontend/${file.fieldname}-${Date.now()}${path.extname(
+        file.originalname
+      )}`
     )
   },
 })

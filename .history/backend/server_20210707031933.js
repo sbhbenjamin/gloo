@@ -49,7 +49,7 @@ app.use(
   express.static(path.join(__dirname, "/frontend/uploads"))
 )
 app.use(
-  "/frontend/certUploads",
+  "/certUploads",
   express.static(path.join(__dirname, "/frontend/certUploads"))
 )
 
