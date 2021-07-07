@@ -27,7 +27,7 @@ const Header = () => {
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand className='navbar-brand' data-testid='navbar-brand'>
-              Gloo
+              <h>Gloo</h>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -46,10 +46,18 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )} */}
+              {userInfo && (
+                <LinkContainer to='/conversations' data-testid='navbar-chat'>
+                  <Nav.Link>
+                    <i className='fas fa-comment-alt mx-1'></i>
+                    Chats
+                  </Nav.Link>
+                </LinkContainer>
+              )}
 
               <LinkContainer to='/cart' data-testid='navbar-cart'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i>
+                  <i className='fas fa-shopping-cart mx-1'></i>
                   Cart
                 </Nav.Link>
               </LinkContainer>

@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Card, Row, Col } from "react-bootstrap";
-import Rating from "./Rating";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Card, Row, Col } from 'react-bootstrap'
+import Rating from './Rating'
 
 import {
   addFavourite,
   removeFavourite,
   getFavourites,
-} from "../actions/userActions";
+} from '../actions/userActions'
 
 import {
   USER_ADD_FAVOURITE_RESET,
   USER_REMOVE_FAVOURITE_RESET,
-} from "../constants/userConstants";
+} from '../constants/userConstants'
 
 const Product = ({ product }) => {
   // const dispatch = useDispatch()
@@ -57,7 +57,7 @@ const Product = ({ product }) => {
   // };
 
   return (
-    <Card className="my-3 rounded d-flex flex-column">
+    <Card className='my-3 rounded d-flex flex-column'>
       <Link to={`/product/${product._id}`}>
         <Card.Img
           data-testid='product-image'
@@ -66,26 +66,29 @@ const Product = ({ product }) => {
         />
       </Link>
 
-      <Card.Body className="d-flex flex-column">
+      <Card.Body className='d-flex flex-column'>
         <Link to={`/product/${product._id}`}>
           <Card.Title as='div'>
-            <strong data-testid='product-name'>{product.name}</strong>
+            <h2 data-testid='product-name' className='text-xl font-bold'>
+              {product.name}
+            </h2>
           </Card.Title>
         </Link>
 
-        <Card.Text as="div">
+        <Card.Text as='div'>
           <Rating
-            data-testid="product-rating"
+            data-testid='product-rating'
             value={product.rating}
             text={`${product.numReviews} reviews`}
-            data-testid='product-reviews'
           />
         </Card.Text>
 
-        <Card.Text as="h3" style={{ paddingBottom: 0 }}>
+        <Card.Text as='h3'>
           <Row>
             <Col>
-              $<span data-testid='product-price'>{product.price}</span>
+              <div className='text-lg text-right'>
+                $<span data-testid='product-price'>{product.price}</span>
+              </div>
             </Col>
             {/* <Col className="text-end">
               {userInfo &&
@@ -103,7 +106,7 @@ const Product = ({ product }) => {
         </Card.Text>
       </Card.Body>
     </Card>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

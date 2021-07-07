@@ -9,7 +9,7 @@ const getConversations = asyncHandler(async (req, res) => {
     .populate('sender', 'name')
     .populate('receiver', 'name')
 
-  res.json({ conversations })
+  res.json(conversations)
 })
 
 // @desc        Create a conversation
