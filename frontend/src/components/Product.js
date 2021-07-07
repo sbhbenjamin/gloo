@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Card, Row, Col } from 'react-bootstrap'
 import Rating from './Rating'
 
-import {
-  addFavourite,
-  removeFavourite,
-  getFavourites,
-} from '../actions/userActions'
+// import {
+//   addFavourite,
+//   removeFavourite,
+//   getFavourites,
+// } from '../actions/userActions'
 
-import {
-  USER_ADD_FAVOURITE_RESET,
-  USER_REMOVE_FAVOURITE_RESET,
-} from '../constants/userConstants'
+// import {
+//   USER_ADD_FAVOURITE_RESET,
+//   USER_REMOVE_FAVOURITE_RESET,
+// } from '../constants/userConstants'
 
 const Product = ({ product }) => {
   // const dispatch = useDispatch()

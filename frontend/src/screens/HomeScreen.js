@@ -1,12 +1,12 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Row, Col } from "react-bootstrap"
-import Product from "../components/Product"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import Paginate from "../components/Paginate"
-import Meta from "../components/Meta"
-import { listProducts } from "../actions/productActions"
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Row, Col } from 'react-bootstrap'
+import Product from '../components/Product'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
+import Meta from '../components/Meta'
+import { listProducts } from '../actions/productActions'
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -27,8 +27,9 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <Meta />
-
-      <h1>Latest Products</h1>
+      <div className='mb-2'>
+        <h1 className='text-4xl font-semibold'>Latest Products</h1>
+      </div>
       {/* {errorFavourite && <Message variant='danger'>{errorFavourite}</Message>} */}
       {loading ? (
         <Loader />
@@ -46,7 +47,7 @@ const HomeScreen = ({ match }) => {
           <Paginate
             pages={pages}
             page={page}
-            keyword={keyword ? keyword : ""}
+            keyword={keyword ? keyword : ''}
           />
         </>
       )}
