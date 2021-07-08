@@ -14,6 +14,7 @@ import {
   PRODUCT_CREATE_REVIEW_RESET,
   PRODUCT_DETAILS_RESET,
 } from '../constants/productConstants'
+import { createConversation } from '../actions/conversationActions'
 
 const ProductScreen = ({ history, match }) => {
   const [rating, setRating] = useState(0)
@@ -55,6 +56,11 @@ const ProductScreen = ({ history, match }) => {
 
   const editHandler = () => {
     history.push(`/product/${product._id}/edit`)
+  }
+
+  const chatHandler = () => {
+    dispatch(createConversation(product))
+    history.push(`/conversations`)
   }
 
   const submitHandler = (e) => {
@@ -202,7 +208,7 @@ const ProductScreen = ({ history, match }) => {
                     ) : (
                       <ListGroup.Item className='d-grid gap-2'>
                         <div className='d-grid gap-2'>
-                          <Button
+                          {/* <Button
                             data-testid='addtocart-btn'
                             onClick={addToCartHandler}
                             className='btn'
@@ -210,6 +216,15 @@ const ProductScreen = ({ history, match }) => {
                             disabled={!product.available}
                           >
                             Add To Cart
+                          </Button> */}
+                          <Button
+                            data-testid='chat-btn'
+                            onClick={chatHandler}
+                            className='btn'
+                            type='button'
+                            disabled={!product.available}
+                          >
+                            Chat
                           </Button>
                         </div>
                       </ListGroup.Item>

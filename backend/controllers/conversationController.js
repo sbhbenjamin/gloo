@@ -23,17 +23,18 @@ const createConversation = asyncHandler(async (req, res) => {
     receiver: receiver,
   })
 
-  if (conversationExists.length === 0) {
+  try {
     const conversation = new Conversation({
       sender,
       receiver,
     })
+    console.log(conversation)
 
     const createdConversation = await conversation.save()
     res.status(201).json(createdConversation)
-  } else {
+  } catch (error) {
     res.status(400)
-    throw new Error('Conversation already exists')
+    throw new Error(error)
   }
 })
 

@@ -19,7 +19,6 @@ const Header = () => {
     <header>
       <Navbar
         className='p-3 navbar'
-        bg='light'
         variant='light'
         expand='lg'
         collapseOnSelect
@@ -100,7 +99,7 @@ const Header = () => {
               ) : (
                 <LinkContainer to='/login' data-testid='navbar-signin'>
                   <Nav.Link>
-                    <i className='fas fa-user'></i>
+                    <i className='fas fa-user mr-1'></i>
                     Sign In
                   </Nav.Link>
                 </LinkContainer>

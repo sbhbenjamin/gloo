@@ -10,7 +10,7 @@ const getMessagesByConversationId = asyncHandler(async (req, res) => {
     conversation: req.params.convoid,
   })
 
-  res.json({ messages })
+  res.json(messages)
 })
 
 // @desc        Create a message
