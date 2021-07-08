@@ -178,8 +178,8 @@ export const orderDeleteReducer = (state = { order: [] }, action) => {
   }
 }
 
-export const orderSellerReducer = (
-  state = { loading: true, seller: {} },
+export const orderSellersReducer = (
+  state = { loading: true, sellers: {} },
   action
 ) => {
   switch (action.type) {

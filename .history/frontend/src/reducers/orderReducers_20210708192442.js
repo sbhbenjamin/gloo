@@ -178,7 +178,7 @@ export const orderDeleteReducer = (state = { order: [] }, action) => {
   }
 }
 
-export const orderSellerReducer = (
+export const orderSellersReducer = (
   state = { loading: true, seller: {} },
   action
 ) => {
