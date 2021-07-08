@@ -41,7 +41,7 @@ const CertScreen = ({ history, match }) => {
         <Link
           data-testid='back-btn'
           className='btn btn-outline-secondary my-3'
-          to='/certificates'
+          to='/'
         >
           Go Back
         </Link>
@@ -52,7 +52,7 @@ const CertScreen = ({ history, match }) => {
         ) : (
           <>
             <Meta title={cert.name} />
-            <div className='flex justify-content-evenly items-center'>
+            <div className='flex justify-around place-items-center'>
               <span md={9}>
                 <Image
                   data-testid='cert-image'
@@ -62,7 +62,7 @@ const CertScreen = ({ history, match }) => {
                   className='max-w-2xl'
                 />
               </span>
-              <span md={3}>
+              <span md={3} className='justify-evenly'>
                 <ListGroup variant='flush'>
                   <h1
                     className='font-bold uppercase text-2xl mb-6'

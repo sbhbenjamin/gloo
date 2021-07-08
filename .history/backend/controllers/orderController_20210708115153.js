@@ -13,7 +13,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     taxPrice,
     shippingPrice,
     totalPrice,
-    sellers,
+    seller,
   } = req.body
 
   if (orderItems && orderItems.length === 0) {
@@ -29,7 +29,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       taxPrice,
       shippingPrice,
       totalPrice,
-      sellers,
+      seller,
     })
 
     const createdOrder = await order.save()
@@ -44,7 +44,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id)
     .populate("buyer", "name email")
-    .populate("sellers", "name")
+    .populate("seller", "name")
 
   if (order) {
     res.json(order)
@@ -102,7 +102,7 @@ const getMyOrders = asyncHandler(async (req, res) => {
 const getOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({})
     .populate("buyer", "id name")
-    .populate("sellers", "id name")
+    .populate("seller", "id name")
   res.json(orders)
 })
 

@@ -133,14 +133,12 @@ const PlaceOrderScreen = ({ history }) => {
                           </Row>
                         </ListGroup.Item>
                       ))}
-                      {cart.cartItems.map(
-                        (item) =>
-                          (!sellers ||
-                            !sellers.find(
-                              (sellerid) => sellerid === item.user._id
-                            )) &&
+                      {cart.cartItems.map((item) => {
+                        if (!sellers.find(item.user._id)) {
                           sellers.push(item.user._id)
-                      )}
+                        }
+                        return 1
+                      })}
                       {console.log(sellers)}
                     </ListGroup>
                   )}

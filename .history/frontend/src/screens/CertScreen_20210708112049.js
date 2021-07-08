@@ -41,7 +41,7 @@ const CertScreen = ({ history, match }) => {
         <Link
           data-testid='back-btn'
           className='btn btn-outline-secondary my-3'
-          to='/certificates'
+          to='/'
         >
           Go Back
         </Link>

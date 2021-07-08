@@ -35,7 +35,7 @@ const PlaceOrderScreen = ({ history }) => {
   const { order, success, error } = orderCreate
 
   const orderSellers = useSelector((state) => state.orderSellers)
-  const { sellers } = orderSellers
+  const { sell } = orderSellers
 
   useEffect(() => {
     if (!userInfo) {
@@ -45,7 +45,7 @@ const PlaceOrderScreen = ({ history }) => {
     }
   }, [history, success, cart, order, userInfo])
 
-  const placeOrderHandler = () => {
+  const placeOrderHandler = (sell) => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -55,7 +55,7 @@ const PlaceOrderScreen = ({ history }) => {
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
-        sellers: sellers,
+        sellers: sell,
       })
     )
   }
@@ -133,15 +133,7 @@ const PlaceOrderScreen = ({ history }) => {
                           </Row>
                         </ListGroup.Item>
                       ))}
-                      {cart.cartItems.map(
-                        (item) =>
-                          (!sellers ||
-                            !sellers.find(
-                              (sellerid) => sellerid === item.user._id
-                            )) &&
-                          sellers.push(item.user._id)
-                      )}
-                      {console.log(sellers)}
+                      {cart.cartItems.map((item) => sell.push(item.user._id))}
                     </ListGroup>
                   )}
                 </ListGroup.Item>

@@ -34,13 +34,8 @@ const UserCertsScreen = ({ history, match }) => {
       dispatch(deleteCert(id))
     }
   }
-
   const nameClickHandler = (certid) => {
     history.push(`/certificates/${certid}`)
-  }
-
-  const createCertHandler = () => {
-    history.push("/newcertificate")
   }
 
   return userInfo ? (
@@ -50,7 +45,7 @@ const UserCertsScreen = ({ history, match }) => {
           <h1>Certificates</h1>
         </Col>
         <Col className='text-end'>
-          <Button className='my-3' onClick={createCertHandler}>
+          <Button className='my-3'>
             <i className='fas fa-plus'></i> Create Certificate
           </Button>
         </Col>

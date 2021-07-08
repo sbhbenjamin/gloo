@@ -27,7 +27,7 @@ const Header = () => {
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand className='navbar-brand' data-testid='navbar-brand'>
-              Gloo
+              <h2>Gloo</h2>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />

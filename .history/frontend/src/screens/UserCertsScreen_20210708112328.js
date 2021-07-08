@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Table, Button, Row, Col } from "react-bootstrap"
+import { Table, Button, Row } from "react-bootstrap"
 import { LinkContainer, Link } from "react-router-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import Message from "../components/Message"
@@ -34,26 +34,15 @@ const UserCertsScreen = ({ history, match }) => {
       dispatch(deleteCert(id))
     }
   }
-
   const nameClickHandler = (certid) => {
     history.push(`/certificates/${certid}`)
-  }
-
-  const createCertHandler = () => {
-    history.push("/newcertificate")
   }
 
   return userInfo ? (
     <>
       <Row className='align-items-center'>
-        <Col>
-          <h1>Certificates</h1>
-        </Col>
-        <Col className='text-end'>
-          <Button className='my-3' onClick={createCertHandler}>
-            <i className='fas fa-plus'></i> Create Certificate
-          </Button>
-        </Col>
+        <h1>Certificates</h1>
+        <Button className='justify-content-end'> hello </Button>
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}

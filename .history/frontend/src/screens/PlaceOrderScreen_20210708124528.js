@@ -45,7 +45,7 @@ const PlaceOrderScreen = ({ history }) => {
     }
   }, [history, success, cart, order, userInfo])
 
-  const placeOrderHandler = () => {
+  const placeOrderHandler = (sell) => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -55,7 +55,7 @@ const PlaceOrderScreen = ({ history }) => {
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
-        sellers: sellers,
+        sellers: sell,
       })
     )
   }
@@ -133,15 +133,9 @@ const PlaceOrderScreen = ({ history }) => {
                           </Row>
                         </ListGroup.Item>
                       ))}
-                      {cart.cartItems.map(
-                        (item) =>
-                          (!sellers ||
-                            !sellers.find(
-                              (sellerid) => sellerid === item.user._id
-                            )) &&
-                          sellers.push(item.user._id)
+                      {cart.cartItems.map((item) =>
+                        sellers.push(item.user._id)
                       )}
-                      {console.log(sellers)}
                     </ListGroup>
                   )}
                 </ListGroup.Item>
@@ -216,7 +210,7 @@ const PlaceOrderScreen = ({ history }) => {
                       type='button'
                       size='lg'
                       disabled={cart.cartItems === 0}
-                      onClick={placeOrderHandler}
+                      onClick={placeOrderHandler(sellers)}
                       block
                     >
                       Place Order

@@ -135,10 +135,7 @@ const PlaceOrderScreen = ({ history }) => {
                       ))}
                       {cart.cartItems.map(
                         (item) =>
-                          (!sellers ||
-                            !sellers.find(
-                              (sellerid) => sellerid === item.user._id
-                            )) &&
+                          (!sellers || !sellers.find(item.user._id)) &&
                           sellers.push(item.user._id)
                       )}
                       {console.log(sellers)}

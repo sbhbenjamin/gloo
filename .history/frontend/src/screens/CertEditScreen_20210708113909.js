@@ -233,9 +233,7 @@ const CertEditScreen = ({ match, history }) => {
         </FormContainer>
       </>
     ) : (
-      <Message variant='danger'>
-        Unauthorised Access of Certificate Edit Page
-      </Message>
+      <Message variant='danger'>Unauthorised Access of Cert Edit Page</Message>
     )
   ) : (
     ""

@@ -13,7 +13,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     taxPrice,
     shippingPrice,
     totalPrice,
-    sellers,
+    seller,
   } = req.body
 
   if (orderItems && orderItems.length === 0) {
@@ -29,7 +29,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       taxPrice,
       shippingPrice,
       totalPrice,
-      sellers,
+      seller,
     })
 
     const createdOrder = await order.save()
@@ -44,7 +44,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id)
     .populate("buyer", "name email")
-    .populate("sellers", "name")
+    .populate("seller", "name")
 
   if (order) {
     res.json(order)
@@ -83,26 +83,24 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 // @route       GET /api/orders/myorders
 // @access      Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ buyer: req.user._id })
+  const orders = await Order.find({ user: req.user._id })
   res.json(orders)
 })
 
 // @desc        Get logged in user orders (seller)
 // @route       GET /api/orders/myorders
 // @access      Private
-// const getMySellerOrders = asyncHandler(async (req, res) => {
-//   const orders = await Order.find({}).populate("user", "id name")
+const getMySellerOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate("user", "id name")
 
-//   res.json(orders)
-// })
+  res.json(orders)
+})
 
 // @desc        Get all orders
 // @route       GET /api/orders
 // @access      Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({})
-    .populate("buyer", "id name")
-    .populate("sellers", "id name")
+  const orders = await Order.find({}).populate("user", "id name")
   res.json(orders)
 })
 
@@ -147,6 +145,7 @@ export {
   getOrderById,
   updateOrderToPaid,
   getMyOrders,
+  getMySellerOrders,
   getOrders,
   updateOrderToDelivered,
   deleteOrder,
