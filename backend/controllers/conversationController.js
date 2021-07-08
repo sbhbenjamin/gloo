@@ -6,8 +6,9 @@ import Conversation from '../models/conversationModel.js'
 // @access      Private
 const getConversations = asyncHandler(async (req, res) => {
   const conversations = await Conversation.find()
-    .populate('sender', 'name')
-    .populate('receiver', 'name')
+    .populate('buyer', 'name')
+    .populate('seller', 'name')
+    .populate('product', 'name image numReviews rating')
 
   res.json(conversations)
 })
@@ -16,19 +17,14 @@ const getConversations = asyncHandler(async (req, res) => {
 // @route       POST /api/conversations
 // @access      Private
 const createConversation = asyncHandler(async (req, res) => {
-  const { sender, receiver } = req.body
-
-  const conversationExists = await Conversation.find({
-    sender: sender,
-    receiver: receiver,
-  })
+  const { buyer, seller, product } = req.body
 
   try {
     const conversation = new Conversation({
-      sender,
-      receiver,
+      buyer,
+      seller,
+      product,
     })
-    console.log(conversation)
 
     const createdConversation = await conversation.save()
     res.status(201).json(createdConversation)
