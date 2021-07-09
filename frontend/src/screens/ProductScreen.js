@@ -15,6 +15,7 @@ import {
   PRODUCT_DETAILS_RESET,
 } from '../constants/productConstants'
 import { createConversation } from '../actions/conversationActions'
+import { CONVERSATION_SET } from '../constants/conversationConstants'
 
 const ProductScreen = ({ history, match }) => {
   const [rating, setRating] = useState(0)
@@ -28,6 +29,13 @@ const ProductScreen = ({ history, match }) => {
   const productReviewCreate = useSelector((state) => state.productReviewCreate)
   const { success: successProductReview, error: errorProductReview } =
     productReviewCreate
+
+  const conversationList = useSelector((state) => state.conversationList)
+  const {
+    loading: loadingConversations,
+    error: errorConversations,
+    conversations,
+  } = conversationList
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -59,7 +67,19 @@ const ProductScreen = ({ history, match }) => {
   }
 
   const chatHandler = () => {
-    dispatch(createConversation(product))
+    const chatExists = conversations?.filter(
+      (c) =>
+        c.buyer._id === userInfo._id &&
+        c.seller._id === product.user._id &&
+        c.product._id === product._id
+    )
+
+    if (!chatExists) {
+      dispatch(createConversation(product))
+
+      // dispatch({ type: CONVERSATION_SET, payload: })
+    }
+    console.log(chatExists)
     history.push(`/conversations`)
   }
 

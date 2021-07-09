@@ -1,0 +1,140 @@
+.messenger {
+  height: 70vh;
+  display: flex;
+  margin-top: 5px;
+}
+
+.chatMenu {
+  flex: 3;
+  /* border-right: 2px solid rgb(215, 215, 215); */
+}
+
+.chatMenuInput {
+  width: 90%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+.chatBox {
+  flex: 8;
+}
+
+.chatBoxWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.chatBoxProductImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+/* .chatBoxProductBtn {
+  padding: 8px 16px;
+} */
+
+.chatBoxProductBtnWrapper {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chatBoxProductName {
+  margin: 0;
+}
+
+.chatBoxProductBtnExpand {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.chatBoxProductCancel {
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.chatBoxTop {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+.chatBoxBottom {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatMessageInput {
+  width: 80%;
+  height: 90px;
+  padding: 10px;
+}
+
+.chatSubmitButton {
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: teal;
+  color: white;
+}
+
+.chatOnline {
+  flex: 3;
+}
+
+.chatMenuWrapper,
+.chatBoxWrapper,
+.chatOnlineWrapper {
+  padding: 10px 10px 10px 0;
+  height: 100%;
+}
+
+.noConversationText {
+  position: absolute;
+  top: 10%;
+  font-size: 50px;
+  color: rgb(224, 220, 220);
+  cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+  .chatMenu {
+    flex: 1;
+  }
+
+  .chatMenuInput {
+    display: none;
+  }
+
+  .chatBox {
+    flex: 10;
+  }
+
+  .chatOnline {
+    flex: 1px;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}

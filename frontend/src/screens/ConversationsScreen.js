@@ -1,17 +1,30 @@
 import './conversationscreen.css'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Nav, Form, Button, Container } from 'react-bootstrap'
+import {
+  Row,
+  Col,
+  Nav,
+  FormControl,
+  Button,
+  Card,
+  InputGroup,
+} from 'react-bootstrap'
 import { listConversations } from '../actions/conversationActions'
-import { listMessages } from '../actions/messageActions'
+import { createMessage, listMessages } from '../actions/messageActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Rating from '../components/Rating'
 import { io } from 'socket.io-client'
-import ChatUser from '../components/ChatUser'
-import ChatMessage from '../components/ChatMessage'
+import ChatUser from '../components/chatUser/ChatUser'
+import ChatMessage from '../components/chatMessage/ChatMessage'
+import { MESSAGE_CREATE_RESET } from '../constants/messageConstants'
 
-const ConversationsScreen = () => {
+const ConversationsScreen = ({ history }) => {
   const [currentChat, setCurrentChat] = useState(null)
+  const [newMessage, setNewMessage] = useState('')
+  const [offerActive, setOfferActive] = useState(false)
+  const [offerPrice, setOfferPrice] = useState(null)
   const dispatch = useDispatch()
   const scrollRef = useRef()
   // const socket = io()
@@ -34,6 +47,13 @@ const ConversationsScreen = () => {
     conversations,
   } = conversationList
 
+  const conversationCreate = useSelector((state) => state.conversationCreate)
+  const {
+    loading: loadingConversationCreate,
+    error: errorConversationCreate,
+    conversation: createdConversation,
+  } = conversationCreate
+
   const messageList = useSelector((state) => state.messageList)
   const {
     loading: loadingMessages,
@@ -41,35 +61,68 @@ const ConversationsScreen = () => {
     messages,
   } = messageList
 
-  useEffect(() => {
-    dispatch(listConversations())
-  }, [dispatch])
+  const messageCreate = useSelector((state) => state.messageCreate)
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+  } = messageCreate
 
   useEffect(() => {
+    dispatch(listConversations())
+  }, [dispatch, createdConversation])
+
+  useEffect(() => {
+    dispatch({ type: MESSAGE_CREATE_RESET })
     if (currentChat) {
       dispatch(listMessages(currentChat._id))
     }
-  }, [dispatch, currentChat])
+  }, [dispatch, currentChat, successCreate])
 
-  const handleChatSubmit = (e) => {
+  const handleOfferBtn = () => {
+    setOfferActive(true)
+  }
+
+  const handleOfferCancel = () => {
+    setOfferActive(false)
+  }
+
+  const handleOfferSubmit = () => {
+    // dispatch offer
+    console.log(offerPrice)
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault()
+    const message = {
+      conversation: currentChat._id,
+      sender: userInfo._id,
+      text: newMessage,
+    }
+    dispatch(createMessage(message))
+    setNewMessage('')
   }
   return (
     <>
+      <Button
+        data-testid='navigate-back-btn'
+        onClick={history.goBack}
+        variant='outline-secondary'
+      >
+        Go Back
+      </Button>
       <div className='messenger'>
         <div className='chatMenu'>
           <div className='chatMenuWrapper'>
-            <input placeholder='Search for friends' className='chatMenuInput' />
-
             {loadingConversations ? (
               <Loader />
             ) : errorConversations ? (
               <Message variant='danger'>{errorConversations}</Message>
             ) : (
-              <Nav variant='pills' className='flex-column'>
+              <Nav variant='pills' className='flex-column ms-0'>
                 {conversations.map((c) => (
-                  <div onClick={() => setCurrentChat(c)}>
-                    <Nav.Link>{c.receiver.name}</Nav.Link>
+                  <div onClick={() => setCurrentChat(c)} key={c._id}>
+                    <ChatUser conversation={c} currentChat={currentChat} />
                   </div>
                 ))}
               </Nav>
@@ -85,6 +138,69 @@ const ConversationsScreen = () => {
             ) : currentChat ? (
               messages && (
                 <>
+                  <Card className='chatBoxProduct'>
+                    <Card.Body>
+                      <Row>
+                        <Col xs={1}>
+                          <img
+                            className='chatBoxProductImage'
+                            src={currentChat.product.image}
+                            alt={currentChat.product.name}
+                          />
+                        </Col>
+                        <Col className='flex-grow-1'>
+                          <p className='chatBoxProductName'>
+                            {currentChat.product.name}
+                          </p>
+                          <Rating
+                            data-testid='product-rating'
+                            value={currentChat.product.rating}
+                            text={`${currentChat.product.numReviews} reviews`}
+                          />
+                        </Col>
+                        <Col xs={5} className='d-flex chatBoxProductBtnWrapper'>
+                          {!offerActive ? (
+                            <Button
+                              className='chatBoxProductBtn'
+                              onClick={handleOfferBtn}
+                            >
+                              Make offer
+                            </Button>
+                          ) : (
+                            <div className='chatBoxProductBtnExpand'>
+                              <InputGroup>
+                                <InputGroup.Prepend>
+                                  <InputGroup.Text>$</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                  type='number'
+                                  placeholder='0.00'
+                                  onChange={(e) =>
+                                    setOfferPrice(e.target.value)
+                                  }
+                                />
+                                <InputGroup.Append>
+                                  <Button
+                                    variant='outline-success'
+                                    onClick={handleOfferSubmit}
+                                  >
+                                    Offer
+                                  </Button>
+                                </InputGroup.Append>
+                              </InputGroup>
+                              <a
+                                href='#'
+                                className='chatBoxProductCancel'
+                                onClick={handleOfferCancel}
+                              >
+                                cancel
+                              </a>
+                            </div>
+                          )}
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
                   <div className='chatBoxTop'>
                     {messages?.map((m) => (
                       <div ref={scrollRef}>
@@ -99,12 +215,13 @@ const ConversationsScreen = () => {
                     <textarea
                       className='chatMessageInput'
                       placeholder='write something...'
-                      // onChange={(e) => setNewMessage(e.target.value)}
-                      // value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      value={newMessage}
                     ></textarea>
                     <button
+                      type='submit'
                       className='chatSubmitButton'
-                      // onClick={handleSubmit}
+                      onClick={handleSubmit}
                     >
                       Send
                     </button>
@@ -122,54 +239,5 @@ const ConversationsScreen = () => {
     </>
   )
 }
-
-//   return (
-//     <div className='messenger'>
-//       <div className='chatMenu'>
-//         {loadingConversations ? (
-//           <Loader />
-//         ) : errorConversations ? (
-//           <Message variant='danger'>{errorConversations}</Message>
-//         ) : (
-//           <Nav variant='pills' className='flex-column'>
-//             {conversations.map((c) => (
-//               <Nav.Link>{c.receiver.name}</Nav.Link>
-//             ))}
-//           </Nav>
-//         )}
-//       </div>
-//       <div className='chatBox' xs={9}>
-//         <Row className='chatBoxWrapper'>
-//           <div className='chatBoxTop'>
-//             <ChatMessage />
-//             <ChatMessage own={true} />
-//             <ChatMessage />
-//             <ChatMessage own={true} />
-//             <ChatMessage />
-//             <ChatMessage own={true} />
-//             <ChatMessage />
-//             <ChatMessage own={true} />
-//           </div>
-//         </Row>
-//         <Row>
-//           <Form>
-//             <div className='d-flex'>
-//               <Col xs='11' className='w-96'>
-//                 <Form.Group inline>
-//                   <Form.Control placeholder='Say Hello!' />
-//                 </Form.Group>
-//               </Col>
-//               <Col className='flex-shrink-1'>
-//                 <Button onSubmit={handleChatSubmit} type='submit'>
-//                   Send
-//                 </Button>
-//               </Col>
-//             </div>
-//           </Form>
-//         </Row>
-//       </div>
-//     </div>
-//   )
-// }
 
 export default ConversationsScreen

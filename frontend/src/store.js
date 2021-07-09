@@ -47,6 +47,7 @@ import {
 import {
   conversationCreateReducer,
   conversationListReducer,
+  conversationSetReducer,
 } from './reducers/conversationReducers'
 import {
   messageCreateReducer,
@@ -91,6 +92,7 @@ const reducer = combineReducers({
   certListUser: certListUserReducer,
   conversationList: conversationListReducer,
   conversationCreate: conversationCreateReducer,
+  conversationSet: conversationSetReducer,
   messageList: messageListReducer,
   messageCreate: messageCreateReducer,
 })

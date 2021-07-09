@@ -13,8 +13,8 @@ const Rating = ({ value, text, color }) => {
   }
 
   return (
-    <div className='rating flex text-gray-700'>
-      <div className='mr-1'>
+    <div className='rating d-flex text-gray-700'>
+      <div className='me-1'>
         <span>
           <i
             data-testid='star-1'

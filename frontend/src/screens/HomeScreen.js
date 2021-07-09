@@ -27,8 +27,8 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <Meta />
-      <div className='mb-2'>
-        <h1 className='text-4xl font-semibold'>Latest Products</h1>
+      <div className='mb-3'>
+        <h2>Latest Products</h2>
       </div>
       {/* {errorFavourite && <Message variant='danger'>{errorFavourite}</Message>} */}
       {loading ? (

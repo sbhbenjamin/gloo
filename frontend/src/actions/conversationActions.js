@@ -7,6 +7,8 @@ import {
   CONVERSATION_LIST_FAIL,
   CONVERSATION_LIST_REQUEST,
   CONVERSATION_LIST_SUCCESS,
+  CONVERSATION_SET_REQUEST,
+  CONVERSATION_SET_SUCCESS,
 } from '../constants/conversationConstants'
 
 export const listConversations = () => async (dispatch, getState) => {
@@ -51,8 +53,9 @@ export const createConversation = (product) => async (dispatch, getState) => {
     } = getState()
 
     const conversation = {
-      sender: userInfo._id,
-      receiver: product.user._id,
+      buyer: userInfo._id,
+      seller: product.user._id,
+      product: product,
     }
 
     const config = {

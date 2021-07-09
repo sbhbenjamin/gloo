@@ -1,3 +1,4 @@
+import './product.css'
 import { Link } from 'react-router-dom'
 import { Card, Row, Col } from 'react-bootstrap'
 import Rating from './Rating'
@@ -67,9 +68,9 @@ const Product = ({ product }) => {
       <Card.Body className='d-flex flex-column'>
         <Link to={`/product/${product._id}`}>
           <Card.Title as='div'>
-            <h2 data-testid='product-name' className='text-xl font-bold'>
+            <h5 className='card-title' data-testid='product-name'>
               {product.name}
-            </h2>
+            </h5>
           </Card.Title>
         </Link>
 
@@ -81,10 +82,10 @@ const Product = ({ product }) => {
           />
         </Card.Text>
 
-        <Card.Text as='h3'>
+        <Card.Text as='h5' className='mt-2'>
           <Row>
-            <Col>
-              <div className='text-lg text-right'>
+            <Col className='priceWrapper'>
+              <div className='productPrice'>
                 $<span data-testid='product-price'>{product.price}</span>
               </div>
             </Col>
