@@ -1,59 +1,65 @@
-import './product.css'
-import { Link } from 'react-router-dom'
-import { Card, Row, Col } from 'react-bootstrap'
-import Rating from './Rating'
+import "./product.css"
+import { Link } from "react-router-dom"
+import { Card, Row, Col } from "react-bootstrap"
+import Rating from "./Rating"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 
-// import {
-//   addFavourite,
-//   removeFavourite,
-//   getFavourites,
-// } from '../actions/userActions'
+import {
+  addFavourite,
+  removeFavourite,
+  getFavourites,
+  getFavourite,
+} from "../actions/userActions"
 
-// import {
-//   USER_ADD_FAVOURITE_RESET,
-//   USER_REMOVE_FAVOURITE_RESET,
-// } from '../constants/userConstants'
+import {
+  USER_ADD_FAVOURITE_RESET,
+  USER_REMOVE_FAVOURITE_RESET,
+} from "../constants/userConstants"
 
 const Product = ({ product }) => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // const userFavourites = useSelector((state) => state.userFavourites);
-  // const { products } = userFavourites;
+  const userFavourites = useSelector((state) => state.userFavourites)
+  const { products: productsFavourites } = userFavourites
 
-  // const favouriteAdd = useSelector((state) => state.favouriteAdd);
-  // const { success: successAdd } = favouriteAdd;
+  const favouriteAdd = useSelector((state) => state.favouriteAdd)
+  const { success: successAdd } = favouriteAdd
 
-  // const favouriteRemove = useSelector((state) => state.favouriteRemove);
-  // const { success: successRemove } = favouriteRemove;
+  const favouriteRemove = useSelector((state) => state.favouriteRemove)
+  const { success: successRemove } = favouriteRemove
 
-  // const userLogin = useSelector((state) => state.userLogin)
-  // const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   // useEffect(() => {
   //   if (userInfo) {
-  //     dispatch(getFavourites(userInfo._id));
+  //     dispatch(getFavourites())
   //   }
-  // }, [dispatch, userInfo, successAdd, successRemove]);
+  // }, [dispatch, userInfo])
 
-  // const checkFavourited = () => {
-  //   if (products) {
-  //     return products.find((p) => p._id.toString() === product._id);
-  //   } else {
-  //     return false;
-  //   }
-  // };
+  const checkFavourited = () => {
+    if (productsFavourites) {
+      return productsFavourites.find((p) => p._id === product._id)
+    } else {
+      return undefined
+    }
+  }
 
-  // const addToFavouritesHandler = (e) => {
-  //   e.preventDefault();
-  //   dispatch(addFavourite(product));
-  //   dispatch({ type: USER_ADD_FAVOURITE_RESET });
-  // };
+  const addToFavouritesHandler = (e) => {
+    e.preventDefault()
+    productsFavourites.push(product)
+    dispatch(addFavourite(product))
+    dispatch({ type: USER_ADD_FAVOURITE_RESET })
+  }
 
-  // const removeFromFavouritesHandler = (e) => {
-  //   e.preventDefault();
-  //   dispatch(removeFavourite(product));
-  //   dispatch({ type: USER_REMOVE_FAVOURITE_RESET });
-  // };
+  const removeFromFavouritesHandler = (e) => {
+    e.preventDefault()
+    const index = productsFavourites.findIndex((p) => p._id === product._id)
+    productsFavourites.splice(index, 1)
+    dispatch(removeFavourite(product))
+    dispatch({ type: USER_REMOVE_FAVOURITE_RESET })
+  }
 
   return (
     <Card className='my-3 rounded d-flex flex-column'>
@@ -80,6 +86,18 @@ const Product = ({ product }) => {
             value={product.rating}
             text={`${product.numReviews} reviews`}
           />
+          <Col className='text-end'>
+            {userInfo &&
+              (checkFavourited.apply() ? (
+                <a href='/' onClick={(e) => removeFromFavouritesHandler(e)}>
+                  <i className='fas fa-heart'></i>
+                </a>
+              ) : (
+                <a href='/' onClick={(e) => addToFavouritesHandler(e)}>
+                  <i className='far fa-heart'></i>
+                </a>
+              ))}
+          </Col>
         </Card.Text>
 
         <Card.Text as='h5' className='mt-2'>
@@ -89,18 +107,6 @@ const Product = ({ product }) => {
                 $<span data-testid='product-price'>{product.price}</span>
               </div>
             </Col>
-            {/* <Col className="text-end">
-              {userInfo &&
-                (checkFavourited() ? (
-                  <a href="/" onClick={(e) => removeFromFavouritesHandler(e)}>
-                    <i className="fas fa-heart"></i>
-                  </a>
-                ) : (
-                  <a href="/" onClick={(e) => addToFavouritesHandler(e)}>
-                    <i className="far fa-heart"></i>
-                  </a>
-                ))}
-            </Col> */}
           </Row>
         </Card.Text>
       </Card.Body>

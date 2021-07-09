@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
-import Product from '../components/Product'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import Paginate from '../components/Paginate'
-import Meta from '../components/Meta'
-import { listProducts } from '../actions/productActions'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Row, Col } from "react-bootstrap"
+import Product from "../components/Product"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import Paginate from "../components/Paginate"
+import Meta from "../components/Meta"
+import { listProducts } from "../actions/productActions"
+import { getFavourites } from "../actions/userActions"
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -22,6 +23,7 @@ const HomeScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
+    dispatch(getFavourites())
   }, [dispatch, keyword, pageNumber, userInfo])
 
   return (
@@ -47,7 +49,7 @@ const HomeScreen = ({ match }) => {
           <Paginate
             pages={pages}
             page={page}
-            keyword={keyword ? keyword : ''}
+            keyword={keyword ? keyword : ""}
           />
         </>
       )}
