@@ -15,6 +15,9 @@ node_modules/
 # uploads
 /uploads/image-*
 
+.history
+/frontend/certUploads
+
 # misc
 .DS_Store
 .env
