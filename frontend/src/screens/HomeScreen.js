@@ -1,13 +1,13 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Row, Col } from "react-bootstrap"
-import Product from "../components/Product"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import Paginate from "../components/Paginate"
-import Meta from "../components/Meta"
-import { listProducts } from "../actions/productActions"
-import { getFavourites } from "../actions/userActions"
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Row, Col } from 'react-bootstrap'
+import Product from '../components/Product'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
+import Meta from '../components/Meta'
+import { listProducts } from '../actions/productActions'
+import { getFavourites } from '../actions/userActions'
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -41,7 +41,14 @@ const HomeScreen = ({ match }) => {
         <>
           <Row>
             {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+              <Col
+                key={product._id}
+                sm={12}
+                md={6}
+                lg={4}
+                xl={3}
+                className='d-flex align-items-stretch'
+              >
                 <Product product={product} />
               </Col>
             ))}
@@ -49,7 +56,7 @@ const HomeScreen = ({ match }) => {
           <Paginate
             pages={pages}
             page={page}
-            keyword={keyword ? keyword : ""}
+            keyword={keyword ? keyword : ''}
           />
         </>
       )}

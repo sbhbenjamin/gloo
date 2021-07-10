@@ -1,10 +1,10 @@
-import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import CheckoutSteps from "../components/CheckoutSteps"
-import { createOrder } from "../actions/orderActions"
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import CheckoutSteps from '../components/CheckoutSteps'
+import { createOrder } from '../actions/orderActions'
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -39,7 +39,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login')
     } else if (success) {
       history.push(`order/${order._id}`)
     }
@@ -75,20 +75,24 @@ const PlaceOrderScreen = ({ history }) => {
             <Col md={8}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h2>Shipping</h2>
+                  <div className='mb-3'>
+                    <h3>Shipping</h3>
+                  </div>
                   <p>
-                    <strong>Address:</strong>{" "}
+                    <strong>Address:</strong>{' '}
                     <span data-testid='order-address'>
-                      {cart.shippingAddress.address},{" "}
-                      {cart.shippingAddress.city},{" "}
-                      {cart.shippingAddress.postalCode},{" "}
+                      {cart.shippingAddress.address},{' '}
+                      {cart.shippingAddress.city},{' '}
+                      {cart.shippingAddress.postalCode},{' '}
                       {cart.shippingAddress.country}
                     </span>
                   </p>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                  <h2>Payment Method</h2>
+                  <div className='mb-3'>
+                    <h3>Payment Method</h3>
+                  </div>
                   <strong>Method: </strong>
                   <span data-testid='order-paymentmethod'>
                     {cart.paymentMethod}
@@ -96,7 +100,9 @@ const PlaceOrderScreen = ({ history }) => {
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                  <h2>Order Items</h2>
+                  <div className='mb-3'>
+                    <h3>Order Items</h3>
+                  </div>
                   {cart.cartItems.length === 0 ? (
                     <Message data-testid='order-message'>
                       Your cart is empty

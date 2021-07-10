@@ -63,7 +63,7 @@ const ProfileScreen = ({ location, history }) => {
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>
-            <h3 className='mb-1'>Name</h3>
+            <Form.Label className='mb-1'>Name</Form.Label>
             <Form.Control
               data-testid='update-name'
               type='name'
@@ -75,7 +75,7 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Form.Group controlId='email'>
-            <h3 className='mb-1'>Email Address</h3>
+            <Form.Label className='mb-1'>Email Address</Form.Label>
             <Form.Control
               data-testid='update-email'
               type='email'
@@ -87,7 +87,7 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Form.Group controlId='password'>
-            <h3 className='mb-1'>Password</h3>
+            <Form.Label className='mb-1'>Password</Form.Label>
             <Form.Control
               data-testid='update-password'
               type='password'
@@ -99,7 +99,7 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Form.Group controlId='confirmPassword'>
-            <h3 className='mb-1'>Confirm Password</h3>
+            <Form.Label className='mb-1'>Confirm Password</Form.Label>
             <Form.Control
               data-testid='update-confirmpassword'
               type='password'
@@ -113,7 +113,7 @@ const ProfileScreen = ({ location, history }) => {
           <Button
             data-testid='update-submit'
             type='submit'
-            variant='outline-primary'
+            variant='outline-success'
             className='mb-3'
           >
             Update

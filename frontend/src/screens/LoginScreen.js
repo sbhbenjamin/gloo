@@ -37,7 +37,7 @@ const LoginScreen = ({ location, history }) => {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='email'>
+        <Form.Group controlId='email' className='mb-2'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             data-testid='login-email'
@@ -59,74 +59,23 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        {/* <Button
-          data-testid='login-btn'
-          className='mt-2'
-          type='submit'
-          variant='primary'
-        >
+        <Button data-testid='login-btn' className='mt-3' type='submit'>
           Sign In
-        </Button> */}
-        <button data-testid='login-btn' className='mt-2' type='submit'>
-          Sign In
-        </button>
+        </Button>
       </Form>
 
-      <Row className='py-3'>
+      <Row className='mt-3'>
         <Col>
           New Customer?{' '}
           <Link
             data-testid='register-redirect'
             to={redirect ? `/register?redirect=${redirect}` : '/register'}
-            className='text-blue-600'
           >
             Register
           </Link>
         </Col>
       </Row>
     </FormContainer>
-
-    // <div
-    //   className='flex flex-col justify-center items-center static'
-    //   style={{ height: '70vh' }}
-    // >
-    //   <div className='absolute top-40'>
-    //     {error && <Message variant='danger'>{error}</Message>}
-    //     {loading && <Loader />}
-    //   </div>
-    //   <form id='login' onSubmit={submitHandler}>
-    //     <h3>Log in</h3>
-    //     <div className='flex flex-col gap-2'>
-    //       <label htmlFor='emailAddress'>Email Address</label>
-    //       <input
-    //         type='email'
-    //         value={email}
-    //         onChange={(e) => setEmail(e.target.value)}
-    //       />
-    //     </div>
-    //     <div className='flex flex-col gap-2'>
-    //       <label htmlFor='password'>Password</label>
-    //     </div>
-    //     <input
-    //       type='password'
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //     />
-    //     <span>
-    //       New Customer?{' '}
-    //       <Link
-    //         data-testid='register-redirect'
-    //         to={redirect ? `/register?redirect=${redirect}` : '/register'}
-    //         className='text-blue-600'
-    //       >
-    //         Register
-    //       </Link>
-    //     </span>
-    //     <button type='submit' className='btn'>
-    //       Log in
-    //     </button>
-    //   </form>
-    // </div>
   )
 }
 

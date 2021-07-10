@@ -1,10 +1,11 @@
-import React from "react"
-import { Route } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { LinkContainer } from "react-router-bootstrap"
-import { Button, Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
-import SearchBox from "./SearchBox"
-import { logout } from "../actions/userActions"
+import './header.css'
+import React from 'react'
+import { Route } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Button, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import SearchBox from './SearchBox'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -36,7 +37,7 @@ const Header = () => {
               {userInfo && (
                 <LinkContainer to='/favourites' data-testid='navbar-favourites'>
                   <Nav.Link>
-                    <i className='fas fa-heart'></i>
+                    <i className='fas fa-heart me-1'></i>
                     Favourites
                   </Nav.Link>
                 </LinkContainer>
@@ -44,7 +45,7 @@ const Header = () => {
               {userInfo && (
                 <LinkContainer to='/conversations' data-testid='navbar-chat'>
                   <Nav.Link>
-                    <i className='fas fa-comment-alt mx-1'></i>
+                    <i className='fas fa-comment-alt me-1'></i>
                     Chats
                   </Nav.Link>
                 </LinkContainer>
@@ -52,18 +53,11 @@ const Header = () => {
 
               <LinkContainer to='/cart' data-testid='navbar-cart'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart mx-1'></i>
+                  <i className='fas fa-shopping-cart me-1'></i>
                   Cart
                 </Nav.Link>
               </LinkContainer>
-              {/* {userInfo && (
-                <LinkContainer to={`/favourites`}>
-                  <Nav.Link>
-                    <i className='fas fa-heart'></i>
-                    Favourites
-                  </Nav.Link>
-                </LinkContainer>
-              )} */}
+
               {userInfo ? (
                 <NavDropdown
                   title={userInfo.name}
@@ -95,7 +89,7 @@ const Header = () => {
               ) : (
                 <LinkContainer to='/login' data-testid='navbar-signin'>
                   <Nav.Link>
-                    <i className='fas fa-user mr-1'></i>
+                    <i className='fas fa-user me-1'></i>
                     Sign In
                   </Nav.Link>
                 </LinkContainer>

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Row, Col } from "react-bootstrap"
-import Product from "../components/Product"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import Meta from "../components/Meta"
-import { getFavourites } from "../actions/userActions"
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Row, Col } from 'react-bootstrap'
+import Product from '../components/Product'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import Meta from '../components/Meta'
+import { getFavourites } from '../actions/userActions'
 
 const FavouritesScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -28,7 +28,7 @@ const FavouritesScreen = ({ history }) => {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login')
     }
     if (userInfo) {
       dispatch(getFavourites())
@@ -53,7 +53,14 @@ const FavouritesScreen = ({ history }) => {
                 </Message>
               ) : (
                 productsFavourites.map((product) => (
-                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                  <Col
+                    key={product._id}
+                    sm={12}
+                    md={6}
+                    lg={4}
+                    xl={3}
+                    className='d-flex align-items-stretch'
+                  >
                     <Product product={product} />
                   </Col>
                 ))

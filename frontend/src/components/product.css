@@ -1,5 +1,4 @@
-a {
-  text-decoration: none;
+.productName {
   color: black;
 }
 
@@ -7,4 +6,8 @@ a {
   align-items: center;
   display: flex;
   justify-content: flex-end;
+}
+
+.productHeart {
+  color: black;
 }
