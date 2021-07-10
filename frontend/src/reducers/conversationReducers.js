@@ -1,6 +1,7 @@
 import {
   CONVERSATION_CREATE_FAIL,
   CONVERSATION_CREATE_REQUEST,
+  CONVERSATION_CREATE_RESET,
   CONVERSATION_CREATE_SUCCESS,
   CONVERSATION_LIST_FAIL,
   CONVERSATION_LIST_REQUEST,
@@ -42,6 +43,8 @@ export const conversationCreateReducer = (state = {}, action) => {
       }
     case CONVERSATION_CREATE_FAIL:
       return { loading: false, error: action.payload }
+    case CONVERSATION_CREATE_RESET:
+      return {}
     default:
       return state
   }
@@ -50,7 +53,7 @@ export const conversationCreateReducer = (state = {}, action) => {
 export const conversationSetReducer = (state = {}, action) => {
   switch (action.type) {
     case CONVERSATION_SET:
-      return { conversation: action.payload }
+      return { product: action.payload }
     case CONVERSATION_RESET:
       return {}
     default:

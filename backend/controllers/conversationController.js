@@ -13,6 +13,31 @@ const getConversations = asyncHandler(async (req, res) => {
   res.json(conversations)
 })
 
+// @desc        Fetch conversations by user id
+// @route       GET /api/conversations/:userid
+// @access      Private
+const getConversationsByUserId = asyncHandler(async (req, res) => {
+  const conversations = await Conversation.find({
+    $or: [
+      {
+        buyer: {
+          _id: req.params.userid,
+        },
+      },
+      {
+        seller: {
+          _id: req.params.userid,
+        },
+      },
+    ],
+  })
+    .populate('buyer', 'name')
+    .populate('seller', 'name')
+    .populate('product', 'name image numReviews rating')
+
+  res.json(conversations)
+})
+
 // @desc        Create a conversation
 // @route       POST /api/conversations
 // @access      Private
@@ -27,7 +52,13 @@ const createConversation = asyncHandler(async (req, res) => {
     })
 
     const createdConversation = await conversation.save()
-    res.status(201).json(createdConversation)
+
+    const populatedConvo = await Conversation.findById(conversation.id)
+      .populate('buyer', 'name')
+      .populate('seller', 'name')
+      .populate('product', 'name image numReviews rating')
+
+    res.status(201).json(populatedConvo)
   } catch (error) {
     res.status(400)
     throw new Error(error)
@@ -51,4 +82,9 @@ const deleteConversation = asyncHandler(async (req, res) => {
   }
 })
 
-export { getConversations, createConversation, deleteConversation }
+export {
+  getConversations,
+  createConversation,
+  deleteConversation,
+  getConversationsByUserId,
+}

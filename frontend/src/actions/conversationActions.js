@@ -25,7 +25,10 @@ export const listConversations = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/conversations`, config)
+    const { data } = await axios.get(
+      `/api/conversations/${userInfo._id}`,
+      config
+    )
 
     dispatch({
       type: CONVERSATION_LIST_SUCCESS,
@@ -65,7 +68,7 @@ export const createConversation = (product) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post(
-      `/api/conversations`,
+      `/api/conversations/`,
       conversation,
       config
     )

@@ -10,7 +10,7 @@ const ChatUser = ({ conversation, currentChat }) => {
   return (
     <div
       className={`${
-        currentChat === conversation && 'conversationSelect'
+        currentChat?._id === conversation?._id && 'conversationSelect'
       } conversation`}
     >
       <img
@@ -19,7 +19,7 @@ const ChatUser = ({ conversation, currentChat }) => {
         alt=''
       />
       <span className='conversationName'>
-        {userInfo._id === conversation.seller._id
+        {userInfo?._id === conversation.seller._id
           ? conversation.buyer.name
           : conversation.seller.name}
       </span>

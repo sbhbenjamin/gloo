@@ -14,8 +14,14 @@ import {
   PRODUCT_CREATE_REVIEW_RESET,
   PRODUCT_DETAILS_RESET,
 } from '../constants/productConstants'
-import { createConversation } from '../actions/conversationActions'
-import { CONVERSATION_SET } from '../constants/conversationConstants'
+import {
+  createConversation,
+  listConversations,
+} from '../actions/conversationActions'
+import {
+  CONVERSATION_CREATE_RESET,
+  CONVERSATION_SET,
+} from '../constants/conversationConstants'
 
 const ProductScreen = ({ history, match }) => {
   const [rating, setRating] = useState(0)
@@ -30,15 +36,12 @@ const ProductScreen = ({ history, match }) => {
   const { success: successProductReview, error: errorProductReview } =
     productReviewCreate
 
-  const conversationList = useSelector((state) => state.conversationList)
-  const {
-    loading: loadingConversations,
-    error: errorConversations,
-    conversations,
-  } = conversationList
-
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  useEffect(() => {
+    dispatch({ type: CONVERSATION_CREATE_RESET })
+  }, [dispatch, history])
 
   useEffect(() => {
     if (successProductReview) {
@@ -56,7 +59,7 @@ const ProductScreen = ({ history, match }) => {
     }
 
     dispatch(listProductDetails(match.params.id))
-  }, [dispatch, match, successProductReview, history, product._id])
+  }, [dispatch, match, successProductReview, history, product._id, userInfo])
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}`)
@@ -64,23 +67,6 @@ const ProductScreen = ({ history, match }) => {
 
   const editHandler = () => {
     history.push(`/product/${product._id}/edit`)
-  }
-
-  const chatHandler = () => {
-    const chatExists = conversations?.filter(
-      (c) =>
-        c.buyer._id === userInfo._id &&
-        c.seller._id === product.user._id &&
-        c.product._id === product._id
-    )
-
-    if (!chatExists) {
-      dispatch(createConversation(product))
-
-      // dispatch({ type: CONVERSATION_SET, payload: })
-    }
-    console.log(chatExists)
-    history.push(`/conversations`)
   }
 
   const submitHandler = (e) => {
@@ -237,15 +223,19 @@ const ProductScreen = ({ history, match }) => {
                           >
                             Add To Cart
                           </Button> */}
-                          <Button
+                          <Link
                             data-testid='chat-btn'
-                            onClick={chatHandler}
-                            className='btn'
-                            type='button'
+                            className='btn btn-primary'
                             disabled={!product.available}
+                            to={{
+                              pathname: '/conversations',
+                              state: {
+                                product,
+                              },
+                            }}
                           >
                             Chat
-                          </Button>
+                          </Link>
                         </div>
                       </ListGroup.Item>
                     ))}
