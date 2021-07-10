@@ -2,9 +2,15 @@ import "./product.css"
 import { Link } from "react-router-dom"
 import { Card, Row, Col } from "react-bootstrap"
 import Rating from "./Rating"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import { addFavourite, removeFavourite } from "../actions/userActions"
+import {
+  addFavourite,
+  removeFavourite,
+  getFavourites,
+  getFavourite,
+} from "../actions/userActions"
 
 import {
   USER_ADD_FAVOURITE_RESET,
@@ -100,8 +106,8 @@ const Product = ({ product }) => {
           </Card.Text>
         </Card.Body>
       </Card>
-    ) ||
-    successAdd ||
+    ) &&
+    successAdd &&
     successRemove
   )
 }

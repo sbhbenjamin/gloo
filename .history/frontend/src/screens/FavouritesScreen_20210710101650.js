@@ -6,14 +6,16 @@ import Message from "../components/Message"
 import Loader from "../components/Loader"
 import Meta from "../components/Meta"
 import { getFavourites } from "../actions/userActions"
+// import { USER_LIST_FAVOURITES_RESET } from '../constants/userConstants'
 
-const FavouritesScreen = ({ history }) => {
+const FavouritesScreen = () => {
   const dispatch = useDispatch()
 
   const userFavourites = useSelector((state) => state.userFavourites)
   const {
     loading: loadingFavourites,
     error: errorFavourites,
+    // success: successFavourites,
     products: productsFavourites,
   } = userFavourites
 
@@ -27,44 +29,37 @@ const FavouritesScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/login")
-    }
     if (userInfo) {
       dispatch(getFavourites())
     }
-  }, [dispatch, userInfo, history])
+  }, [dispatch, userInfo, successRemove, successAdd])
 
   return (
-    (
-      <>
-        <Meta />
-        <h1>Favourites</h1>
-        {loadingFavourites ? (
-          <Loader />
-        ) : errorFavourites ? (
-          <Message variant='danger'>{errorFavourites}</Message>
-        ) : (
-          <>
-            <Row>
-              {!productsFavourites ? (
-                <Message variant='danger'>
-                  You do not have any favourite products.
-                </Message>
-              ) : (
-                productsFavourites.map((product) => (
-                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                    <Product product={product} />
-                  </Col>
-                ))
-              )}
-            </Row>
-          </>
-        )}
-      </>
-    ) ||
-    successAdd ||
-    successRemove
+    <>
+      <Meta />
+      <h1>Favourites</h1>
+      {loadingFavourites ? (
+        <Loader />
+      ) : errorFavourites ? (
+        <Message variant='danger'>{errorFavourites}</Message>
+      ) : (
+        <>
+          <Row>
+            {!productsFavourites ? (
+              <Message variant='danger'>
+                You do not have any favourite products.
+              </Message>
+            ) : (
+              productsFavourites.map((product) => (
+                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                  <Product product={product} />
+                </Col>
+              ))
+            )}
+          </Row>
+        </>
+      )}
+    </>
   )
 }
 

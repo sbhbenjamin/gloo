@@ -2,9 +2,15 @@ import "./product.css"
 import { Link } from "react-router-dom"
 import { Card, Row, Col } from "react-bootstrap"
 import Rating from "./Rating"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import { addFavourite, removeFavourite } from "../actions/userActions"
+import {
+  addFavourite,
+  removeFavourite,
+  getFavourites,
+  getFavourite,
+} from "../actions/userActions"
 
 import {
   USER_ADD_FAVOURITE_RESET,
@@ -18,10 +24,10 @@ const Product = ({ product }) => {
   const { products: productsFavourites } = userFavourites
 
   const favouriteAdd = useSelector((state) => state.favouriteAdd)
-  const { success: successAdd } = favouriteAdd
+  // const { success: successAdd } = favouriteAdd
 
   const favouriteRemove = useSelector((state) => state.favouriteRemove)
-  const { success: successRemove } = favouriteRemove
+  // const { success: successRemove } = favouriteRemove
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -100,9 +106,9 @@ const Product = ({ product }) => {
           </Card.Text>
         </Card.Body>
       </Card>
-    ) ||
-    successAdd ||
-    successRemove
+    ) &&
+    favouriteAdd &&
+    favouriteRemove
   )
 }
 

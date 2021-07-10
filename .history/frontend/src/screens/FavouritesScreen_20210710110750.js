@@ -7,7 +7,7 @@ import Loader from "../components/Loader"
 import Meta from "../components/Meta"
 import { getFavourites } from "../actions/userActions"
 
-const FavouritesScreen = ({ history }) => {
+const FavouritesScreen = () => {
   const dispatch = useDispatch()
 
   const userFavourites = useSelector((state) => state.userFavourites)
@@ -27,13 +27,10 @@ const FavouritesScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/login")
-    }
     if (userInfo) {
       dispatch(getFavourites())
     }
-  }, [dispatch, userInfo, history])
+  }, [dispatch, userInfo])
 
   return (
     (
