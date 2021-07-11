@@ -1,8 +1,8 @@
-import React from 'react'
-import { render as rtlRender } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
-import { configureStore } from '@reduxjs/toolkit'
+import React from "react"
+import { render as rtlRender } from "@testing-library/react"
+import { Provider } from "react-redux"
+import { BrowserRouter as Router } from "react-router-dom"
+import { configureStore } from "@reduxjs/toolkit"
 
 import {
   productListReducer,
@@ -13,8 +13,8 @@ import {
   productReviewCreateReducer,
   productTopRatedReducer,
   productListUserReducer,
-} from '../../reducers/productReducers'
-import { cartReducer } from '../../reducers/cartReducers'
+} from "../../reducers/productReducers"
+import { cartReducer } from "../../reducers/cartReducers"
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -25,10 +25,9 @@ import {
   userDeleteReducer,
   userUpdateReducer,
   userFavouritesReducer,
-  getFavouriteReducer,
   favouriteAddReducer,
   favouriteRemoveReducer,
-} from '../../reducers/userReducers'
+} from "../../reducers/userReducers"
 import {
   orderCreateReducer,
   orderDetailsReducer,
@@ -36,7 +35,7 @@ import {
   orderListMyReducer,
   orderListReducer,
   orderDeliverReducer,
-} from '../../reducers/orderReducers'
+} from "../../reducers/orderReducers"
 
 const reducer = {
   productList: productListReducer,
@@ -57,7 +56,6 @@ const reducer = {
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
   userFavourites: userFavouritesReducer,
-  getFavourite: getFavouriteReducer,
   favouriteAdd: favouriteAddReducer,
   favouriteRemove: favouriteRemoveReducer,
   orderCreate: orderCreateReducer,
@@ -100,9 +98,9 @@ function renderWithLogin(
     preloadedState = {
       userLogin: {
         userInfo: {
-          _id: '60d55c4cd97a74d6bd80cb20',
-          name: 'John Doe',
-          email: 'john@example.com',
+          _id: "60d55c4cd97a74d6bd80cb20",
+          name: "John Doe",
+          email: "john@example.com",
           isAdmin: false,
           token: process.env.USER_TOKEN,
         },
@@ -131,9 +129,9 @@ function renderWithOwnership(
     preloadedState = {
       userLogin: {
         userInfo: {
-          _id: '60d55c4cd97a74d6bd80cb1f',
-          name: 'Admin user',
-          email: 'admin@example.com',
+          _id: "60d55c4cd97a74d6bd80cb1f",
+          name: "Admin user",
+          email: "admin@example.com",
           isAdmin: true,
           token: process.env.OWNER_TOKEN,
         },
@@ -162,9 +160,9 @@ function renderWithCartFull(
     preloadedState = {
       userLogin: {
         userInfo: {
-          _id: '60d55c4cd97a74d6bd80cb1f',
-          name: 'Admin user',
-          email: 'admin@example.com',
+          _id: "60d55c4cd97a74d6bd80cb1f",
+          name: "Admin user",
+          email: "admin@example.com",
           isAdmin: true,
           token: process.env.OWNER_TOKEN,
         },
@@ -172,20 +170,20 @@ function renderWithCartFull(
       cart: {
         cartItems: [
           {
-            image: '/images/electrical.jpg',
-            name: '1st Solution Electrical',
+            image: "/images/electrical.jpg",
+            name: "1st Solution Electrical",
             price: 89.99,
-            product: '60d55c4cd97a74d6bd80cb22',
+            product: "60d55c4cd97a74d6bd80cb22",
             qty: 1,
           },
         ],
         shippingAddress: {
-          address: '11 Main St',
-          city: 'Oregon',
-          country: 'USA',
-          postalCode: '110534',
+          address: "11 Main St",
+          city: "Oregon",
+          country: "USA",
+          postalCode: "110534",
         },
-        paymentMethod: 'PayPal',
+        paymentMethod: "PayPal",
       },
     },
     store = configureStore({
@@ -211,9 +209,9 @@ function renderWithCart(
     preloadedState = {
       userLogin: {
         userInfo: {
-          _id: '60d55c4cd97a74d6bd80cb1f',
-          name: 'Admin user',
-          email: 'admin@example.com',
+          _id: "60d55c4cd97a74d6bd80cb1f",
+          name: "Admin user",
+          email: "admin@example.com",
           isAdmin: true,
           token: process.env.OWNER_TOKEN,
         },
@@ -221,10 +219,10 @@ function renderWithCart(
       cart: {
         cartItems: [
           {
-            image: '/images/aircon.jpg',
-            name: '24hrs Shadin Air-conditioning',
+            image: "/images/aircon.jpg",
+            name: "24hrs Shadin Air-conditioning",
             price: 929.99,
-            product: '60d55c4cd97a74d6bd80cb24',
+            product: "60d55c4cd97a74d6bd80cb24",
             qty: 1,
           },
         ],
@@ -249,7 +247,7 @@ function renderWithCart(
 }
 
 // re-export everything
-export * from '@testing-library/react'
+export * from "@testing-library/react"
 // override render method
 export {
   render,

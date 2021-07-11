@@ -70,7 +70,7 @@ it("should render product details with correct rating, seller, and image without
   expect(screen.getByTestId("star-4")).toHaveClass("fas fa-star")
   expect(screen.getByTestId("star-5")).toHaveClass("fas fa-star-half-alt")
 
-  expect(screen.queryByText("Add To Cart")).toBeNull()
+  expect(screen.queryByText("Chat")).toBeNull()
   expect(screen.queryByText("Edit Listing")).toBeNull()
 })
 
@@ -95,7 +95,7 @@ it("should render correct details, rating, image, and contain add to cart when l
   expect(screen.getByTestId("star-4")).toHaveClass("fas fa-star")
   expect(screen.getByTestId("star-5")).toHaveClass("fas fa-star-half-alt")
 
-  expect(screen.getByTestId("addtocart-btn")).toHaveTextContent("Add To Cart")
+  expect(screen.getByTestId("chat-btn")).toHaveTextContent("Chat")
   expect(screen.queryByText("Edit Listing")).toBeNull()
 })
 
@@ -123,5 +123,5 @@ it("should render correct details, rating, image, and contain edit listing when 
   expect(screen.getByTestId("listing-edit-btn")).toHaveTextContent(
     "Edit Listing"
   )
-  expect(screen.queryByText("Add To Cart")).toBeNull()
+  expect(screen.queryByText("Chat")).toBeNull()
 })

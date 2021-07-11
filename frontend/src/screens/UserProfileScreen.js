@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
-import Product from '../components/Product'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import Meta from '../components/Meta'
-import { listUserProducts } from '../actions/productActions'
-import { getUserDetailsPublic } from '../actions/userActions'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Row, Col } from "react-bootstrap"
+import Product from "../components/Product"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import Meta from "../components/Meta"
+import { listUserProducts } from "../actions/productActions"
+import { getUserDetailsPublic } from "../actions/userActions"
 
 const UserProfileScreen = ({ match }) => {
   const userId = match.params.id
@@ -40,7 +40,7 @@ const UserProfileScreen = ({ match }) => {
       <Meta title={userId} />
       {(loadingUserDetails || loadingProducts) && <Loader />}
       {loadingUserDetails ? (
-        <Loader />
+        "" // <Loader />
       ) : errorUserDetails ? (
         <Message variant='danger'>{errorUserDetails}</Message>
       ) : (
@@ -49,7 +49,7 @@ const UserProfileScreen = ({ match }) => {
         </Row>
       )}
       {loadingProducts ? (
-        '' //<Loader />
+        "" //<Loader />
       ) : errorProducts ? (
         <Message variant='danger'>{errorProducts}</Message>
       ) : (
@@ -58,9 +58,9 @@ const UserProfileScreen = ({ match }) => {
             <p>
               {userInfo
                 ? userInfo._id === user._id
-                  ? 'You do not have any listings'
-                  : 'This user does not currently have any listings'
-                : 'This user does not currently have any listings'}
+                  ? "You do not have any listings"
+                  : "This user does not currently have any listings"
+                : "This user does not currently have any listings"}
             </p>
           ) : (
             products.map((product) => (

@@ -36,7 +36,14 @@ export const sampleOrderArray = [
         qty: 1,
       },
     ],
-    user: "60bde864ee22a3fe9466639d",
+    buyer: {
+      _id: "60bde864ee22a3fe9466639d",
+      name: "John Doe",
+    },
+    seller: {
+      _id: "60d55c4cd97a74d6bd80cb1f",
+      name: "Admin user",
+    },
     paymentMethod: "PayPal",
     createdAt: "2021-06-27T07:58:46.748Z",
     updatedAt: "2021-06-28T07:59:11.187Z",
@@ -72,7 +79,14 @@ export const sampleOrderArray = [
         qty: 1,
       },
     ],
-    user: "60bde864ee22a3fe9466639d",
+    buyer: {
+      _id: "60bde864ee22a3fe9466639d",
+      name: "John Doe",
+    },
+    seller: {
+      _id: "60d55c4cd97a74d6bd80cb1f",
+      name: "Admin user",
+    },
     paymentMethod: "PayPal",
     createdAt: "2021-04-17T07:59:27.867Z",
     updatedAt: "2021-04-17T07:59:40.962Z",
@@ -102,7 +116,14 @@ export const sampleOrderArray = [
         qty: 1,
       },
     ],
-    user: "60bde864ee22a3fe9466639d",
+    buyer: {
+      _id: "60bde864ee22a3fe9466639d",
+      name: "John Doe",
+    },
+    seller: {
+      _id: "60d55c4cd97a74d6bd80cb1f",
+      name: "Admin user",
+    },
     paymentMethod: "PayPal",
     createdAt: "2021-04-30T08:01:01.466Z",
     updatedAt: "2021-04-30T08:01:01.466Z",
@@ -131,7 +152,14 @@ export const sampleOrderArray = [
         qty: 1,
       },
     ],
-    user: "60bde864ee22a3fe9466639d",
+    buyer: {
+      _id: "60bde864ee22a3fe9466639d",
+      name: "John Doe",
+    },
+    seller: {
+      _id: "60d55c4cd97a74d6bd80cb1f",
+      name: "Admin user",
+    },
     paymentMethod: "PayPal",
     createdAt: "2021-05-15T08:01:17.336Z",
     updatedAt: "2021-05-15T08:01:17.336Z",
@@ -163,10 +191,14 @@ export const orderDetails = {
       qty: 1,
     },
   ],
-  user: {
+  buyer: {
+    _id: "60bde864ee22a3fe9466639d",
+    name: "John Doe",
+    email: "john@example.com",
+  },
+  seller: {
     _id: "60d55c4cd97a74d6bd80cb1f",
     name: "Admin user",
-    email: "admin@example.com",
   },
   paymentMethod: "PayPal",
   createdAt: "2021-06-27T14:51:41.720Z",

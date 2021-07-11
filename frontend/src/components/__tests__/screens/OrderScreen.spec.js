@@ -72,7 +72,7 @@ it("should display order if logged in user is owner", async () => {
       "60d8907d82be25123a0bbf14"
     )
     expect(screen.getByTestId("order-email")).toHaveTextContent(
-      "admin@example.com"
+      "john@example.com"
     )
     expect(screen.getByTestId("order-address")).toHaveTextContent(
       "11 Main St, Oregon, 523111, USA"
