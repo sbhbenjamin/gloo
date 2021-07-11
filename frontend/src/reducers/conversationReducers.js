@@ -7,8 +7,6 @@ import {
   CONVERSATION_LIST_REQUEST,
   CONVERSATION_LIST_RESET,
   CONVERSATION_LIST_SUCCESS,
-  CONVERSATION_RESET,
-  CONVERSATION_SET,
 } from '../constants/conversationConstants'
 
 export const conversationListReducer = (
@@ -21,6 +19,7 @@ export const conversationListReducer = (
     case CONVERSATION_LIST_SUCCESS:
       return {
         loading: false,
+        success: true,
         conversations: action.payload,
       }
     case CONVERSATION_LIST_FAIL:
@@ -44,17 +43,6 @@ export const conversationCreateReducer = (state = {}, action) => {
     case CONVERSATION_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case CONVERSATION_CREATE_RESET:
-      return {}
-    default:
-      return state
-  }
-}
-
-export const conversationSetReducer = (state = {}, action) => {
-  switch (action.type) {
-    case CONVERSATION_SET:
-      return { product: action.payload }
-    case CONVERSATION_RESET:
       return {}
     default:
       return state

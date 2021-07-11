@@ -1,15 +1,7 @@
 import './conversationscreen.css'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Row,
-  Col,
-  Nav,
-  FormControl,
-  Button,
-  Card,
-  InputGroup,
-} from 'react-bootstrap'
+import { Nav, Button } from 'react-bootstrap'
 import {
   createConversation,
   listConversations,
@@ -17,21 +9,16 @@ import {
 import { createMessage, listMessages } from '../actions/messageActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import Rating from '../components/Rating'
+import ChatProduct from '../components/chatProduct/ChatProduct'
 import { io } from 'socket.io-client'
 import ChatUser from '../components/chatUser/ChatUser'
 import ChatMessage from '../components/chatMessage/ChatMessage'
 import { MESSAGE_CREATE_RESET } from '../constants/messageConstants'
-import {
-  CONVERSATION_CREATE_RESET,
-  CONVERSATION_RESET,
-} from '../constants/conversationConstants'
+import { CONVERSATION_CREATE_RESET } from '../constants/conversationConstants'
 
 const ConversationsScreen = ({ history, match }) => {
   const [currentChat, setCurrentChat] = useState(null)
   const [newMessage, setNewMessage] = useState('')
-  const [offerActive, setOfferActive] = useState(false)
-  const [offerPrice, setOfferPrice] = useState(null)
   const dispatch = useDispatch()
   const scrollRef = useRef()
 
@@ -62,9 +49,6 @@ const ConversationsScreen = ({ history, match }) => {
     conversation: createdConversation,
   } = conversationCreate
 
-  // const conversationSet = useSelector((state) => state.conversationSet)
-  // const { product: productSet } = conversationSet
-
   const messageList = useSelector((state) => state.messageList)
   const {
     loading: loadingMessages,
@@ -79,15 +63,15 @@ const ConversationsScreen = ({ history, match }) => {
     success: successCreate,
   } = messageCreate
 
-  // list all conversations
   useEffect(() => {
     if (!userInfo) {
-      dispatch({ type: CONVERSATION_RESET })
       history.push('/')
     }
 
+    // list all conversations
     dispatch(listConversations())
-    // set current chat to product that user came from
+
+    // check if user came from product screen
     if (history.location.state?.product && conversations) {
       const chatExists = conversations?.filter(
         (c) =>
@@ -96,20 +80,31 @@ const ConversationsScreen = ({ history, match }) => {
       )
 
       if (chatExists.length > 0) {
+        // if current chat exists, set current chat
         setCurrentChat(chatExists[0])
+        history.replace({
+          pathname: '/conversations',
+          state: {},
+        })
       } else {
+        // create new conversation if chat does not exist
         dispatch(createConversation(history.location.state.product))
       }
     }
   }, [dispatch, history, userInfo])
 
   useEffect(() => {
+    // when conversation is created, reset state and list products
     if (createdConversation) {
       setCurrentChat(createdConversation)
       dispatch({ type: CONVERSATION_CREATE_RESET })
       dispatch(listConversations())
+      history.replace({
+        pathname: '/conversations',
+        state: {},
+      })
     }
-  }, [createdConversation])
+  }, [dispatch, history, createdConversation])
 
   // list all messages
   useEffect(() => {
@@ -118,19 +113,6 @@ const ConversationsScreen = ({ history, match }) => {
       dispatch(listMessages(currentChat._id))
     }
   }, [dispatch, currentChat, successCreate])
-
-  const handleOfferBtn = () => {
-    setOfferActive(true)
-  }
-
-  const handleOfferCancel = () => {
-    setOfferActive(false)
-  }
-
-  const handleOfferSubmit = () => {
-    // dispatch offer
-    console.log(offerPrice)
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -164,12 +146,8 @@ const ConversationsScreen = ({ history, match }) => {
                 ) : (
                   <Nav variant='pills' className='flex-column ms-0'>
                     {conversations.map((c) => (
-                      <div onClick={() => setCurrentChat(c)}>
-                        <ChatUser
-                          key={c._id}
-                          conversation={c}
-                          currentChat={currentChat}
-                        />
+                      <div key={c._id} onClick={() => setCurrentChat(c)}>
+                        <ChatUser conversation={c} currentChat={currentChat} />
                       </div>
                     ))}
                   </Nav>
@@ -185,72 +163,7 @@ const ConversationsScreen = ({ history, match }) => {
                 ) : currentChat ? (
                   messages && (
                     <>
-                      <Card className='chatBoxProduct'>
-                        <Card.Body>
-                          <Row>
-                            <Col xs={1}>
-                              <img
-                                className='chatBoxProductImage'
-                                src={currentChat.product.image}
-                                alt={currentChat.product.name}
-                              />
-                            </Col>
-                            <Col className='flex-grow-1'>
-                              <p className='chatBoxProductName'>
-                                {currentChat.product.name}
-                              </p>
-                              <Rating
-                                data-testid='product-rating'
-                                value={currentChat.product.rating}
-                                text={`${currentChat.product.numReviews} reviews`}
-                              />
-                            </Col>
-                            <Col
-                              xs={5}
-                              className='d-flex chatBoxProductBtnWrapper'
-                            >
-                              {!offerActive ? (
-                                <Button
-                                  className='chatBoxProductBtn'
-                                  onClick={handleOfferBtn}
-                                >
-                                  Make offer
-                                </Button>
-                              ) : (
-                                <div className='chatBoxProductBtnExpand'>
-                                  <InputGroup>
-                                    <InputGroup.Prepend>
-                                      <InputGroup.Text>$</InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl
-                                      type='number'
-                                      placeholder='0.00'
-                                      onChange={(e) =>
-                                        setOfferPrice(e.target.value)
-                                      }
-                                    />
-                                    <InputGroup.Append>
-                                      <Button
-                                        variant='outline-success'
-                                        onClick={handleOfferSubmit}
-                                      >
-                                        Offer
-                                      </Button>
-                                    </InputGroup.Append>
-                                  </InputGroup>
-                                  <a
-                                    href='#'
-                                    className='chatBoxProductCancel'
-                                    onClick={handleOfferCancel}
-                                  >
-                                    cancel
-                                  </a>
-                                </div>
-                              )}
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
+                      <ChatProduct currentChat={currentChat} />
                       <div className='chatBoxTop'>
                         {messages?.map((m) => (
                           <div ref={scrollRef}>
