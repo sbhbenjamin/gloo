@@ -39,7 +39,7 @@ const FavouritesScreen = ({ history }) => {
     (
       <>
         <Meta />
-        <h1>Favourites</h1>
+        <h2>Favourites</h2>
         {loadingFavourites ? (
           <Loader />
         ) : errorFavourites ? (

@@ -45,7 +45,6 @@ describe('Product loads correctly', () => {
     expect(screen.getByTestId('product-name')).toHaveTextContent(
       '1st Solution Electrical'
     )
-    expect(screen.getByTestId('product-price')).toHaveTextContent('89.99')
     expect(screen.getByTestId('product-image')).toHaveAttribute(
       'src',
       '/images/electrical.jpg'

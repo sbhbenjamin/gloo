@@ -1,6 +1,6 @@
 import './chatproduct.css'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Card,
   Row,
@@ -10,11 +10,25 @@ import {
   FormControl,
 } from 'react-bootstrap'
 import Rating from '../Rating'
+import { createOffer } from '../../actions/offerActions'
 
 const ChatProduct = ({ currentChat }) => {
   const [offerActive, setOfferActive] = useState(false)
   const [offerPrice, setOfferPrice] = useState(null)
+  const [offerMade, setOfferMade] = useState(false)
   const dispatch = useDispatch()
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const { name, image, rating, numReviews } = currentChat.product
+
+  const offerCreate = useSelector((state) => state.offerCreate)
+  const {
+    // loading: loadingofferCreate,
+    // error: errorofferCreate,
+    offer: createdOffer,
+  } = offerCreate
 
   const handleOfferBtn = () => {
     setOfferActive(true)
@@ -25,9 +39,26 @@ const ChatProduct = ({ currentChat }) => {
   }
 
   const handleOfferSubmit = () => {
-    // dispatch offer
-    console.log(offerPrice)
+    const offer = {
+      conversation: currentChat._id,
+      buyer: userInfo._id,
+      seller: currentChat.product._id,
+      orderItem: {
+        name,
+        image,
+        product: currentChat.product,
+      },
+      offerPrice: offerPrice,
+      offerStatus: 'pending',
+    }
+    dispatch(createOffer(offer))
   }
+
+  useState(() => {
+    if (createdOffer?.conversation === currentChat._id) {
+      setOfferMade(true)
+    }
+  }, [dispatch, createdOffer])
 
   return (
     <>
@@ -35,22 +66,22 @@ const ChatProduct = ({ currentChat }) => {
         <Card.Body>
           <Row>
             <Col xs={1}>
-              <img
-                className='chatBoxProductImage'
-                src={currentChat.product.image}
-                alt={currentChat.product.name}
-              />
+              <img className='chatBoxProductImage' src={image} alt={name} />
             </Col>
             <Col className='flex-grow-1'>
-              <p className='chatBoxProductName'>{currentChat.product.name}</p>
+              <p className='chatBoxProductName'>{name}</p>
               <Rating
                 data-testid='product-rating'
-                value={currentChat.product.rating}
-                text={`${currentChat.product.numReviews} reviews`}
+                value={rating}
+                text={`${numReviews} reviews`}
               />
             </Col>
             <Col xs={5} className='d-flex chatBoxProductBtnWrapper'>
-              {!offerActive ? (
+              {offerMade ? (
+                <Button disabled variant='secondary'>
+                  Offer made
+                </Button>
+              ) : !offerActive ? (
                 <Button className='chatBoxProductBtn' onClick={handleOfferBtn}>
                   Make offer
                 </Button>

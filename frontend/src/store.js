@@ -52,6 +52,7 @@ import {
   messageCreateReducer,
   messageListReducer,
 } from './reducers/messageReducers'
+import { offerCreateReducer } from './reducers/offerReducers'
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -93,6 +94,7 @@ const reducer = combineReducers({
   conversationCreate: conversationCreateReducer,
   messageList: messageListReducer,
   messageCreate: messageCreateReducer,
+  offerCreate: offerCreateReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
