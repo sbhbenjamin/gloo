@@ -35,84 +35,88 @@ const CertScreen = ({ history, match }) => {
     history.push(`/certificates/${cert._id}/edit`)
   }
 
-  return userInfo && cert.user ? (
-    userInfo._id === cert.user._id || userInfo.isAdmin ? (
-      <>
-        <Link
-          data-testid='back-btn'
-          className='btn btn-outline-secondary my-3'
-          to='/certificates'
-        >
-          Go Back
-        </Link>
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-          <>
-            <Meta title={cert.name} />
-            <Row className='d-flex align-items-center'>
-              <Col md={7}>
-                <Image
-                  data-testid='cert-image'
-                  src={cert.image}
-                  alt={cert.name}
-                  fluid
-                  className='max-w-2xl'
-                />
-              </Col>
-              <Col md={4}>
-                <ListGroup variant='flush'>
-                  <h1
-                    className='font-bold uppercase text-2xl mb-6'
-                    data-testid='cert-name'
-                  >
-                    {cert.name}
-                  </h1>
-                  <ListGroup.Item className='mb-3'>
-                    <p data-testid='cert-issuer'>
-                      <strong>Issueing Organisation: </strong>
-                      {cert.issuer}
-                    </p>
-                  </ListGroup.Item>
-                  <ListGroup.Item className='mb-3'>
-                    <p data-testid='cert-date'>
-                      <strong>Date of Attainment: </strong>
-                      {cert.date}
-                    </p>
-                  </ListGroup.Item>
-                  <ListGroup.Item className='mb-3'>
-                    <p data-testid='cert-status'>
-                      <strong>Status: </strong> {cert.status}
-                    </p>
-                  </ListGroup.Item>
+  return userInfo ? (
+    cert.user ? (
+      userInfo._id === cert.user._id || userInfo.isAdmin ? (
+        <>
+          <Link
+            data-testid='back-btn'
+            className='btn btn-outline-secondary my-3'
+            to='/certificates'
+          >
+            Go Back
+          </Link>
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant='danger'>{error}</Message>
+          ) : (
+            <>
+              <Meta title={cert.name} />
+              <Row className='d-flex align-items-center'>
+                <Col md={7}>
+                  <Image
+                    data-testid='cert-image'
+                    src={cert.image}
+                    alt={cert.name}
+                    fluid
+                    className='max-w-2xl'
+                  />
+                </Col>
+                <Col md={4}>
+                  <ListGroup variant='flush'>
+                    <h1
+                      className='font-bold uppercase text-2xl mb-6'
+                      data-testid='cert-name'
+                    >
+                      {cert.name}
+                    </h1>
+                    <ListGroup.Item className='mb-3'>
+                      <p data-testid='cert-issuer'>
+                        <strong>Issueing Organisation: </strong>
+                        {cert.issuer}
+                      </p>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='mb-3'>
+                      <p data-testid='cert-date'>
+                        <strong>Date of Attainment: </strong>
+                        {cert.date}
+                      </p>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='mb-3'>
+                      <p data-testid='cert-status'>
+                        <strong>Status: </strong> {cert.status}
+                      </p>
+                    </ListGroup.Item>
 
-                  <ListGroup.Item className='d-grid gap-2'>
-                    <div className='d-grid gap-2 place-items-center col-6 mx-auto'>
-                      <Button
-                        data-testid='cert-edit-btn'
-                        onClick={editHandler}
-                        className='btn btn-success w-3'
-                        type='button'
-                      >
-                        Edit Certificate
-                      </Button>
-                    </div>
-                  </ListGroup.Item>
-                </ListGroup>
-              </Col>
-            </Row>
-          </>
-        )}
-      </>
+                    <ListGroup.Item className='d-grid gap-2'>
+                      <div className='d-grid gap-2 place-items-center col-6 mx-auto'>
+                        <Button
+                          data-testid='cert-edit-btn'
+                          onClick={editHandler}
+                          className='btn btn-success w-3'
+                          type='button'
+                        >
+                          Edit Certificate
+                        </Button>
+                      </div>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Col>
+              </Row>
+            </>
+          )}
+        </>
+      ) : (
+        <Message variant='danger'>
+          Unauthorised Access of Certificate Page
+        </Message>
+      )
     ) : (
-      <Message variant='danger'>
-        Unauthorised Access of Certificate Page
-      </Message>
+      <Loader />
     )
   ) : (
-    ""
+    <Message variant='danger'>Unauthorised Access of Certificate Page</Message>
   )
 }
 

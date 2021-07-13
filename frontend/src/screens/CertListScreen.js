@@ -5,7 +5,7 @@ import Message from "../components/Message"
 import Loader from "../components/Loader"
 import { deleteCert, listCerts } from "../actions/certActions"
 
-const UserCertsScreen = ({ history, match }) => {
+const CertListScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const certList = useSelector((state) => state.certList)
@@ -39,72 +39,77 @@ const UserCertsScreen = ({ history, match }) => {
   }
 
   return userInfo ? (
-    <>
-      <Row className='align-items-center'>
-        <h1>Certificates</h1>
-      </Row>
-      {loadingDelete && <Loader />}
-      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
-        <>
-          <Table striped bordered hover responsive className='table-sm'>
-            <thead>
-              <tr>
-                <th>CERT ID</th>
-                <th>NAME</th>
-                <th>ISSUER</th>
-                <th>DATE OF ATTAINMENT</th>
-                <th>USER</th>
-                <th>STATUS</th>
-                <th>REMOVE</th>
-              </tr>
-            </thead>
-            <tbody>
-              {certs.map((cert) => (
-                <tr key={cert._id}>
-                  <td>{cert._id}</td>
-                  <td>
-                    <a
-                      href
-                      className='no-underline hover:underline'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        nameClickHandler(cert._id)
-                      }}
-                    >
-                      {cert.name}
-                    </a>
-                  </td>
-                  <td>{cert.issuer}</td>
-                  <td>{cert.date}</td>
-                  <td>{cert.user.name}</td>
-                  <td>{cert.status}</td>
-                  <td>
-                    <Button
-                      variant='danger'
-                      className='btn-sm'
-                      onClick={() => deleteHandler(cert._id)}
-                    >
-                      <i className='fas fa-trash'></i>
-                    </Button>
-                  </td>
+    userInfo.isAdmin ? (
+      <>
+        <Row className='align-items-center'>
+          <h1>Certificates</h1>
+        </Row>
+        {loadingDelete && <Loader />}
+        {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant='danger'>{error}</Message>
+        ) : (
+          <>
+            <Table striped bordered hover responsive className='table-sm'>
+              <thead>
+                <tr>
+                  <th>CERT ID</th>
+                  <th>NAME</th>
+                  <th>ISSUER</th>
+                  <th>DATE OF ATTAINMENT</th>
+                  <th>USER</th>
+                  <th>STATUS</th>
+                  <th>REMOVE</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </>
-      )}
-    </>
+              </thead>
+              <tbody>
+                {certs.map((cert) => (
+                  <tr key={cert._id}>
+                    <td>{cert._id}</td>
+                    <td>
+                      <a
+                        href='true'
+                        className='no-underline hover:underline'
+                        onClick={(e) => {
+                          e.preventDefault()
+                          nameClickHandler(cert._id)
+                        }}
+                      >
+                        {cert.name}
+                      </a>
+                    </td>
+                    <td>{cert.issuer}</td>
+                    <td>{cert.date}</td>
+                    <td>{cert.user.name}</td>
+                    <td>{cert.status}</td>
+                    <td>
+                      <Button
+                        variant='danger'
+                        className='btn-sm'
+                        onClick={() => deleteHandler(cert._id)}
+                      >
+                        <i className='fas fa-trash'></i>
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </>
+        )}
+      </>
+    ) : (
+      <Message variant='danger'>
+        Unauthorised Access of Admin Certificate List Page
+      </Message>
+    )
   ) : (
     <Message variant='danger'>
-      {" "}
       You need to be logged in to view this page
     </Message>
   )
 }
 
-export default UserCertsScreen
+export default CertListScreen

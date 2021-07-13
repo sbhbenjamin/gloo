@@ -8,7 +8,7 @@ import FormContainer from "../components/FormContainer"
 import { CERT_CREATE_RESET } from "../constants/certConstants"
 import { createCert } from "../actions/certActions"
 
-const CertCreateScreen = ({ match, history }) => {
+const CertCreateScreen = ({ history }) => {
   const [name, setName] = useState("")
   const [issuer, setIssuer] = useState("")
   const [date, setDate] = useState("")
@@ -74,7 +74,7 @@ const CertCreateScreen = ({ match, history }) => {
     )
   }
 
-  return (
+  return userInfo ? (
     <>
       <Button
         data-testid='navigate-back-btn'
@@ -140,7 +140,7 @@ const CertCreateScreen = ({ match, history }) => {
           </Form.Group>
 
           <Button
-            data-testid='product-submit'
+            data-testid='cert-submit'
             className='mt-2'
             type='submit'
             variant='primary'
@@ -150,6 +150,10 @@ const CertCreateScreen = ({ match, history }) => {
         </Form>
       </FormContainer>
     </>
+  ) : (
+    <Message variant='danger'>
+      You need to be logged in to view this page
+    </Message>
   )
 }
 

@@ -52,7 +52,7 @@ const CertEditScreen = ({ match, history }) => {
       history.push("/certificates")
     } else if (successDelete) {
       dispatch({ type: CERT_DELETE_RESET })
-      history.push("/")
+      history.push("/certificates")
     } else {
       if (!cert.name || cert._id !== certId) {
         dispatch(listCertDetails(certId))
@@ -117,128 +117,136 @@ const CertEditScreen = ({ match, history }) => {
     }
   }
 
-  return userInfo && cert.user ? (
-    userInfo._id === cert.user._id || userInfo.isAdmin ? (
-      <>
-        <Link
-          to={`/certificates/${cert._id}`}
-          className='btn btn-outline-secondary'
-        >
-          Go Back
-        </Link>
-        <FormContainer>
-          <h1>Edit Certificate</h1>
-          {loadingUpdate && <Loader />}
-          {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-          {loadingDelete && <Loader />}
-          {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-          {loading ? (
-            <Loader />
-          ) : error ? (
-            <Message variant='danger'>{error}</Message>
-          ) : (
-            <Form onSubmit={submitHandler}>
-              <Form.Group controlId='name'>
-                <Form.Label>Name of Certificate</Form.Label>
-                <Form.Control
-                  data-testid='cert-name'
-                  type='name'
-                  placeholder='Enter certificate name'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId='issuer'>
-                <Form.Label>Issuer</Form.Label>
-                <Form.Control
-                  data-testid='cert-issuer'
-                  type='text'
-                  placeholder='Enter issueing organisation'
-                  value={issuer}
-                  onChange={(e) => setIssuer(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-
-              <Form.Group controlId='date'>
-                <Form.Label>Date of Attainment</Form.Label>
-                <Form.Control
-                  data-testid='cert-date'
-                  type='text'
-                  placeholder='Enter date'
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-
-              <Form.Group controlId='image'>
-                <Form.Label>Image</Form.Label>
-                <Form.Control
-                  data-testid='cert-image'
-                  type='text'
-                  placeholder='Upload an image'
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                ></Form.Control>
-                <Form.File
-                  id='image-file'
-                  custom
-                  onChange={uploadFileHandler}
-                  className='mt-2'
-                ></Form.File>
-                {uploading && <Loader />}
-              </Form.Group>
-              {userInfo.isAdmin && (
-                <Form.Group>
-                  <div class='form-check form-check-inline'>
-                    <label className='form-check-label'>Approve</label>
-                    <input
-                      name='status'
-                      type='radio'
-                      checked={status === "Approved"}
-                      onChange={approveStatusHandler}
-                      className='form-check-input'
-                    />
-                  </div>
-                  <div class='form-check form-check-inline'>
-                    <label className='form-check-label'>Reject</label>
-                    <input
-                      name='status'
-                      type='radio'
-                      checked={status === "Rejected"}
-                      onChange={rejectStatusHandler}
-                      className='form-check-input'
-                    />
-                  </div>
+  return userInfo ? (
+    cert.user ? (
+      userInfo._id === cert.user._id || userInfo.isAdmin ? (
+        <>
+          <Link
+            to={`/certificates/${cert._id}`}
+            className='btn btn-outline-secondary'
+          >
+            Go Back
+          </Link>
+          <FormContainer>
+            <h1>Edit Certificate</h1>
+            {loadingUpdate && <Loader />}
+            {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+            {loadingDelete && <Loader />}
+            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+            {loading ? (
+              <Loader />
+            ) : error ? (
+              <Message variant='danger'>{error}</Message>
+            ) : (
+              <Form onSubmit={submitHandler}>
+                <Form.Group controlId='name'>
+                  <Form.Label>Name of Certificate</Form.Label>
+                  <Form.Control
+                    data-testid='cert-name'
+                    type='name'
+                    placeholder='Enter certificate name'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  ></Form.Control>
                 </Form.Group>
-              )}
-              <Button
-                data-testid='edit-submit'
-                type='submit'
-                variant='primary'
-                className='mt-2 me-2'
-              >
-                Update Certificate
-              </Button>
-              <Button
-                data-testid='edit-delete'
-                type='button'
-                variant='danger'
-                className='mt-2'
-                onClick={deleteHandler}
-              >
-                Delete
-              </Button>
-            </Form>
-          )}
-        </FormContainer>
-      </>
+                <Form.Group controlId='issuer'>
+                  <Form.Label>Issuer</Form.Label>
+                  <Form.Control
+                    data-testid='cert-issuer'
+                    type='text'
+                    placeholder='Enter issueing organisation'
+                    value={issuer}
+                    onChange={(e) => setIssuer(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId='date'>
+                  <Form.Label>Date of Attainment</Form.Label>
+                  <Form.Control
+                    data-testid='cert-date'
+                    type='text'
+                    placeholder='Enter date'
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId='image'>
+                  <Form.Label>Image</Form.Label>
+                  <Form.Control
+                    data-testid='cert-image'
+                    type='text'
+                    placeholder='Upload an image'
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}
+                  ></Form.Control>
+                  <Form.File
+                    id='image-file'
+                    custom
+                    onChange={uploadFileHandler}
+                    className='mt-2'
+                  ></Form.File>
+                  {uploading && <Loader />}
+                </Form.Group>
+                {userInfo.isAdmin && (
+                  <Form.Group>
+                    <div className='form-check form-check-inline'>
+                      <label className='form-check-label'>Approve</label>
+                      <input
+                        name='status'
+                        type='radio'
+                        checked={status === "Approved"}
+                        onChange={approveStatusHandler}
+                        className='form-check-input'
+                        data-testid='approve-cert'
+                      />
+                    </div>
+                    <div className='form-check form-check-inline'>
+                      <label className='form-check-label'>Reject</label>
+                      <input
+                        name='status'
+                        type='radio'
+                        checked={status === "Rejected"}
+                        onChange={rejectStatusHandler}
+                        className='form-check-input'
+                        data-testid='reject-cert'
+                      />
+                    </div>
+                  </Form.Group>
+                )}
+                <Button
+                  data-testid='edit-submit'
+                  type='submit'
+                  variant='primary'
+                  className='mt-2 me-2'
+                >
+                  Update Certificate
+                </Button>
+                <Button
+                  data-testid='edit-delete'
+                  type='button'
+                  variant='danger'
+                  className='mt-2'
+                  onClick={deleteHandler}
+                >
+                  Delete
+                </Button>
+              </Form>
+            )}
+          </FormContainer>
+        </>
+      ) : (
+        <Message variant='danger'>
+          Unauthorised Access of Certificate Edit Page
+        </Message>
+      )
     ) : (
-      <Message variant='danger'>
-        Unauthorised Access of Certificate Edit Page
-      </Message>
+      <Loader />
     )
   ) : (
-    ""
+    <Message variant='danger'>
+      Unauthorised Access of Certificate Edit Page
+    </Message>
   )
 }
 

@@ -6,7 +6,7 @@ import Message from "../components/Message"
 import Loader from "../components/Loader"
 import { deleteCert, listUserCerts } from "../actions/certActions"
 
-const UserCertsScreen = ({ history, match }) => {
+const UserCertsScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const certListUser = useSelector((state) => state.certListUser)
@@ -25,8 +25,9 @@ const UserCertsScreen = ({ history, match }) => {
   useEffect(() => {
     if (!userInfo) {
       history.push("/login")
+    } else {
+      dispatch(listUserCerts(userInfo._id))
     }
-    dispatch(listUserCerts(userInfo._id))
   }, [dispatch, history, userInfo, successDelete])
 
   const deleteHandler = (id) => {
@@ -80,7 +81,7 @@ const UserCertsScreen = ({ history, match }) => {
                   <td>{cert._id}</td>
                   <td>
                     <a
-                      href
+                      href='/'
                       className='no-underline hover:underline'
                       onClick={(e) => {
                         e.preventDefault()
@@ -111,7 +112,6 @@ const UserCertsScreen = ({ history, match }) => {
     </>
   ) : (
     <Message variant='danger'>
-      {" "}
       You need to be logged in to view this page
     </Message>
   )

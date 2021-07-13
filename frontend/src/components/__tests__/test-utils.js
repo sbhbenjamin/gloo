@@ -36,6 +36,14 @@ import {
   orderListReducer,
   orderDeliverReducer,
 } from "../../reducers/orderReducers"
+import {
+  certListReducer,
+  certDetailsReducer,
+  certDeleteReducer,
+  certCreateReducer,
+  certUpdateReducer,
+  certListUserReducer,
+} from "../../reducers/certReducers"
 
 const reducer = {
   productList: productListReducer,
@@ -64,6 +72,12 @@ const reducer = {
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
+  certList: certListReducer,
+  certDetails: certDetailsReducer,
+  certDelete: certDeleteReducer,
+  certCreate: certCreateReducer,
+  certUpdate: certUpdateReducer,
+  certListUser: certListUserReducer,
 }
 
 function render(
