@@ -6,45 +6,45 @@ import {
 } from '../constants/cartConstants'
 
 export const cartReducer = (
-  state = { cartItems: [], shippingAddress: {} },
+  state = { cartItem: [], shippingAddress: {} },
   action
 ) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload
 
-      // search in the state.cartItems array for the existence of the specific
+      // search in the state.cartItem array for the existence of the specific
       // product that is defined by the item (by the action.payload)
       // if we find a match, assign the result to the existItem variable
-      const existItem = state.cartItems.find((x) => x.product === item.product)
+      const existItem = state.cartItem.find((x) => x.product === item.product)
 
-      // if there is already a product matching the item in the state.cartItems
+      // if there is already a product matching the item in the state.cartItem
       // array
       if (existItem) {
-        // return the existing state with adjusted cartItems
+        // return the existing state with adjusted cartItem
         return {
           ...state,
-          // map through the cartItems array and replace the matching product
+          // map through the cartItem array and replace the matching product
           // with the new item. leave the remaining products as they were
-          cartItems: state.cartItems.map((x) =>
+          cartItem: state.cartItem.map((x) =>
             x.product === existItem.product ? item : x
           ),
         }
         // otherwise, if the item is NOT already a product matching the item
-        // in the state.cartItems array
+        // in the state.cartItem array
       } else {
-        // return the existing state with adjusted cartItems
+        // return the existing state with adjusted cartItem
         return {
           ...state,
-          // return a new cartItems array with the prevcious products spread
+          // return a new cartItem array with the prevcious products spread
           // and add the new item
-          cartItems: [...state.cartItems, item],
+          cartItem: [...state.cartItem, item],
         }
       }
     case CART_REMOVE_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+        cartItem: state.cartItem.filter((x) => x.product !== action.payload),
       }
 
     case CART_SAVE_SHIPPING_ADDRESS:

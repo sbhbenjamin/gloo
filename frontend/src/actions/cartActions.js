@@ -6,22 +6,21 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
 } from '../constants/cartConstants'
 
-export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/products/${id}`)
-
+export const addToCart = (offer) => async (dispatch, getState) => {
   dispatch({
     type: CART_ADD_ITEM,
     payload: {
-      product: data._id,
-      name: data.name,
-      image: data.image,
-      price: data.price,
-      user: data.user,
-      qty,
+      buyer: offer.buyer,
+      seller: offer.seller,
+      orderItem: {
+        name: offer.orderItem.name,
+        image: offer.orderItem.image,
+        product: offer.orderItem.product,
+      },
     },
   })
 
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+  localStorage.setItem('cartItem', JSON.stringify(getState().cart.cartItem))
 }
 
 export const removeFromCart = (id) => (dispatch, getState) => {
@@ -30,7 +29,7 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     payload: id,
   })
 
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+  localStorage.setItem('cartItem', JSON.stringify(getState().cart.cartItem))
 }
 
 export const saveShippingAddress = (data) => (dispatch) => {

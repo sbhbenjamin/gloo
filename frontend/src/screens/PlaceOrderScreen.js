@@ -16,7 +16,7 @@ const PlaceOrderScreen = ({ history }) => {
   }
 
   cart.itemsPrice = addDecimals(
-    cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    cart.cartItem.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
 
   cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100)
@@ -48,7 +48,7 @@ const PlaceOrderScreen = ({ history }) => {
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
-        orderItems: cart.cartItems,
+        orderItems: cart.cartItem,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
@@ -62,7 +62,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
-      {cart.cartItems.length === 0 ||
+      {cart.cartItem.length === 0 ||
       !cart.paymentMethod ||
       cart.shippingAddress === null ? (
         <Message variant='danger'>
@@ -103,13 +103,13 @@ const PlaceOrderScreen = ({ history }) => {
                   <div className='mb-3'>
                     <h3>Order Items</h3>
                   </div>
-                  {cart.cartItems.length === 0 ? (
+                  {cart.cartItem.length === 0 ? (
                     <Message data-testid='order-message'>
                       Your cart is empty
                     </Message>
                   ) : (
                     <ListGroup variant='flush'>
-                      {cart.cartItems.map((item, index) => (
+                      {cart.cartItem.map((item, index) => (
                         <ListGroup.Item key={index}>
                           <Row>
                             <Col md={1}>
@@ -139,7 +139,7 @@ const PlaceOrderScreen = ({ history }) => {
                           </Row>
                         </ListGroup.Item>
                       ))}
-                      {cart.cartItems && (seller = cart.cartItems[0].user._id)}
+                      {cart.cartItem && (seller = cart.cartItem[0].user._id)}
                     </ListGroup>
                   )}
                 </ListGroup.Item>
@@ -213,7 +213,7 @@ const PlaceOrderScreen = ({ history }) => {
                       data-testid='order-submit-btn'
                       type='button'
                       size='lg'
-                      disabled={cart.cartItems === 0}
+                      disabled={cart.cartItem === 0}
                       onClick={placeOrderHandler}
                       block
                     >

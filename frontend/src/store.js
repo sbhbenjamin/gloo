@@ -52,7 +52,11 @@ import {
   messageCreateReducer,
   messageListReducer,
 } from './reducers/messageReducers'
-import { offerCreateReducer } from './reducers/offerReducers'
+import {
+  offerAcceptReducer,
+  offerCreateReducer,
+  offerListReducer,
+} from './reducers/offerReducers'
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -95,10 +99,12 @@ const reducer = combineReducers({
   messageList: messageListReducer,
   messageCreate: messageCreateReducer,
   offerCreate: offerCreateReducer,
+  offerList: offerListReducer,
+  offerAccept: offerAcceptReducer,
 })
 
-const cartItemsFromStorage = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems'))
+const cartItemFromStorage = localStorage.getItem('cartItem')
+  ? JSON.parse(localStorage.getItem('cartItem'))
   : []
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -111,7 +117,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
 
 const initialState = {
   cart: {
-    cartItems: cartItemsFromStorage,
+    cartItem: cartItemFromStorage,
     shippingAddress: shippingAddressFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },

@@ -5,11 +5,19 @@ import Offer from '../models/offerModel.js'
 // @route       POST /api/offers
 // @access      Private
 const createOffer = asyncHandler(async (req, res) => {
-  const { conversation, buyer, seller, orderItem, offerPrice, offerStatus } =
-    req.body
+  const {
+    conversation,
+    sender,
+    buyer,
+    seller,
+    orderItem,
+    offerPrice,
+    offerStatus,
+  } = req.body
 
   const offer = new Offer({
     conversation,
+    sender,
     buyer,
     seller,
     orderItem,
@@ -34,6 +42,28 @@ const getOffers = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('Offer not found')
   }
+})
+
+// @desc        Fetch offers by user id
+// @route       GET /api/offers/:userid
+// @access      Private
+const getOffersByUserId = asyncHandler(async (req, res) => {
+  const offers = await Offer.find({
+    $or: [
+      {
+        buyer: {
+          _id: req.params.userid,
+        },
+      },
+      {
+        seller: {
+          _id: req.params.userid,
+        },
+      },
+    ],
+  })
+
+  res.json(offers)
 })
 
 // @desc        Fetch single offer
@@ -90,6 +120,7 @@ export {
   createOffer,
   getOffers,
   getOfferById,
+  getOffersByUserId,
   updateOfferStatus,
   updateOfferPrice,
 }

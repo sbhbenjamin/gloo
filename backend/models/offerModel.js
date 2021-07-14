@@ -7,6 +7,11 @@ const offerSchema = mongoose.Schema(
       required: true,
       ref: 'Conversation',
     },
+    sender: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
     buyer: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

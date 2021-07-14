@@ -9,7 +9,6 @@ const router = express.Router()
 import { protect, admin } from '../middleware/authMiddleware.js'
 
 router.route('/').get(getConversations).post(createConversation)
-
 router.route('/:id').delete(deleteConversation)
 router.route('/:userid').get(getConversationsByUserId)
 

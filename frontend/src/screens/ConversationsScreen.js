@@ -10,27 +10,18 @@ import { createMessage, listMessages } from '../actions/messageActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import ChatProduct from '../components/chatProduct/ChatProduct'
-import { io } from 'socket.io-client'
 import ChatUser from '../components/chatUser/ChatUser'
 import ChatMessage from '../components/chatMessage/ChatMessage'
 import { MESSAGE_CREATE_RESET } from '../constants/messageConstants'
 import { CONVERSATION_CREATE_RESET } from '../constants/conversationConstants'
 
-const ConversationsScreen = ({ history, match }) => {
+const ConversationsScreen = ({ history }) => {
   const [currentChat, setCurrentChat] = useState(null)
   const [newMessage, setNewMessage] = useState('')
+  const [childError, setChildError] = useState(null)
+  const [childInfo, setChildInfo] = useState(null)
   const dispatch = useDispatch()
   const scrollRef = useRef()
-
-  // const socket = io()
-  // const socket = useRef()
-
-  // useEffect(() => {
-  //   socket.current = io('ws://localhost:5000')
-  //   socket.current.on('message', (message) => {
-  //     console.log(message)
-  //   })
-  // }, [])
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -136,6 +127,8 @@ const ConversationsScreen = ({ history, match }) => {
           >
             Go Back
           </Button>
+          {childError && <Message variant='danger'>{childError}</Message>}
+          {childInfo && <Message variant='success'>{childInfo}</Message>}
           <div className='messenger'>
             <div className='chatMenu'>
               <div className='chatMenuWrapper'>
@@ -147,7 +140,11 @@ const ConversationsScreen = ({ history, match }) => {
                   <Nav variant='pills' className='flex-column ms-0'>
                     {conversations.map((c) => (
                       <div key={c._id} onClick={() => setCurrentChat(c)}>
-                        <ChatUser conversation={c} currentChat={currentChat} />
+                        <ChatUser
+                          setChildError={setChildError}
+                          conversation={c}
+                          currentChat={currentChat}
+                        />
                       </div>
                     ))}
                   </Nav>
@@ -163,12 +160,15 @@ const ConversationsScreen = ({ history, match }) => {
                 ) : currentChat ? (
                   messages && (
                     <>
-                      <ChatProduct currentChat={currentChat} />
+                      <ChatProduct
+                        currentChat={currentChat}
+                        setChildError={setChildError}
+                        setChildInfo={setChildInfo}
+                      />
                       <div className='chatBoxTop'>
                         {messages?.map((m) => (
-                          <div ref={scrollRef}>
+                          <div key={m._id} ref={scrollRef}>
                             <ChatMessage
-                              key={m._id}
                               message={m}
                               own={m.sender === userInfo._id}
                             />

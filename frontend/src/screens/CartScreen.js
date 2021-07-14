@@ -13,7 +13,7 @@ const CartScreen = ({ match, location, history }) => {
   const dispatch = useDispatch()
 
   const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const { cartItem } = cart
 
   useEffect(() => {
     if (productId) {
@@ -33,13 +33,13 @@ const CartScreen = ({ match, location, history }) => {
     <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
+        {cartItem.length === 0 ? (
           <Message>
             Your cart is empty <Link to='/'>Go Back</Link>
           </Message>
         ) : (
           <ListGroup variant='flush'>
-            {cartItems.map((item) => (
+            {cartItem.map((item) => (
               <ListGroup.Item key={item.product}>
                 <Row>
                   <Col md={2}>
@@ -84,12 +84,12 @@ const CartScreen = ({ match, location, history }) => {
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                Subtotal ({cartItem.reduce((acc, item) => acc + item.qty, 0)})
                 items
               </h2>
               <p data-testid='cart-price'>
                 $
-                {cartItems
+                {cartItem
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
                   .toFixed(2)}
               </p>
@@ -99,7 +99,7 @@ const CartScreen = ({ match, location, history }) => {
                 data-testid='cart-checkout-btn'
                 type='button'
                 className='btn-block'
-                disabled={cartItems.length === 0}
+                disabled={cartItem.length === 0}
                 onClick={checkoutHandler}
               >
                 Proceed To Checkout

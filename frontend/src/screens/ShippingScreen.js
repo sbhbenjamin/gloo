@@ -34,7 +34,7 @@ const ShippingScreen = ({ history }) => {
 
   return (
     <>
-      {cart.cartItems.length === 0 ? (
+      {cart.cartItem.length === 0 ? (
         <Message variant='danger'>
           Order does not exist. <a href='/'>Go back.</a>
         </Message>

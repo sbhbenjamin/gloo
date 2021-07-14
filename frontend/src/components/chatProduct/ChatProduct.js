@@ -1,5 +1,6 @@
 import './chatproduct.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Card,
@@ -10,12 +11,24 @@ import {
   FormControl,
 } from 'react-bootstrap'
 import Rating from '../Rating'
-import { createOffer } from '../../actions/offerActions'
+import Message from '../Message'
+import Loader from '../Loader'
+import {
+  acceptOffer,
+  createOffer,
+  getOffers,
+  rejectOffer,
+} from '../../actions/offerActions'
 
-const ChatProduct = ({ currentChat }) => {
+const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
   const [offerActive, setOfferActive] = useState(false)
   const [offerPrice, setOfferPrice] = useState(null)
-  const [offerMade, setOfferMade] = useState(false)
+  const [currentOffer, setCurrentOffer] = useState(null)
+  const [offered, setOffered] = useState(false)
+  const [accepted, setAccepted] = useState(false)
+  const [rejected, setRejected] = useState(false)
+  const [offerer, setOfferer] = useState(false)
+
   const dispatch = useDispatch()
 
   const userLogin = useSelector((state) => state.userLogin)
@@ -23,14 +36,100 @@ const ChatProduct = ({ currentChat }) => {
 
   const { name, image, rating, numReviews } = currentChat.product
 
+  const offerList = useSelector((state) => state.offerList)
+  const {
+    loading: loadingOffers,
+    error: errorOffers,
+    success: offersSuccess,
+    offers,
+  } = offerList
+
   const offerCreate = useSelector((state) => state.offerCreate)
   const {
-    // loading: loadingofferCreate,
-    // error: errorofferCreate,
+    // loading: loadingCreate,
     offer: createdOffer,
+    error: errorCreate,
   } = offerCreate
 
-  const handleOfferBtn = () => {
+  const offerAccept = useSelector((state) => state.offerAccept)
+  const {
+    // loading: loadingAccept,
+    error: errorAccept,
+    offer: acceptedOffer,
+  } = offerAccept
+
+  // lift errors to parent
+  useEffect(() => {
+    if (errorCreate) {
+      setChildError(errorCreate)
+    }
+    if (errorOffers) {
+      setChildError(errorOffers)
+    }
+
+    if (errorAccept) {
+      setChildError(errorAccept)
+    }
+  }, [setChildError, errorCreate, errorOffers, errorAccept])
+
+  useEffect(() => {
+    dispatch(getOffers())
+  }, [dispatch, currentChat, createdOffer, acceptedOffer])
+
+  useEffect(() => {
+    if (offers) {
+      const offerExists = offers.filter(
+        (offer) =>
+          offer.conversation === currentChat._id &&
+          offer.offerStatus !== 'rejected'
+      )
+
+      if (offerExists.length > 0) {
+        const offer = offerExists[0]
+        setCurrentOffer(offer)
+
+        // check if offer is accepted and user is buyer
+        if (
+          offer?.offerStatus === 'accepted' &&
+          currentOffer?.buyer === userInfo._id
+        ) {
+          console.log('offer accepted, user buyer')
+          setOffered(true)
+
+          // offer is made, user is recepient
+        } else if (
+          offer?.offerStatus === 'pending' &&
+          offer?.sender !== userInfo._id
+        ) {
+          console.log('offer made, user recepient')
+          setOffered(true)
+          setOfferer(false)
+          // offer is made, user is sender
+        } else if (
+          offer &&
+          offer.offerStatus === 'pending' &&
+          offer.sender === userInfo._id
+        ) {
+          console.log('offer made, user sender')
+          setOffered(true)
+          setOfferer(true)
+          // offer is accepted, user is seller
+        } else if (offer?.offerStatus === 'accepted') {
+          console.log('offer accepted! ')
+          setAccepted(true)
+        } else {
+          console.log('offer does not exist :-(')
+        }
+      }
+    } else {
+      setCurrentOffer(null)
+      setOffered(false)
+      setOfferer(null)
+      setAccepted(false)
+    }
+  }, [dispatch, offers, currentOffer, userInfo._id, currentChat, offersSuccess])
+
+  const handleMakeOffer = () => {
     setOfferActive(true)
   }
 
@@ -41,8 +140,9 @@ const ChatProduct = ({ currentChat }) => {
   const handleOfferSubmit = () => {
     const offer = {
       conversation: currentChat._id,
-      buyer: userInfo._id,
-      seller: currentChat.product._id,
+      sender: userInfo._id,
+      buyer: currentChat.buyer._id,
+      seller: currentChat.seller._id,
       orderItem: {
         name,
         image,
@@ -52,72 +152,120 @@ const ChatProduct = ({ currentChat }) => {
       offerStatus: 'pending',
     }
     dispatch(createOffer(offer))
+    setChildInfo('Offer successfully created')
   }
 
-  useState(() => {
-    if (createdOffer?.conversation === currentChat._id) {
-      setOfferMade(true)
-    }
-  }, [dispatch, createdOffer])
+  const handleAcceptOffer = () => {
+    dispatch(acceptOffer(currentOffer))
+    setAccepted(true)
+    setChildInfo('Offer successfully accepted')
+  }
+
+  const handleDeclineOffer = () => {
+    dispatch(rejectOffer(currentOffer))
+    setRejected(true)
+    setCurrentOffer(null)
+    setChildInfo('Offer successfully rejected')
+  }
 
   return (
     <>
-      <Card className='chatBoxProduct'>
-        <Card.Body>
-          <Row>
-            <Col xs={1}>
-              <img className='chatBoxProductImage' src={image} alt={name} />
-            </Col>
-            <Col className='flex-grow-1'>
-              <p className='chatBoxProductName'>{name}</p>
-              <Rating
-                data-testid='product-rating'
-                value={rating}
-                text={`${numReviews} reviews`}
-              />
-            </Col>
-            <Col xs={5} className='d-flex chatBoxProductBtnWrapper'>
-              {offerMade ? (
-                <Button disabled variant='secondary'>
-                  Offer made
-                </Button>
-              ) : !offerActive ? (
-                <Button className='chatBoxProductBtn' onClick={handleOfferBtn}>
-                  Make offer
-                </Button>
-              ) : (
-                <div className='chatBoxProductBtnExpand'>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text>$</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                      type='number'
-                      placeholder='0.00'
-                      onChange={(e) => setOfferPrice(e.target.value)}
-                    />
-                    <InputGroup.Append>
-                      <Button
-                        variant='outline-success'
-                        onClick={handleOfferSubmit}
-                      >
-                        Offer
-                      </Button>
-                    </InputGroup.Append>
-                  </InputGroup>
-                  <a
-                    href='#'
-                    className='chatBoxProductCancel'
-                    onClick={handleOfferCancel}
+      {loadingOffers ? (
+        <Loader />
+      ) : (
+        <Card className='chatBoxProduct'>
+          <Card.Body>
+            <Row>
+              {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+              <Col xs={1}>
+                <img className='chatBoxProductImage' src={image} alt={name} />
+              </Col>
+              <Col className='flex-grow-1'>
+                <p className='chatBoxProductName'>{name}</p>
+                <Rating
+                  data-testid='product-rating'
+                  value={rating}
+                  text={`${numReviews} reviews`}
+                />
+              </Col>
+              <Col xs={5} className='d-flex chatBoxProductBtnWrapper'>
+                {accepted && userInfo._id === currentOffer.buyer ? (
+                  <Link
+                    data-testid='checkout-btn'
+                    className='btn btn-success'
+                    to={{
+                      pathname: '/checkout',
+                      state: {
+                        offer: currentOffer,
+                      },
+                    }}
                   >
-                    cancel
-                  </a>
-                </div>
-              )}
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+                    Proceed to Checkout
+                  </Link>
+                ) : accepted && userInfo._id === currentOffer.seller ? (
+                  <Button disabled variant='secondary'>
+                    Accepted
+                  </Button>
+                ) : // if offer is not made by current user and offer status is pending
+                !rejected && offered === true && offerer === false ? (
+                  <Row>
+                    <Col>
+                      <Button variant='success' onClick={handleAcceptOffer}>
+                        ${currentOffer.offerPrice.toFixed(2)}
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button variant='danger' onClick={handleDeclineOffer}>
+                        Decline
+                      </Button>
+                    </Col>
+                  </Row>
+                ) : offered && offerer ? (
+                  <Button disabled variant='secondary'>
+                    Offer made
+                  </Button>
+                ) : // no offer on currently
+                rejected || (offered === false && offerActive === false) ? (
+                  <Button
+                    className='chatBoxProductBtn'
+                    onClick={handleMakeOffer}
+                  >
+                    Make offer
+                  </Button>
+                ) : (
+                  <div className='chatBoxProductBtnExpand'>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>$</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                        type='number'
+                        placeholder='0.00'
+                        onChange={(e) => setOfferPrice(e.target.value)}
+                      />
+                      <InputGroup.Append>
+                        <Button
+                          variant='outline-success'
+                          onClick={handleOfferSubmit}
+                        >
+                          Offer
+                        </Button>
+                      </InputGroup.Append>
+                    </InputGroup>
+                    <a
+                      href='#'
+                      className='chatBoxProductCancel'
+                      onClick={handleOfferCancel}
+                    >
+                      cancel
+                    </a>
+                  </div>
+                )}
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      )}{' '}
     </>
   )
 }
