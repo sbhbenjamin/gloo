@@ -120,6 +120,8 @@ const ConversationsScreen = ({ history }) => {
     <>
       {userInfo && (
         <>
+          {childError && <Message variant='danger'>{childError}</Message>}
+          {childInfo && <Message variant='success'>{childInfo}</Message>}
           <Button
             data-testid='navigate-back-btn'
             onClick={history.goBack}
@@ -127,8 +129,6 @@ const ConversationsScreen = ({ history }) => {
           >
             Go Back
           </Button>
-          {childError && <Message variant='danger'>{childError}</Message>}
-          {childInfo && <Message variant='success'>{childInfo}</Message>}
           <div className='messenger'>
             <div className='chatMenu'>
               <div className='chatMenuWrapper'>

@@ -9,6 +9,7 @@ import {
   Button,
   InputGroup,
   FormControl,
+  Spinner,
 } from 'react-bootstrap'
 import Rating from '../Rating'
 import Message from '../Message'
@@ -138,21 +139,25 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
   }
 
   const handleOfferSubmit = () => {
-    const offer = {
-      conversation: currentChat._id,
-      sender: userInfo._id,
-      buyer: currentChat.buyer._id,
-      seller: currentChat.seller._id,
-      orderItem: {
-        name,
-        image,
-        product: currentChat.product,
-      },
-      offerPrice: offerPrice,
-      offerStatus: 'pending',
+    if (offerPrice) {
+      const offer = {
+        conversation: currentChat._id,
+        sender: userInfo._id,
+        buyer: currentChat.buyer._id,
+        seller: currentChat.seller._id,
+        orderItem: {
+          name,
+          image,
+          product: currentChat.product,
+        },
+        offerPrice: offerPrice,
+        offerStatus: 'pending',
+      }
+      dispatch(createOffer(offer))
+      setChildInfo('Offer successfully created')
+    } else {
+      setChildError('Offer required')
     }
-    dispatch(createOffer(offer))
-    setChildInfo('Offer successfully created')
   }
 
   const handleAcceptOffer = () => {
@@ -171,7 +176,18 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
   return (
     <>
       {loadingOffers ? (
-        <Loader />
+        <Spinner
+          animation='border'
+          role='status'
+          style={{
+            width: '50px',
+            height: '50px',
+            margin: 'auto',
+            display: 'block',
+          }}
+        >
+          <span className='sr-only'>Loading...</span>
+        </Spinner>
       ) : (
         <Card className='chatBoxProduct'>
           <Card.Body>
