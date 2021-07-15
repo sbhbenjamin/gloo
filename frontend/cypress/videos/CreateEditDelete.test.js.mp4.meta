@@ -1,0 +1,201 @@
+;FFMETADATA1
+[CHAPTER]
+TIMEBASE=1/1000
+START=7718
+END=10340
+title=Add product feature not available until login Add Product does not exist
+[CHAPTER]
+TIMEBASE=1/1000
+START=12821
+END=12968
+title=Login feature works as expected Sign in button can be clicked
+[CHAPTER]
+TIMEBASE=1/1000
+START=13102
+END=13117
+title=Login feature works as expected Redirected to Sign In page
+[CHAPTER]
+TIMEBASE=1/1000
+START=13133
+END=13133
+title=Login feature works as expected Able to login with correct email and password
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Add Product Screen Click on Add Product
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Add Product Screen Redirected to correct url
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Add Product Screen Create Product Screen renders properly
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Add Product Screen Details can be filled into form
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Add Product Screen Redirected to home page
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View Add Product Using Image URL Search for newly created product
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View Add Product Using Image URL Redirected to product page url
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View Add Product Using Image URL Image should load
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View My Listings My Listings button can be clicked
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View My Listings Go to Product Page of Johns Product
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View My Listings Click on edit listing
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View My Listings redirected to correct url
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View My Listings Edit Product Screen renders properly
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Edit Product and check if updated Change name of listing
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Edit Product and check if updated Update
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Edit Product and check if updated Edit Product Screen renders properly
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Redirect to product page Redirected to product page
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Redirect to product page Product Title Updated
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Redirect to product page Image should load
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Check if logged out users are able to view updated title Logout
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Check if other logged in users are able to view updated title Sign in button can be clicked
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Check if other logged in users are able to view updated title Redirected to Sign In page
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Check if other logged in users are able to view updated title Able to login with correct email and password into Jane Account
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Check if other logged in users are able to view updated title Search for newly updated product
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Check if other logged in users are able to view updated title Jane can view updated title
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Logout of Jane Account and Login to John Account Logout of Jane
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Logout of Jane Account and Login to John Account Sign in button can be clicked
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Logout of Jane Account and Login to John Account Redirected to Sign In page
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Logout of Jane Account and Login to John Account Login to John
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View Add Product Using Image URL Edited Search for newly created product
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View Add Product Using Image URL Edited Redirected to product page url
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=View Add Product Using Image URL Edited Image should load
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Delete listing Conditional Rendering of Edit Listing works
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Delete listing Redirected to edit page url
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Delete listing Delete function should work
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=Delete listing No results for deleted product
