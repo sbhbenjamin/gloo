@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 before(() => {
   cy.viewport(1280, 720)
   cy.visit("https://gloo-dev.herokuapp.com/")
