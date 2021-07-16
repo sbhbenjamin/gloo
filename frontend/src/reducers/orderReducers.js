@@ -24,7 +24,8 @@ import {
   ORDER_DELETE_REQUEST,
   ORDER_DELETE_SUCCESS,
   ORDER_DELETE_FAIL,
-} from "../constants/orderConstants"
+  ORDER_DETAILS_RESET,
+} from '../constants/orderConstants'
 
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
@@ -70,6 +71,8 @@ export const orderDetailsReducer = (
         loading: false,
         error: action.payload,
       }
+    case ORDER_DETAILS_RESET:
+      return {}
     default:
       return state
   }

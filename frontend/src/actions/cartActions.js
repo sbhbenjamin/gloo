@@ -9,18 +9,10 @@ import {
 export const addToCart = (offer) => async (dispatch, getState) => {
   dispatch({
     type: CART_ADD_ITEM,
-    payload: {
-      buyer: offer.buyer,
-      seller: offer.seller,
-      orderItem: {
-        name: offer.orderItem.name,
-        image: offer.orderItem.image,
-        product: offer.orderItem.product,
-      },
-    },
+    payload: offer,
   })
 
-  localStorage.setItem('cartItem', JSON.stringify(getState().cart.cartItem))
+  localStorage.setItem('offer', JSON.stringify(getState().cart.offer))
 }
 
 export const removeFromCart = (id) => (dispatch, getState) => {
@@ -29,7 +21,7 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     payload: id,
   })
 
-  localStorage.setItem('cartItem', JSON.stringify(getState().cart.cartItem))
+  localStorage.setItem('offer', JSON.stringify(getState().cart.offer))
 }
 
 export const saveShippingAddress = (data) => (dispatch) => {

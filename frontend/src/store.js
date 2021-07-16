@@ -103,9 +103,9 @@ const reducer = combineReducers({
   offerAccept: offerAcceptReducer,
 })
 
-const cartItemFromStorage = localStorage.getItem('cartItem')
-  ? JSON.parse(localStorage.getItem('cartItem'))
-  : []
+const offerFromStorage = localStorage.getItem('offer')
+  ? JSON.parse(localStorage.getItem('offer'))
+  : {}
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -117,7 +117,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
 
 const initialState = {
   cart: {
-    cartItem: cartItemFromStorage,
+    offer: offerFromStorage,
     shippingAddress: shippingAddressFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },

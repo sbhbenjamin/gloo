@@ -2,6 +2,11 @@ import mongoose from 'mongoose'
 
 const orderSchema = mongoose.Schema(
   {
+    offer: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Offer',
+    },
     buyer: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -26,6 +31,11 @@ const orderSchema = mongoose.Schema(
       city: { type: String, required: true },
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
+    },
+    itemPrice: {
+      type: Number,
+      required: true,
+      default: 0.0,
     },
     taxPrice: {
       type: Number,

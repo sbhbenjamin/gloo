@@ -15,14 +15,12 @@ const PlaceOrderScreen = ({ history }) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
 
-  cart.itemsPrice = addDecimals(
-    cart.cartItem.reduce((acc, item) => acc + item.price * item.qty, 0)
-  )
+  cart.offer.offerPrice = addDecimals(cart.offer.offerPrice)
 
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100)
-  cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 15)
+  cart.taxPrice = addDecimals(Number((0.07 * cart.offer.offerPrice).toFixed(2)))
   cart.totalPrice = (
-    Number(cart.itemsPrice) +
+    Number(cart.offer.offerPrice) +
     Number(cart.shippingPrice) +
     Number(cart.taxPrice)
   ).toFixed(2)
@@ -38,6 +36,7 @@ const PlaceOrderScreen = ({ history }) => {
   let { seller } = orderSeller
 
   useEffect(() => {
+    console.log('(placeorder) current state = ', cart)
     if (!userInfo) {
       history.push('/login')
     } else if (success) {
@@ -48,23 +47,23 @@ const PlaceOrderScreen = ({ history }) => {
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
-        orderItems: cart.cartItem,
+        offer: cart.offer,
+        buyer: cart.offer.buyer,
+        seller: cart.offer.seller,
+        orderItem: cart.offer.orderItem,
         shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
+        itemPrice: cart.offer.offerPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
-        seller: seller,
+        paymentMethod: cart.paymentMethod,
       })
     )
   }
 
   return (
     <>
-      {cart.cartItem.length === 0 ||
-      !cart.paymentMethod ||
-      cart.shippingAddress === null ? (
+      {!cart.offer || !cart.paymentMethod || !cart.shippingAddress ? (
         <Message variant='danger'>
           Order does not exist. <a href='/'>Go back.</a>
         </Message>
@@ -103,43 +102,40 @@ const PlaceOrderScreen = ({ history }) => {
                   <div className='mb-3'>
                     <h3>Order Items</h3>
                   </div>
-                  {cart.cartItem.length === 0 ? (
+                  {!cart.offer ? (
                     <Message data-testid='order-message'>
                       Your cart is empty
                     </Message>
                   ) : (
                     <ListGroup variant='flush'>
-                      {cart.cartItem.map((item, index) => (
-                        <ListGroup.Item key={index}>
-                          <Row>
-                            <Col md={1}>
-                              <Image
-                                data-testid='order-image'
-                                src={item.image}
-                                alt={item.name}
-                                fluid
-                                rounded
-                              />
-                            </Col>
-                            <Col>
-                              <Link
-                                data-testid='order-name'
-                                to={`/product/${cart.product}`}
-                              >
-                                {item.name}
-                              </Link>
-                            </Col>
-                            <Col md={2}></Col>
-                            <Col md={2}>
-                              $
-                              <span data-testid='order-price'>
-                                {item.price}
-                              </span>
-                            </Col>
-                          </Row>
-                        </ListGroup.Item>
-                      ))}
-                      {cart.cartItem && (seller = cart.cartItem[0].user._id)}
+                      <ListGroup.Item>
+                        <Row>
+                          <Col md={1}>
+                            <Image
+                              data-testid='order-image'
+                              src={cart.offer.orderItem.image}
+                              alt={cart.offer.orderItem.name}
+                              fluid
+                              rounded
+                            />
+                          </Col>
+                          <Col>
+                            <Link
+                              data-testid='order-name'
+                              to={`/product/${cart.offer.orderItem.product}`}
+                            >
+                              {cart.offer.orderItem.name}
+                            </Link>
+                          </Col>
+                          <Col md={2}></Col>
+                          <Col md={2}>
+                            $
+                            <span data-testid='order-price'>
+                              {cart.offer.offerPrice}
+                            </span>
+                          </Col>
+                        </Row>
+                      </ListGroup.Item>
                     </ListGroup>
                   )}
                 </ListGroup.Item>
@@ -158,7 +154,7 @@ const PlaceOrderScreen = ({ history }) => {
                       <Col>
                         $
                         <span data-testid='order-products-price'>
-                          {cart.itemsPrice}
+                          {cart.offer.offerPrice}
                         </span>
                       </Col>
                     </Row>
@@ -213,7 +209,7 @@ const PlaceOrderScreen = ({ history }) => {
                       data-testid='order-submit-btn'
                       type='button'
                       size='lg'
-                      disabled={cart.cartItem === 0}
+                      disabled={!cart.offer}
                       onClick={placeOrderHandler}
                       block
                     >

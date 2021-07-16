@@ -26,6 +26,7 @@ import { logout } from './userActions'
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
+    console.log(order)
     dispatch({
       type: ORDER_CREATE_REQUEST,
     })

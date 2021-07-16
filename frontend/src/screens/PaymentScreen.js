@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
@@ -28,6 +29,7 @@ const PaymentScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
+    console.log('(payment) current state = ', cart)
     if (!userInfo) {
       history.push('/login')
     }
@@ -35,7 +37,7 @@ const PaymentScreen = ({ history }) => {
 
   return (
     <>
-      {cart.cartItem.length === 0 ? (
+      {!cart.offer ? (
         <Message variant='danger'>
           Order does not exist. <a href='/'>Go back.</a>
         </Message>
@@ -75,6 +77,21 @@ const PaymentScreen = ({ history }) => {
             >
               Continue
             </Button>
+            {/* <Link
+              data-testid='payment-continue-btn'
+              type='submit'
+              className='btn btn-primary'
+              to={{
+                pathname: '/placeorder',
+                state: {
+                  offer: history.location.state.offer,
+                  shipping: history.location.state.shipping,
+                  paymentMethod,
+                },
+              }}
+            >
+              Continue
+            </Link> */}
           </Form>
         </FormContainer>
       )}

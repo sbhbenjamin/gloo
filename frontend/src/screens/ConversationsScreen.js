@@ -63,7 +63,11 @@ const ConversationsScreen = ({ history }) => {
     dispatch(listConversations())
 
     // check if user came from product screen
-    if (history.location.state?.product && conversations) {
+    if (
+      history.location.state &&
+      history.location.state.product &&
+      conversations
+    ) {
       const chatExists = conversations?.filter(
         (c) =>
           c.buyer._id === userInfo._id &&
@@ -156,11 +160,14 @@ const ConversationsScreen = ({ history }) => {
                 {loadingMessages ? (
                   <Loader />
                 ) : errorMessages ? (
-                  <Message variant='danger'>{errorMessages}</Message>
+                  <Message variant='danger' variants='danger' timeout={true}>
+                    {errorMessages}
+                  </Message>
                 ) : currentChat ? (
                   messages && (
                     <>
                       <ChatProduct
+                        history={history}
                         currentChat={currentChat}
                         setChildError={setChildError}
                         setChildInfo={setChildInfo}

@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
-import { PayPalButton } from "react-paypal-button-v2"
-import { Link } from "react-router-dom"
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { PayPalButton } from 'react-paypal-button-v2'
+import { Link } from 'react-router-dom'
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
 import {
   getOrderDetails,
   payOrder,
   deliverOrder,
-} from "../actions/orderActions"
+} from '../actions/orderActions'
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
   ORDER_CREATE_RESET,
-} from "../constants/orderConstants"
+} from '../constants/orderConstants'
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
@@ -36,28 +36,22 @@ const OrderScreen = ({ match, history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  if (!loading && order) {
-    //   Calculate prices
-    const addDecimals = (num) => {
-      return (Math.round(num * 100) / 100).toFixed(2)
-    }
-
-    order.itemsPrice = addDecimals(
-      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-    )
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2)
   }
 
   useEffect(() => {
+    console.log(order)
     dispatch({ type: ORDER_CREATE_RESET })
 
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login')
     }
 
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal")
-      const script = document.createElement("script")
-      script.type = "text/javascript"
+      const { data: clientId } = await axios.get('/api/config/paypal')
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
       script.async = true
       script.onload = () => {
@@ -91,37 +85,46 @@ const OrderScreen = ({ match, history }) => {
     <Loader />
   ) : error ? (
     <Message variant='danger'>{error}</Message>
-  ) : (!userInfo || !order || userInfo._id !== order.buyer._id) &&
-    userInfo &&
+  ) : !userInfo ||
+    (userInfo._id !== order.buyer._id && userInfo._id !== order.seller._id) ||
     !userInfo.isAdmin ? (
     <Message variant='danger'>
       You are unauthorised to access this page. <a href='/'>Go back.</a>
     </Message>
   ) : (
     <>
-      <h1>
-        Order <span data-testid='order-id'>{order._id}</span>
-      </h1>
+      <Button
+        data-testid='navigate-back-btn'
+        onClick={history.goBack}
+        variant='outline-secondary'
+        className='mb-4'
+      >
+        Go Back
+      </Button>
       <Row>
+        <h2>
+          Order <span data-testid='order-id'>{order._id}</span>
+        </h2>
+
         <Col md={8}>
           <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <h2>Shipping</h2>
+            <ListGroup.Item className='ps-0'>
+              <h3>Shipping</h3>
               <p>
                 <strong>Name: </strong>
                 <span data-testid='order-username'>{order.buyer.name}</span>
               </p>
               <p>
-                <strong>Email: </strong>{" "}
+                <strong>Email: </strong>{' '}
                 <a href={`mailto:${order.buyer.email}`}>
                   <span data-testid='order-email'>{order.buyer.email}</span>
                 </a>
               </p>
               <p>
-                <strong>Address:</strong>{" "}
+                <strong>Address:</strong>{' '}
                 <span data-testid='order-address'>
-                  {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
-                  {order.shippingAddress.postalCode},{" "}
+                  {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
+                  {order.shippingAddress.postalCode},{' '}
                   {order.shippingAddress.country}
                 </span>
               </p>
@@ -142,8 +145,8 @@ const OrderScreen = ({ match, history }) => {
               )}
             </ListGroup.Item>
 
-            <ListGroup.Item>
-              <h2>Payment Method</h2>
+            <ListGroup.Item className='ps-0'>
+              <h3>Payment Method</h3>
               <p>
                 <strong>Method: </strong>
                 <span data-testid='order-paymentmethod'>
@@ -167,39 +170,37 @@ const OrderScreen = ({ match, history }) => {
               )}
             </ListGroup.Item>
 
-            <ListGroup.Item>
-              <h2>Order Items</h2>
-              {order.orderItems.length === 0 ? (
+            <ListGroup.Item className='ps-0'>
+              <h3>Order Items</h3>
+              {!order.orderItem ? (
                 <Message>Order is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
-                  {order.orderItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
-                      <Row>
-                        <Col md={1}>
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
-                        </Col>
-                        <Col>
-                          <Link to={`/product/${item.product}`}>
-                            <span data-testid='order-product-name'>
-                              {item.name}
-                            </span>
-                          </Link>
-                        </Col>
-                        <Col md={4}>
-                          $
-                          <span data-testid='order-product-price'>
-                            {item.price}
+                  <ListGroup.Item>
+                    <Row>
+                      <Col md={1}>
+                        <Image
+                          src={order.orderItem.image}
+                          alt={order.orderItem.name}
+                          fluid
+                          rounded
+                        />
+                      </Col>
+                      <Col>
+                        <Link to={`/product/${order.orderItem.product}`}>
+                          <span data-testid='order-product-name'>
+                            {order.orderItem.name}
                           </span>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  ))}
+                        </Link>
+                      </Col>
+                      <Col md={4}>
+                        $
+                        <span data-testid='order-product-price'>
+                          {addDecimals(order.itemPrice)}
+                        </span>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
                 </ListGroup>
               )}
             </ListGroup.Item>
@@ -217,7 +218,7 @@ const OrderScreen = ({ match, history }) => {
                   <Col>
                     $
                     <span data-testid='order-summary-price'>
-                      {order.itemsPrice}
+                      {addDecimals(order.itemPrice)}
                     </span>
                   </Col>
                 </Row>
@@ -228,7 +229,7 @@ const OrderScreen = ({ match, history }) => {
                   <Col>
                     $
                     <span data-testid='order-summary-shipping'>
-                      {order.shippingPrice}
+                      {addDecimals(order.shippingPrice)}
                     </span>
                   </Col>
                 </Row>
@@ -239,7 +240,7 @@ const OrderScreen = ({ match, history }) => {
                   <Col>
                     $
                     <span data-testid='order-summary-tax'>
-                      {order.taxPrice}
+                      {addDecimals(order.taxPrice)}
                     </span>
                   </Col>
                 </Row>
@@ -250,7 +251,7 @@ const OrderScreen = ({ match, history }) => {
                   <Col>
                     $
                     <span data-testid='order-summary-total'>
-                      {order.totalPrice}
+                      {addDecimals(order.totalPrice)}
                     </span>
                   </Col>
                 </Row>

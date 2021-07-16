@@ -20,8 +20,11 @@ import {
   getOffers,
   rejectOffer,
 } from '../../actions/offerActions'
+import { addToCart } from '../../actions/cartActions'
+import { getOrderDetails } from '../../actions/orderActions'
+import { ORDER_DETAILS_RESET } from '../../constants/orderConstants'
 
-const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
+const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
   const [offerActive, setOfferActive] = useState(false)
   const [offerPrice, setOfferPrice] = useState(null)
   const [currentOffer, setCurrentOffer] = useState(null)
@@ -29,6 +32,7 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
   const [accepted, setAccepted] = useState(false)
   const [rejected, setRejected] = useState(false)
   const [offerer, setOfferer] = useState(false)
+  const [orderExists, setOrderExists] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -59,6 +63,9 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
     offer: acceptedOffer,
   } = offerAccept
 
+  const orderDetails = useSelector((state) => state.orderDetails)
+  const { order, loading, error } = orderDetails
+
   // lift errors to parent
   useEffect(() => {
     if (errorCreate) {
@@ -78,6 +85,14 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
   }, [dispatch, currentChat, createdOffer, acceptedOffer])
 
   useEffect(() => {
+    if (order) {
+      setOrderExists(order)
+    }
+    console.log(order)
+  }, [order, currentChat])
+
+  useEffect(() => {
+    dispatch({ type: ORDER_DETAILS_RESET })
     if (offers) {
       const offerExists = offers.filter(
         (offer) =>
@@ -88,6 +103,10 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
       if (offerExists.length > 0) {
         const offer = offerExists[0]
         setCurrentOffer(offer)
+
+        if (offer) {
+          dispatch(getOrderDetails(offer._id))
+        }
 
         // check if offer is accepted and user is buyer
         if (
@@ -128,7 +147,7 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
       setOfferer(null)
       setAccepted(false)
     }
-  }, [dispatch, offers, currentOffer, userInfo._id, currentChat, offersSuccess])
+  }, [dispatch, offers, userInfo._id, currentChat])
 
   const handleMakeOffer = () => {
     setOfferActive(true)
@@ -173,6 +192,11 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
     setChildInfo('Offer successfully rejected')
   }
 
+  const handleCheckout = () => {
+    dispatch(addToCart(currentOffer))
+    history.push('/shipping')
+  }
+
   return (
     <>
       {loadingOffers ? (
@@ -205,19 +229,22 @@ const ChatProduct = ({ currentChat, setChildError, setChildInfo }) => {
                 />
               </Col>
               <Col xs={5} className='d-flex chatBoxProductBtnWrapper'>
-                {accepted && userInfo._id === currentOffer.buyer ? (
+                {orderExists ? (
                   <Link
                     data-testid='checkout-btn'
                     className='btn btn-success'
-                    to={{
-                      pathname: '/checkout',
-                      state: {
-                        offer: currentOffer,
-                      },
-                    }}
+                    to={`/order/${orderExists._id}`}
+                  >
+                    View Order
+                  </Link>
+                ) : accepted && userInfo._id === currentOffer.buyer ? (
+                  <Button
+                    data-testid='checkout-btn'
+                    variant='success'
+                    onClick={handleCheckout}
                   >
                     Proceed to Checkout
-                  </Link>
+                  </Button>
                 ) : accepted && userInfo._id === currentOffer.seller ? (
                   <Button disabled variant='secondary'>
                     Accepted
