@@ -1,6 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { createStore, combineReducers, applyMiddleware } from "redux"
+import thunk from "redux-thunk"
+import { composeWithDevTools } from "redux-devtools-extension"
 import {
   productListReducer,
   productDetailsReducer,
@@ -10,8 +10,8 @@ import {
   productReviewCreateReducer,
   productTopRatedReducer,
   productListUserReducer,
-} from './reducers/productReducers'
-import { cartReducer } from './reducers/cartReducers'
+} from "./reducers/productReducers"
+import { cartReducer } from "./reducers/cartReducers"
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -25,7 +25,7 @@ import {
   favouriteAddReducer,
   favouriteRemoveReducer,
   favouriteProductReducer,
-} from './reducers/userReducers'
+} from "./reducers/userReducers"
 import {
   orderCreateReducer,
   orderDetailsReducer,
@@ -35,7 +35,8 @@ import {
   orderDeliverReducer,
   orderDeleteReducer,
   orderSellerReducer,
-} from './reducers/orderReducers'
+  orderSellerListMyReducer,
+} from "./reducers/orderReducers"
 import {
   certListReducer,
   certDetailsReducer,
@@ -43,20 +44,20 @@ import {
   certCreateReducer,
   certUpdateReducer,
   certListUserReducer,
-} from './reducers/certReducers'
+} from "./reducers/certReducers"
 import {
   conversationCreateReducer,
   conversationListReducer,
-} from './reducers/conversationReducers'
+} from "./reducers/conversationReducers"
 import {
   messageCreateReducer,
   messageListReducer,
-} from './reducers/messageReducers'
+} from "./reducers/messageReducers"
 import {
   offerAcceptReducer,
   offerCreateReducer,
   offerListReducer,
-} from './reducers/offerReducers'
+} from "./reducers/offerReducers"
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -88,6 +89,7 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
   orderSeller: orderSellerReducer,
+  orderSellerListMy: orderSellerListMyReducer,
   certList: certListReducer,
   certDetails: certDetailsReducer,
   certDelete: certDeleteReducer,
@@ -103,16 +105,16 @@ const reducer = combineReducers({
   offerAccept: offerAcceptReducer,
 })
 
-const offerFromStorage = localStorage.getItem('offer')
-  ? JSON.parse(localStorage.getItem('offer'))
+const offerFromStorage = localStorage.getItem("offer")
+  ? JSON.parse(localStorage.getItem("offer"))
   : {}
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
   : null
 
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-  ? JSON.parse(localStorage.getItem('shippingAddress'))
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
   : {}
 
 const initialState = {

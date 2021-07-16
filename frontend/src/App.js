@@ -1,33 +1,34 @@
-import './styles/index.css'
-import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import HomeScreen from './screens/HomeScreen'
-import ProductScreen from './screens/ProductScreen'
-import CartScreen from './screens/CartScreen'
-import LoginScreen from './screens/LoginScreen'
-import RegisterScreen from './screens/RegisterScreen'
-import ProfileScreen from './screens/ProfileScreen'
-import ShippingScreen from './screens/ShippingScreen'
-import PaymentScreen from './screens/PaymentScreen'
-import PlaceOrderScreen from './screens/PlaceOrderScreen'
-import OrderScreen from './screens/OrderScreen'
-import OrderListScreen from './screens/OrderListScreen'
-import UserListScreen from './screens/UserListScreen'
-import UserEditScreen from './screens/UserEditScreen'
-import UserProfileScreen from './screens/UserProfileScreen'
-import ProductListScreen from './screens/ProductListScreen'
-import ProductEditScreen from './screens/ProductEditScreen'
-import ProductCreateScreen from './screens/ProductCreateScreen'
-import FavouritesScreen from './screens/FavouritesScreen'
-import UserCertsScreen from './screens/UserCertsScreen'
-import CertScreen from './screens/CertScreen'
-import CertCreateScreen from './screens/CertCreateScreen'
-import CertEditScreen from './screens/CertEditScreen'
-import CertListScreen from './screens/CertListScreen'
-import ConversationScreen from './screens/ConversationsScreen'
+import "./styles/index.css"
+import React from "react"
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import { Container } from "react-bootstrap"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
+import HomeScreen from "./screens/HomeScreen"
+import ProductScreen from "./screens/ProductScreen"
+import CartScreen from "./screens/CartScreen"
+import LoginScreen from "./screens/LoginScreen"
+import RegisterScreen from "./screens/RegisterScreen"
+import ProfileScreen from "./screens/ProfileScreen"
+import OrderSellerScreen from "./screens/OrderSellerScreen"
+import ShippingScreen from "./screens/ShippingScreen"
+import PaymentScreen from "./screens/PaymentScreen"
+import PlaceOrderScreen from "./screens/PlaceOrderScreen"
+import OrderScreen from "./screens/OrderScreen"
+import OrderListScreen from "./screens/OrderListScreen"
+import UserListScreen from "./screens/UserListScreen"
+import UserEditScreen from "./screens/UserEditScreen"
+import UserProfileScreen from "./screens/UserProfileScreen"
+import ProductListScreen from "./screens/ProductListScreen"
+import ProductEditScreen from "./screens/ProductEditScreen"
+import ProductCreateScreen from "./screens/ProductCreateScreen"
+import FavouritesScreen from "./screens/FavouritesScreen"
+import UserCertsScreen from "./screens/UserCertsScreen"
+import CertScreen from "./screens/CertScreen"
+import CertCreateScreen from "./screens/CertCreateScreen"
+import CertEditScreen from "./screens/CertEditScreen"
+import CertListScreen from "./screens/CertListScreen"
+import ConversationScreen from "./screens/ConversationsScreen"
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
           <Route path='/login' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
+          <Route path='/orders' component={OrderSellerScreen} />
           <Route path='/favourites' component={FavouritesScreen} />
           <Route path='/conversations' component={ConversationScreen} />
           <Route path='/new' component={ProductCreateScreen} />

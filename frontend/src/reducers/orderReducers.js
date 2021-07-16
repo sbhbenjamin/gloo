@@ -25,7 +25,11 @@ import {
   ORDER_DELETE_SUCCESS,
   ORDER_DELETE_FAIL,
   ORDER_DETAILS_RESET,
-} from '../constants/orderConstants'
+  ORDER_LIST_MY_SELLER_REQUEST,
+  ORDER_LIST_MY_SELLER_SUCCESS,
+  ORDER_LIST_MY_SELLER_FAIL,
+  ORDER_LIST_MY_SELLER_RESET,
+} from "../constants/orderConstants"
 
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
@@ -201,6 +205,29 @@ export const orderSellerReducer = (
         loading: false,
         error: action.payload,
       }
+    default:
+      return state
+  }
+}
+
+export const orderSellerListMyReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case ORDER_LIST_MY_SELLER_REQUEST:
+      return {
+        loading: true,
+      }
+    case ORDER_LIST_MY_SELLER_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      }
+    case ORDER_LIST_MY_SELLER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      }
+    case ORDER_LIST_MY_SELLER_RESET:
+      return { orders: [] }
     default:
       return state
   }

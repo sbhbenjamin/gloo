@@ -1,5 +1,5 @@
-import asyncHandler from 'express-async-handler'
-import Order from '../models/orderModel.js'
+import asyncHandler from "express-async-handler"
+import Order from "../models/orderModel.js"
 
 // @desc        Create new order
 // @route       POST /api/orders
@@ -20,7 +20,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
   if (!orderItem) {
     res.status(400)
-    throw new Error('Order item does not exist')
+    throw new Error("Order item does not exist")
   } else {
     const order = new Order({
       buyer,
@@ -55,14 +55,14 @@ const getOrderById = asyncHandler(async (req, res) => {
       },
     ],
   })
-    .populate('buyer', 'id name email')
-    .populate('seller', 'id name email')
+    .populate("buyer", "id name email")
+    .populate("seller", "id name email")
 
   if (order[0]) {
     res.json(order[0])
   } else {
     res.status(404)
-    throw new Error('Order not found')
+    throw new Error("Order not found")
   }
 })
 
@@ -87,7 +87,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     res.json(updatedOrder)
   } else {
     res.status(404)
-    throw new Error('Order not found')
+    throw new Error("Order not found")
   }
 })
 
@@ -102,19 +102,21 @@ const getMyOrders = asyncHandler(async (req, res) => {
 // @desc        Get logged in user orders (seller)
 // @route       GET /api/orders/myorders
 // @access      Private
-// const getMySellerOrders = asyncHandler(async (req, res) => {
-//   const orders = await Order.find({}).populate("user", "id name")
+const getMySellerOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ seller: req.user._id })
+    .populate("seller", "name")
+    .populate("buyer", "name email")
 
-//   res.json(orders)
-// })
+  res.json(orders)
+})
 
 // @desc        Get all orders
 // @route       GET /api/orders
 // @access      Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({})
-    .populate('buyer', 'id name')
-    .populate('seller', 'id name')
+    .populate("buyer", "id name")
+    .populate("seller", "id name")
   res.json(orders)
 })
 
@@ -133,7 +135,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
     res.json(updatedOrder)
   } else {
     res.status(404)
-    throw new Error('Order not found')
+    throw new Error("Order not found")
   }
 })
 
@@ -147,10 +149,10 @@ const deleteOrder = asyncHandler(async (req, res) => {
     // if you want only the creator to delete, you should check
     // req.user._id == product.user._id
     await order.remove()
-    res.json({ message: 'Order removed' })
+    res.json({ message: "Order removed" })
   } else {
     res.status(404)
-    throw new Error('Order not found')
+    throw new Error("Order not found")
   }
 })
 
@@ -159,6 +161,7 @@ export {
   getOrderById,
   updateOrderToPaid,
   getMyOrders,
+  getMySellerOrders,
   getOrders,
   updateOrderToDelivered,
   deleteOrder,

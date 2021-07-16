@@ -95,6 +95,7 @@ describe("Favourite some products", () => {
       .within(() => {
         cy.get("[class='fas fa-heart fa-lg']").should("exist")
       })
+    cy.wait(5000) //if dont wait, cypress browser will immediately move on to favourites screen and will only load 1st Solution Electrical (even though SZ Painting is already within the UserFavourites state. Only shows SZ Painting on refresh)
   })
 })
 
