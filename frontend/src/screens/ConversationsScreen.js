@@ -148,6 +148,7 @@ const ConversationsScreen = ({ history }) => {
                           setChildError={setChildError}
                           conversation={c}
                           currentChat={currentChat}
+                          data-testid='chat-user'
                         />
                       </div>
                     ))}
@@ -155,7 +156,7 @@ const ConversationsScreen = ({ history }) => {
                 )}
               </div>
             </div>
-            <div className='chatBox'>
+            <div className='chatBox' data-testid='chatbox'>
               <div className='chatBoxWrapper'>
                 {loadingMessages ? (
                   <Loader />
@@ -171,6 +172,7 @@ const ConversationsScreen = ({ history }) => {
                         currentChat={currentChat}
                         setChildError={setChildError}
                         setChildInfo={setChildInfo}
+                        data-testid='chat-product'
                       />
                       <div className='chatBoxTop'>
                         {messages?.map((m) => (
@@ -188,11 +190,13 @@ const ConversationsScreen = ({ history }) => {
                           placeholder='write something...'
                           onChange={(e) => setNewMessage(e.target.value)}
                           value={newMessage}
+                          data-testid='chat-input'
                         ></textarea>
                         <button
                           type='submit'
                           className='chatSubmitButton'
                           onClick={handleSubmit}
+                          data-testid='chat-send'
                         >
                           Send
                         </button>
@@ -200,7 +204,10 @@ const ConversationsScreen = ({ history }) => {
                     </>
                   )
                 ) : (
-                  <span className='noConversationText'>
+                  <span
+                    className='noConversationText'
+                    data-testid='chat-nulltext'
+                  >
                     Open a conversation to start a chat.
                   </span>
                 )}

@@ -218,10 +218,20 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
             <Row>
               {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
               <Col xs={1}>
-                <img className='chatBoxProductImage' src={image} alt={name} />
+                <img
+                  className='chatBoxProductImage'
+                  data-testid='chat-product-img'
+                  src={image}
+                  alt={name}
+                />
               </Col>
               <Col className='flex-grow-1'>
-                <p className='chatBoxProductName'>{name}</p>
+                <p
+                  className='chatBoxProductName'
+                  data-testid='chat-product-name'
+                >
+                  {name}
+                </p>
                 <Rating
                   data-testid='product-rating'
                   value={rating}
@@ -233,6 +243,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                   <Link
                     data-testid='checkout-btn'
                     className='btn btn-success'
+                    data-testid='chat-product-vieworderbtn'
                     to={`/order/${orderExists._id}`}
                   >
                     View Order
@@ -242,18 +253,27 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                     data-testid='checkout-btn'
                     variant='success'
                     onClick={handleCheckout}
+                    data-testid='chat-product-checkoutbtn'
                   >
                     Proceed to Checkout
                   </Button>
                 ) : accepted && userInfo._id === currentOffer.seller ? (
-                  <Button disabled variant='secondary'>
+                  <Button
+                    disabled
+                    variant='secondary'
+                    data-testid='chat-product-acceptedbtn'
+                  >
                     Accepted
                   </Button>
                 ) : // if offer is not made by current user and offer status is pending
                 !rejected && offered === true && offerer === false ? (
                   <Row>
                     <Col>
-                      <Button variant='success' onClick={handleAcceptOffer}>
+                      <Button
+                        variant='success'
+                        onClick={handleAcceptOffer}
+                        data-testid='chat-product-offerbtn'
+                      >
                         ${currentOffer.offerPrice.toFixed(2)}
                       </Button>
                     </Col>
@@ -264,7 +284,11 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                     </Col>
                   </Row>
                 ) : offered && offerer ? (
-                  <Button disabled variant='secondary'>
+                  <Button
+                    disabled
+                    variant='secondary'
+                    data-testid='chat-product-offeredbtn'
+                  >
                     Offer made
                   </Button>
                 ) : // no offer on currently
@@ -272,6 +296,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                   <Button
                     className='chatBoxProductBtn'
                     onClick={handleMakeOffer}
+                    data-testid='chat-product-offertoggle'
                   >
                     Make offer
                   </Button>
@@ -290,6 +315,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                         <Button
                           variant='outline-success'
                           onClick={handleOfferSubmit}
+                          data-testid='chat-product-offersubmit'
                         >
                           Offer
                         </Button>
@@ -299,6 +325,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                       href='#'
                       className='chatBoxProductCancel'
                       onClick={handleOfferCancel}
+                      data-testid='chat-product-offercancel'
                     >
                       cancel
                     </a>
