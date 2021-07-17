@@ -139,7 +139,7 @@ describe("Log out and delete account using Admin user", () => {
 
   it("Delete Steve Smith account", () => {
     cy.on("window:confirm", (str) => {
-      expect(str).to.eq("Are you sure?")
+      expect(str).eq("Are you sure?")
     })
     cy.contains("Steve Smith")
       .parent("tr")

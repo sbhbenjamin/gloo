@@ -51,12 +51,28 @@ const Header = () => {
                 </LinkContainer>
               )}
 
-              {/* <LinkContainer to='/cart' data-testid='navbar-cart'>
-                <Nav.Link>
-                  <i className='fas fa-shopping-cart me-1'></i>
-                  Cart
-                </Nav.Link>
-              </LinkContainer> */}
+              {userInfo && (
+                <NavDropdown
+                  title={
+                    <>
+                      <i class='fas fa-scroll'></i> Orders
+                    </>
+                  }
+                  id='username'
+                  data-testid='navbar-username'
+                >
+                  <LinkContainer to='/orders/buyer'>
+                    <NavDropdown.Item data-testid='navbar-profile'>
+                      Buyer
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to={`/orders/seller`}>
+                    <NavDropdown.Item data-testid='navbar-sellerorders'>
+                      Seller
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
 
               {userInfo ? (
                 <NavDropdown
@@ -64,19 +80,14 @@ const Header = () => {
                   id='username'
                   data-testid='navbar-username'
                 >
-                  <LinkContainer to='/profile'>
-                    <NavDropdown.Item data-testid='navbar-profile'>
-                      Profile
-                    </NavDropdown.Item>
-                  </LinkContainer>
                   <LinkContainer to={`/user/${userInfo._id}/listings`}>
                     <NavDropdown.Item data-testid='navbar-listings'>
-                      My Listings
+                      Listings
                     </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to={`/certificates`}>
                     <NavDropdown.Item data-testid='navbar-certs'>
-                      My Certificates
+                      Certificates
                     </NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item

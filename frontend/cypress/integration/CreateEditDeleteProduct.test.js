@@ -114,7 +114,7 @@ describe("View My Listings", () => {
 
 describe("Edit Product and check if updated", () => {
   it("Change name of listing", () => {
-    cy.get("[data-testid=edit-name]").type(" Edited")
+    cy.get("[data-testid=edit-name]").wait(3000).type(" Edited")
   })
 
   it("Update", () => {

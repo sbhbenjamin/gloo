@@ -263,10 +263,12 @@ const OrderScreen = ({ match, history }) => {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
+                    userInfo._id === order.buyer._id && (
+                      <PayPalButton
+                        amount={order.totalPrice}
+                        onSuccess={successPaymentHandler}
+                      />
+                    )
                   )}
                 </ListGroup.Item>
               )}
@@ -274,18 +276,24 @@ const OrderScreen = ({ match, history }) => {
               {loadingDeliver && <Loader />}
 
               {userInfo &&
-                userInfo.isAdmin &&
+                (userInfo.isAdmin || userInfo._id === order.seller._id) &&
                 order.isPaid &&
                 !order.isDelivered && (
-                  <ListGroup.Item>
-                    <Button
-                      type='button'
-                      className='btn btn-block'
-                      onClick={deliverHandler}
-                    >
-                      Mark As Delivered
-                    </Button>
-                  </ListGroup.Item>
+                  <>
+                    <ListGroup.Item>
+                      <Row>
+                        <Col className='row align-items-center'>
+                          <Button
+                            type='button'
+                            className='btn btn-block'
+                            onClick={deliverHandler}
+                          >
+                            Mark As Delivered
+                          </Button>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  </>
                 )}
             </ListGroup>
           </Card>
