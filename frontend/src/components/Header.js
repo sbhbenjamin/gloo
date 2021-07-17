@@ -59,10 +59,10 @@ const Header = () => {
                     </>
                   }
                   id='username'
-                  data-testid='navbar-username'
+                  data-testid='navbar-orders'
                 >
                   <LinkContainer to='/orders/buyer'>
-                    <NavDropdown.Item data-testid='navbar-profile'>
+                    <NavDropdown.Item data-testid='navbar-buyerorders'>
                       Buyer
                     </NavDropdown.Item>
                   </LinkContainer>
