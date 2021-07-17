@@ -79,6 +79,15 @@ const ProductScreen = ({ history, match }) => {
     )
   }
 
+  const chatHandler = () => {
+    history.push({
+      pathname: '/conversations',
+      state: {
+        product,
+      },
+    })
+  }
+
   return (
     <>
       <Link
@@ -214,16 +223,14 @@ const ProductScreen = ({ history, match }) => {
                     ) : (
                       <ListGroup.Item className='d-grid gap-2'>
                         <div className='d-grid gap-2'>
-                          {/* <Button
-                            data-testid='addtocart-btn'
-                            onClick={addToCartHandler}
-                            className='btn'
+                          <Button
+                            data-testid='chat-btn'
+                            onClick={chatHandler}
                             type='button'
-                            disabled={!product.available}
                           >
-                            Add To Cart
-                          </Button> */}
-                          <Link
+                            Chat
+                          </Button>
+                          {/* <Link
                             data-testid='chat-btn'
                             className='btn btn-primary'
                             disabled={!product.available}
@@ -235,7 +242,7 @@ const ProductScreen = ({ history, match }) => {
                             }}
                           >
                             Chat
-                          </Link>
+                          </Link> */}
                         </div>
                       </ListGroup.Item>
                     ))}

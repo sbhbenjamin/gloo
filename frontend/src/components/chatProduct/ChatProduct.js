@@ -88,7 +88,6 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
     if (order) {
       setOrderExists(order)
     }
-    console.log(order)
   }, [order, currentChat])
 
   useEffect(() => {
@@ -113,7 +112,6 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
           offer?.offerStatus === 'accepted' &&
           currentOffer?.buyer === userInfo._id
         ) {
-          console.log('offer accepted, user buyer')
           setOffered(true)
 
           // offer is made, user is recepient
@@ -121,7 +119,6 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
           offer?.offerStatus === 'pending' &&
           offer?.sender !== userInfo._id
         ) {
-          console.log('offer made, user recepient')
           setOffered(true)
           setOfferer(false)
           // offer is made, user is sender
@@ -130,15 +127,13 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
           offer.offerStatus === 'pending' &&
           offer.sender === userInfo._id
         ) {
-          console.log('offer made, user sender')
           setOffered(true)
           setOfferer(true)
           // offer is accepted, user is seller
         } else if (offer?.offerStatus === 'accepted') {
-          console.log('offer accepted! ')
           setAccepted(true)
         } else {
-          console.log('offer does not exist :-(')
+          setChildError('Order does not exist')
         }
       }
     } else {
@@ -204,8 +199,8 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
           animation='border'
           role='status'
           style={{
-            width: '50px',
-            height: '50px',
+            width: '25px',
+            height: '25px',
             margin: 'auto',
             display: 'block',
           }}
@@ -278,7 +273,11 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                       </Button>
                     </Col>
                     <Col>
-                      <Button variant='danger' onClick={handleDeclineOffer}>
+                      <Button
+                        variant='danger'
+                        data-testid='chat-product-offerdecline'
+                        onClick={handleDeclineOffer}
+                      >
                         Decline
                       </Button>
                     </Col>
@@ -308,6 +307,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                       </InputGroup.Prepend>
                       <FormControl
                         type='number'
+                        data-testid='chat-product-offerinput'
                         placeholder='0.00'
                         onChange={(e) => setOfferPrice(e.target.value)}
                       />
