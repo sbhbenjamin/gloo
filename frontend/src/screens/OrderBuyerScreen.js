@@ -106,6 +106,7 @@ const OrderBuyerScreen = ({ location, history }) => {
           <thead>
             <tr>
               <th>ID</th>
+              <th>LISTING</th>
               <th>DATE</th>
               <th>TOTAL</th>
               <th>PAID</th>
@@ -117,6 +118,7 @@ const OrderBuyerScreen = ({ location, history }) => {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
+                <td>{order.orderItem && order.orderItem.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice}</td>
                 <td>

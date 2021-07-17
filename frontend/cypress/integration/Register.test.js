@@ -101,7 +101,6 @@ describe("Input new account details into RegisterScreen", () => {
     cy.get("[data-testid=navbar-username]")
       .should("include.text", "Steve Smith")
       .click()
-    cy.get("[data-testid=navbar-profile]").should("have.text", "Profile")
     cy.get("[data-testid=navbar-logout]").should("have.text", "Logout")
   })
 })
@@ -128,7 +127,6 @@ describe("Log out and delete account using Admin user", () => {
     cy.get("[data-testid=navbar-username]")
       .should("include.text", "Admin user")
       .click()
-    cy.get("[data-testid=navbar-profile]").should("have.text", "Profile")
     cy.get("[data-testid=navbar-logout]").should("have.text", "Logout")
   })
 

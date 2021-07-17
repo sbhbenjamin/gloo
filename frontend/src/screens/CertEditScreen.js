@@ -99,16 +99,48 @@ const CertEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(
-      updateCert({
-        _id: certId,
-        name,
-        status,
-        issuer,
-        date,
-        image,
-      })
-    )
+    if (userInfo.isAdmin) {
+      dispatch(
+        updateCert({
+          _id: certId,
+          name,
+          status,
+          issuer,
+          date,
+          image,
+        })
+      )
+    } else {
+      if (cert.status === "Approved") {
+        if (
+          window.confirm(
+            "Your certificate has already been approved. Changing certificate details will revert the status to Pending. Are you sure you want to do this?"
+          )
+        ) {
+          dispatch(
+            updateCert({
+              _id: certId,
+              name,
+              status: "Pending",
+              issuer,
+              date,
+              image,
+            })
+          )
+        }
+      } else {
+        dispatch(
+          updateCert({
+            _id: certId,
+            name,
+            status,
+            issuer,
+            date,
+            image,
+          })
+        )
+      }
+    }
   }
 
   const deleteHandler = () => {

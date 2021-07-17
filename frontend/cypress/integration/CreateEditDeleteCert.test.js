@@ -4,10 +4,10 @@ before(() => {
   cy.visit("https://gloo-dev.herokuapp.com/")
 })
 
-//CREATE PRODUCT
-describe("Add product feature not available until login", () => {
-  it("Add Product does not exist", () => {
-    cy.get("[data-testid=navbar-addproduct]").should("not.exist")
+//CREATE CERTIFICATE
+describe("Certificates tab not available until login", () => {
+  it("Certificates tab does not exist", () => {
+    cy.get("[data-testid=navbar-username]").should("not.exist")
   })
 })
 
@@ -33,81 +33,88 @@ describe("Login feature works as expected", () => {
   })
 })
 
-describe("Add Product Screen", () => {
-  it("Click on Add Product", () => {
-    cy.get("[data-testid=navbar-addproduct]").should("exist").click()
+describe("Create Certificate Screen", () => {
+  it("Click on Certificates", () => {
+    cy.get("[data-testid=navbar-certs]").should("exist").click()
   })
 
   it("Redirected to correct url", () => {
-    cy.url().should("include", "/new")
+    cy.url().should("include", "/certificates")
   })
 
-  it("Create Product Screen renders properly", () => {
-    cy.contains("Create Product").should("exist")
+  it("Certificates Screen renders properly", () => {
+    cy.contains("Certificates").should("exist")
+    cy.get("[data-testid=create-cert-btn]")
+      .should("exist")
+      .should("have.text", "Create Certificate")
+  })
+
+  it("Click on Create Certificate button", () => {
+    cy.get("[data-testid=create-cert-btn]").click()
+  })
+
+  it("Redirected to newcertificate url", () => {
+    cy.url().should("include", "/newcertificate")
+  })
+
+  it("Cert Create Screen renders properly", () => {
+    cy.contains("Apply for Certificate").should("exist")
   })
 
   it("Details can be filled into form", () => {
-    cy.get("[data-testid=product-name]").type("Add Product Using Image URL")
-    cy.get("[data-testid=product-price]").type("9.99")
+    cy.get("[data-testid=cert-name]").type("Add Cert Using Image URL")
+    cy.get("[data-testid=cert-issuer]").type("SG SkillsFuture")
+    cy.get("[data-testid=cert-date]").type("17/07/2021")
     cy.get("[data-testid=product-image]").type(
-      "https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_960_720.png"
+      "http://corpkit.com/images/detailed/d_top_stub.jpg"
     )
-    cy.get("[data-testid=product-category]").type("Test")
-    cy.get("[data-testid=product-description]").type(
-      "Testing add product using image url"
-    )
-    cy.get("[data-testid=product-submit]").click()
+    cy.get("[data-testid=cert-submit]").click()
   })
 
-  it("Redirected to home page", () => {
-    cy.url().should("eq", "https://gloo-dev.herokuapp.com/")
+  it("Redirected to certificates page", () => {
+    cy.url().should("include", "/certificates")
   })
 })
 
-describe("View Add Product Using Image URL", () => {
-  it("Search for newly created product", () => {
-    cy.get("[data-testid=search-input]").type("Add Product Using Image URL")
-    cy.get("[data-testid=search-submit]").click()
-    cy.contains("Add Product Using Image URL", { timeout: 8 * 1000 }).click()
+describe("View Add Cert Using Image URL", () => {
+  it("Click on newly created certificate", () => {
+    cy.contains("Add Cert Using Image URL").click()
   })
 
-  it("Redirected to product page url", () => {
-    cy.url().should("include", "/product")
-    cy.contains("Add Product Using Image URL").should("exist")
+  it("Redirected to cert page url", () => {
+    cy.url().should("include", "/certificates")
+    cy.contains("Add Cert Using Image URL").should("exist")
   })
 
   it("Image should load", () => {
-    cy.get("div[class='col-md-6']")
+    cy.get("[data-testid=cert-image]")
       .find("img", { timeout: 8 * 1000 })
-      .should("have.attr", "alt", "Add Product Using Image URL")
+      .should("have.attr", "alt", "Add Cert Using Image URL")
       .should("be.visible")
+  })
+
+  it("Correct details load", () => {
+    cy.contains("SG SkillsFuture").should("exist")
+    cy.contains("17/07/2021").should("exist")
   })
 })
 
-//EDIT PRODUCT
+//EDIT CERTIFICATE
 
-describe("View My Listings", () => {
-  it("My Listings button can be clicked", () => {
-    cy.get("[data-testid=navbar-username]")
-      .should("include.text", "John Doe")
+describe("Edit Certificate", () => {
+  it("Edit Certificate button can be clicked", () => {
+    cy.get("[data-testid=cert-edit-btn]")
+      .should("have.text", "Edit Certificate")
       .click()
-    cy.get("[data-testid=navbar-listings]").click()
-  })
-
-  it("Go to Product Page of Johns Product", () => {
-    cy.contains("Add Product Using Image URL").click()
-  })
-
-  it("Click on edit listing", () => {
-    cy.get("[data-testid=listing-edit-btn]").click()
   })
 
   it("redirected to correct url", () => {
+    cy.url().should("include", "/certificates")
     cy.url().should("include", "/edit")
   })
 
-  it("Edit Product Screen renders properly", () => {
-    cy.contains("Edit Product").should("exist")
+  it("Edit Certificate Screen renders properly", () => {
+    cy.contains("Edit Certificate").should("exist")
   })
 })
 

@@ -43,7 +43,6 @@ describe("Login feature works as expected", () => {
     cy.get("[data-testid=navbar-username]")
       .should("have.text", "John Doe")
       .click()
-    cy.contains("Profile").should("exist")
     cy.contains("Logout").should("exist")
   })
 })
