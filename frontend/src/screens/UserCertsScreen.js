@@ -1,10 +1,10 @@
-import React, { useEffect } from "react"
-import { Table, Button, Row, Col } from "react-bootstrap"
-import { LinkContainer, Link } from "react-router-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { deleteCert, listUserCerts } from "../actions/certActions"
+import React, { useEffect } from 'react'
+import { Table, Button, Row, Col } from 'react-bootstrap'
+import { LinkContainer, Link } from 'react-router-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { deleteCert, listUserCerts } from '../actions/certActions'
 
 const UserCertsScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -24,14 +24,14 @@ const UserCertsScreen = ({ history }) => {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login')
     } else {
       dispatch(listUserCerts(userInfo._id))
     }
   }, [dispatch, history, userInfo, successDelete])
 
   const deleteHandler = (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm('Are you sure?')) {
       dispatch(deleteCert(id))
     }
   }
@@ -41,7 +41,7 @@ const UserCertsScreen = ({ history }) => {
   }
 
   const createCertHandler = () => {
-    history.push("/newcertificate")
+    history.push('/newcertificate')
   }
 
   return userInfo ? (
@@ -51,7 +51,11 @@ const UserCertsScreen = ({ history }) => {
           <h1>Certificates</h1>
         </Col>
         <Col className='text-end'>
-          <Button className='my-3' onClick={createCertHandler}>
+          <Button
+            className='my-3'
+            onClick={createCertHandler}
+            data-testid='create-cert-btn'
+          >
             <i className='fas fa-plus'></i> Create Certificate
           </Button>
         </Col>
