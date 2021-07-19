@@ -124,7 +124,7 @@ const Header = () => {
                     </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to='/admin/certificatelist'>
-                    <NavDropdown.Item data-testid='admin-orders'>
+                    <NavDropdown.Item data-testid='admin-certs'>
                       Certificates
                     </NavDropdown.Item>
                   </LinkContainer>
