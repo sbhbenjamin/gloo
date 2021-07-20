@@ -8,6 +8,7 @@ import {
 } from '../actions/conversationActions'
 import { createMessage, listMessages } from '../actions/messageActions'
 import Message from '../components/Message'
+import MessageTimeout from '../components/MessageTimeout'
 import Loader from '../components/Loader'
 import ChatProduct from '../components/chatProduct/ChatProduct'
 import ChatUser from '../components/chatUser/ChatUser'
@@ -124,8 +125,12 @@ const ConversationsScreen = ({ history }) => {
     <>
       {userInfo && (
         <>
-          {childError && <Message variant='danger'>{childError}</Message>}
-          {childInfo && <Message variant='success'>{childInfo}</Message>}
+          {childError && !childInfo && (
+            <MessageTimeout variant='danger'>{childError}</MessageTimeout>
+          )}
+          {childInfo && (
+            <MessageTimeout variant='success'>{childInfo}</MessageTimeout>
+          )}
           <Button
             data-testid='navigate-back-btn'
             onClick={history.goBack}
