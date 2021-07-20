@@ -5,28 +5,9 @@ import {
   CART_SAVE_PAYMENT_METHOD,
 } from '../constants/cartConstants'
 
-export const cartReducer = (
-  state = { offer: [], shippingAddress: {} },
-  action
-) => {
+export const cartReducer = (state = { shippingAddress: {} }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
-      // const item = action.payload
-
-      // const existItem = state.offer.find((x) => x.product === item.product)
-      // if (existItem) {
-      //   return {
-      //     ...state,
-      //     offer: state.offer.map((x) =>
-      //       x.product === existItem.product ? item : x
-      //     ),
-      //   }
-      // } else {
-      //   return {
-      //     ...state,
-      //     offer: [...state.offer, item],
-      //   }
-      // }
       return {
         ...state,
         offer: action.payload,
@@ -34,7 +15,7 @@ export const cartReducer = (
     case CART_REMOVE_ITEM:
       return {
         ...state,
-        offer: state.offer.filter((x) => x.product !== action.payload),
+        offer: null,
       }
 
     case CART_SAVE_SHIPPING_ADDRESS:

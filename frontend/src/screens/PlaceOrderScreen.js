@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
+import { clearCart } from '../actions/cartActions'
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -14,16 +15,18 @@ const PlaceOrderScreen = ({ history }) => {
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
-
-  cart.offer.offerPrice = addDecimals(cart.offer.offerPrice)
-
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 15)
-  cart.taxPrice = addDecimals(Number((0.07 * cart.offer.offerPrice).toFixed(2)))
-  cart.totalPrice = (
-    Number(cart.offer.offerPrice) +
-    Number(cart.shippingPrice) +
-    Number(cart.taxPrice)
-  ).toFixed(2)
+  if (cart.offer) {
+    cart.offer.offerPrice = addDecimals(cart.offer.offerPrice)
+    cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 15)
+    cart.taxPrice = addDecimals(
+      Number((0.07 * cart.offer.offerPrice).toFixed(2))
+    )
+    cart.totalPrice = (
+      Number(cart.offer.offerPrice) +
+      Number(cart.shippingPrice) +
+      Number(cart.taxPrice)
+    ).toFixed(2)
+  }
   // cart.paymentMethod = true
 
   const userLogin = useSelector((state) => state.userLogin)
@@ -32,33 +35,36 @@ const PlaceOrderScreen = ({ history }) => {
   const orderCreate = useSelector((state) => state.orderCreate)
   const { order, success, error } = orderCreate
 
-  const orderSeller = useSelector((state) => state.orderSeller)
-  let { seller } = orderSeller
+  // const orderSeller = useSelector((state) => state.orderSeller)
+  // let { seller } = orderSeller
 
   useEffect(() => {
     console.log('(placeorder) current state = ', cart)
     if (!userInfo) {
       history.push('/login')
     } else if (success) {
+      clearCart()
       history.push(`order/${order._id}`)
     }
   }, [history, success, cart, order, userInfo])
 
   const placeOrderHandler = () => {
-    dispatch(
-      createOrder({
-        offer: cart.offer,
-        buyer: cart.offer.buyer,
-        seller: cart.offer.seller,
-        orderItem: cart.offer.orderItem,
-        shippingAddress: cart.shippingAddress,
-        shippingPrice: cart.shippingPrice,
-        itemPrice: cart.offer.offerPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
-        paymentMethod: cart.paymentMethod,
-      })
-    )
+    if (cart.offer) {
+      dispatch(
+        createOrder({
+          offer: cart.offer,
+          buyer: cart.offer.buyer,
+          seller: cart.offer.seller,
+          orderItem: cart.offer.orderItem,
+          shippingAddress: cart.shippingAddress,
+          shippingPrice: cart.shippingPrice,
+          itemPrice: cart.offer.offerPrice,
+          taxPrice: cart.taxPrice,
+          totalPrice: cart.totalPrice,
+          paymentMethod: cart.paymentMethod,
+        })
+      )
+    }
   }
 
   return (

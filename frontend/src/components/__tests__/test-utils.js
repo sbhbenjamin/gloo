@@ -182,20 +182,25 @@ function renderWithCartFull(
         },
       },
       cart: {
-        cartItem: [
-          {
-            image: '/images/electrical.jpg',
+        offer: {
+          orderItem: {
             name: '1st Solution Electrical',
-            price: 89.99,
-            product: '60d55c4cd97a74d6bd80cb22',
-            qty: 1,
+            image: '/images/electrical.jpg',
+            product: '60e5370183206d62e2a6e6d0',
           },
-        ],
+          _id: '60f653ac08c5080004c4eaad',
+          conversation: '60f653a608c5080004c4eaac',
+          sender: '60e5370183206d62e2a6e6ce',
+          buyer: '60e5370183206d62e2a6e6ce',
+          seller: '60e5370183206d62e2a6e6cd',
+          offerPrice: 200,
+          offerStatus: 'accepted',
+        },
         shippingAddress: {
           address: '11 Main St',
           city: 'Oregon',
-          country: 'USA',
           postalCode: '110534',
+          country: 'USA',
         },
         paymentMethod: 'PayPal',
       },
@@ -231,15 +236,20 @@ function renderWithCart(
         },
       },
       cart: {
-        cartItem: [
-          {
-            image: '/images/aircon.jpg',
-            name: '24hrs Shadin Air-conditioning',
-            price: 929.99,
-            product: '60d55c4cd97a74d6bd80cb24',
-            qty: 1,
+        offer: {
+          orderItem: {
+            name: '1st Solution Electrical',
+            image: '/images/electrical.jpg',
+            product: '60e5370183206d62e2a6e6d0',
           },
-        ],
+          _id: '60f653ac08c5080004c4eaad',
+          conversation: '60f653a608c5080004c4eaac',
+          sender: '60e5370183206d62e2a6e6ce',
+          buyer: '60e5370183206d62e2a6e6ce',
+          seller: '60e5370183206d62e2a6e6cd',
+          offerPrice: 200,
+          offerStatus: 'accepted',
+        },
         shippingAddress: {},
       },
     },

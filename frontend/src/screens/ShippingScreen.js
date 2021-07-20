@@ -28,7 +28,8 @@ const ShippingScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    console.log('(shipping) current state = ', cart)
+    console.log('(shipping) current cart state = ', cart)
+    console.log('cart offer', cart.offer)
     if (!userInfo) {
       history.push('/login')
     }
@@ -36,8 +37,7 @@ const ShippingScreen = ({ history }) => {
 
   return (
     <>
-      {/* {cart.cartItem.length === 0 ? ( */}
-      {!cart ? (
+      {!cart.offer ? (
         <Message variant='danger'>
           Order does not exist. <a href='/'>Go back.</a>
         </Message>

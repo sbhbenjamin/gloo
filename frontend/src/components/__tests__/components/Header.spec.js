@@ -9,7 +9,6 @@ it('should render navbar links', () => {
   expect(screen.getByTestId('search-input')).toBeInTheDocument()
   expect(screen.getByTestId('search-submit')).toHaveTextContent('Search')
   expect(screen.getByPlaceholderText('Search Products...')).toBeInTheDocument()
-  expect(screen.getByTestId('navbar-cart')).toHaveTextContent('Cart')
 })
 
 it('should render login button if not logged in', async () => {
@@ -18,9 +17,9 @@ it('should render login button if not logged in', async () => {
   expect(screen.getByTestId('navbar-signin')).toBeInTheDocument()
 })
 
-it('should render name if logged in', async () => {
+it('should render name and chats if logged in', async () => {
   renderWithLogin(<Header />)
-
+  expect(screen.getByTestId('navbar-chat')).toHaveTextContent('Chats')
   expect(screen.getByText('John Doe')).toBeInTheDocument()
   expect(screen.queryByTestId('navbar-signin')).not.toBeInTheDocument()
 })
