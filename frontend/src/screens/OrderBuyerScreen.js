@@ -1,13 +1,12 @@
-import React, { useEffect } from "react"
-import { Table, Button } from "react-bootstrap"
-import { LinkContainer } from "react-router-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { getUserDetails } from "../actions/userActions"
-import { listMyOrders } from "../actions/orderActions"
+import React, { useEffect } from 'react'
+import { Table, Button } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listMyOrders } from '../actions/orderActions'
 
-const OrderBuyerScreen = ({ location, history }) => {
+const OrderBuyerScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const userLogin = useSelector((state) => state.userLogin)
@@ -18,81 +17,13 @@ const OrderBuyerScreen = ({ location, history }) => {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login')
     } else {
       dispatch(listMyOrders())
     }
   }, [dispatch, history, userInfo])
 
   return (
-    // <Row>
-    /* <Col md={3}>
-        <div className='mb-2'>
-          <h2 className='text-2xl font-bold'>Update Profile</h2>
-        </div>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Profile Updated</Message>}
-        {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='name'>
-            <Form.Label className='mb-1'>Name</Form.Label>
-            <Form.Control
-              data-testid='update-name'
-              type='name'
-              placeholder='Enter Name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className='mb-3'
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId='email'>
-            <Form.Label className='mb-1'>Email Address</Form.Label>
-            <Form.Control
-              data-testid='update-email'
-              type='email'
-              placeholder='Enter Email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className='mb-3'
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId='password'>
-            <Form.Label className='mb-1'>Password</Form.Label>
-            <Form.Control
-              data-testid='update-password'
-              type='password'
-              placeholder='Enter Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className='mb-3'
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId='confirmPassword'>
-            <Form.Label className='mb-1'>Confirm Password</Form.Label>
-            <Form.Control
-              data-testid='update-confirmpassword'
-              type='password'
-              placeholder='Confirm Password'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className='mb-3'
-            ></Form.Control>
-          </Form.Group>
-
-          <Button
-            data-testid='update-submit'
-            type='submit'
-            variant='outline-success'
-            className='mb-3'
-          >
-            Update
-          </Button>
-        </Form>
-      </Col> */
     <>
       <div className='mb-4'>
         <h2 className='text-2xl font-bold'>My Orders</h2>
@@ -125,14 +56,14 @@ const OrderBuyerScreen = ({ location, history }) => {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>

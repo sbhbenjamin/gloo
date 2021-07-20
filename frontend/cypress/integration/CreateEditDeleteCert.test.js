@@ -46,7 +46,7 @@ describe('Create Certificate Screen', () => {
     cy.contains('Certificates').should('exist')
     cy.get('[data-testid=create-cert-btn]')
       .should('exist')
-      .should('have.text', 'Create Certificate')
+      .should('have.text', ' Create Certificate')
   })
 
   it('Click on Create Certificate button', () => {
@@ -88,7 +88,6 @@ describe('View Add Cert Using Image URL', () => {
 
   it('Image should load', () => {
     cy.get('[data-testid=cert-image]')
-      .find('img', { timeout: 8 * 1000 })
       .should('have.attr', 'alt', 'Add Cert Using Image URL')
       .should('be.visible')
   })
@@ -178,7 +177,8 @@ describe('Sign in as admin to view the Certificate', () => {
   })
 
   it('Newly created cert should appear', () => {
-    cy.url().should('include', '/certificates')
+    cy.url().should('include', '/admin')
+    cy.url().should('include', '/certificatelist')
     cy.contains('Add Cert Using Image URL Edited')
   })
 
@@ -186,18 +186,17 @@ describe('Sign in as admin to view the Certificate', () => {
     cy.contains('Add Cert Using Image URL Edited').click()
 
     cy.url().should('include', '/certificates')
+  })
 
-    it('Image should load', () => {
-      cy.get('[data-testid=cert-image]')
-        .find('img', { timeout: 8 * 1000 })
-        .should('have.attr', 'alt', 'Add Cert Using Image URL')
-        .should('be.visible')
-    })
+  it('Image should load', () => {
+    cy.get('[data-testid=cert-image]')
+      .should('have.attr', 'alt', 'Add Cert Using Image URL Edited')
+      .should('be.visible')
+  })
 
-    it('Correct details load', () => {
-      cy.contains('SG SkillsFuture').should('exist')
-      cy.contains('17/07/2021').should('exist')
-    })
+  it('Correct details load', () => {
+    cy.contains('SG SkillsFuture').should('exist')
+    cy.contains('17/07/2021').should('exist')
   })
 })
 
@@ -273,7 +272,7 @@ describe('View update in certificate status', () => {
     cy.contains('Certificates').should('exist')
     cy.get('[data-testid=create-cert-btn]')
       .should('exist')
-      .should('have.text', 'Create Certificate')
+      .should('have.text', ' Create Certificate')
     cy.contains('Add Cert Using Image URL Edited').should('exist')
 
     cy.contains('Add Cert Using Image URL Edited')
@@ -286,7 +285,7 @@ describe('View update in certificate status', () => {
 
 describe('View Add Cert Using Image URL Edited', () => {
   it('Click on View Add Cert Using Image URL Edited', () => {
-    cy.contains('View Add Cert Using Image URL Edited').should('exist').click()
+    cy.contains('Add Cert Using Image URL Edited').should('exist').click()
   })
 
   it('Redirected to cert page url', () => {
@@ -296,7 +295,6 @@ describe('View Add Cert Using Image URL Edited', () => {
 
   it('Image should load', () => {
     cy.get('[data-testid=cert-image]')
-      .find('img', { timeout: 8 * 1000 })
       .should('have.attr', 'alt', 'Add Cert Using Image URL Edited')
       .should('be.visible')
   })
@@ -342,6 +340,12 @@ describe('Edit Approved Cert and check if status returns to pending', () => {
   it('redirected to certificates screen', () => {
     cy.url().should('include', '/certificates')
     cy.url().should('not.include', '/edit')
+  })
+})
+
+describe('Go to Cert Screen', () => {
+  it('Click on certificate', () => {
+    cy.contains('Add Cert Using Image URL Edited').click()
   })
 })
 

@@ -47,10 +47,12 @@ const FavouritesScreen = ({ history }) => {
         ) : (
           <>
             <Row>
-              {!productsFavourites ? (
-                <Message variant='danger'>
-                  You do not have any favourite products.
-                </Message>
+              {!productsFavourites || productsFavourites.length === 0 ? (
+                <div className='mt-3'>
+                  <Message variant='danger'>
+                    You do not have any favourite products.
+                  </Message>
+                </div>
               ) : (
                 productsFavourites.map((product) => (
                   <Col

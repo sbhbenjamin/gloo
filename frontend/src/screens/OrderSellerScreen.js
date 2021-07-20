@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react"
-import { Table, Form, Button, Row, Col } from "react-bootstrap"
-import { LinkContainer } from "react-router-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { getUserDetails, updateUserProfile } from "../actions/userActions"
-import { listMyOrders, listMySellerOrders } from "../actions/orderActions"
+import React, { useEffect } from 'react'
+import { Table, Button } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listMySellerOrders } from '../actions/orderActions'
 
-const OrderSellerScreen = ({ location, history }) => {
+const OrderSellerScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const userLogin = useSelector((state) => state.userLogin)
@@ -22,7 +21,7 @@ const OrderSellerScreen = ({ location, history }) => {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login")
+      history.push('/login')
     } else {
       dispatch(listMySellerOrders())
     }
@@ -30,7 +29,6 @@ const OrderSellerScreen = ({ location, history }) => {
 
   return (
     <>
-      {" "}
       <div className='mb-4'>
         <h2 className='text-2xl font-bold'>My Seller Orders</h2>
       </div>
@@ -62,14 +60,14 @@ const OrderSellerScreen = ({ location, history }) => {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>

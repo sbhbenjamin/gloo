@@ -29,7 +29,7 @@ import {
   ORDER_LIST_MY_SELLER_SUCCESS,
   ORDER_LIST_MY_SELLER_FAIL,
   ORDER_LIST_MY_SELLER_RESET,
-} from "../constants/orderConstants"
+} from '../constants/orderConstants'
 
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
