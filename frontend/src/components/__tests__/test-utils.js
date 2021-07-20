@@ -27,6 +27,7 @@ import {
   userFavouritesReducer,
   favouriteAddReducer,
   favouriteRemoveReducer,
+  favouriteProductReducer,
 } from '../../reducers/userReducers'
 import {
   orderCreateReducer,
@@ -35,6 +36,9 @@ import {
   orderListMyReducer,
   orderListReducer,
   orderDeliverReducer,
+  orderDeleteReducer,
+  orderSellerReducer,
+  orderSellerListMyReducer,
 } from '../../reducers/orderReducers'
 import {
   certListReducer,
@@ -44,6 +48,19 @@ import {
   certUpdateReducer,
   certListUserReducer,
 } from '../../reducers/certReducers'
+import {
+  conversationCreateReducer,
+  conversationListReducer,
+} from '../../reducers/conversationReducers'
+import {
+  messageCreateReducer,
+  messageListReducer,
+} from '../../reducers/messageReducers'
+import {
+  offerAcceptReducer,
+  offerCreateReducer,
+  offerListReducer,
+} from '../../reducers/offerReducers'
 
 const reducer = {
   productList: productListReducer,
@@ -64,20 +81,31 @@ const reducer = {
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
   userFavourites: userFavouritesReducer,
+  favouriteProduct: favouriteProductReducer,
   favouriteAdd: favouriteAddReducer,
   favouriteRemove: favouriteRemoveReducer,
   orderCreate: orderCreateReducer,
+  orderDelete: orderDeleteReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
+  orderSeller: orderSellerReducer,
+  orderSellerListMy: orderSellerListMyReducer,
   certList: certListReducer,
   certDetails: certDetailsReducer,
   certDelete: certDeleteReducer,
   certCreate: certCreateReducer,
   certUpdate: certUpdateReducer,
   certListUser: certListUserReducer,
+  conversationList: conversationListReducer,
+  conversationCreate: conversationCreateReducer,
+  messageList: messageListReducer,
+  messageCreate: messageCreateReducer,
+  offerCreate: offerCreateReducer,
+  offerList: offerListReducer,
+  offerAccept: offerAcceptReducer,
 }
 
 function render(
@@ -270,6 +298,73 @@ function renderWithCart(
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
+function renderWithOffer(
+  ui,
+  {
+    preloadedState = {
+      userLogin: {
+        userInfo: {
+          _id: '60d55c4cd97a74d6bd80cb1f',
+          name: 'Admin user',
+          email: 'admin@example.com',
+          isAdmin: true,
+          token: process.env.OWNER_TOKEN,
+        },
+      },
+      offerList: [
+        {
+          orderItem: {
+            name: '1st Solution Electrical',
+            image: '/images/electrical.jpg',
+            product: '60e5370183206d62e2a6e6d0',
+          },
+          _id: '60f2cbb065269381686fe9d2',
+          conversation: '60f653a608c5080004c4eaac',
+          sender: '60e5370183206d62e2a6e6ce',
+          buyer: '60e5370183206d62e2a6e6ce',
+          seller: '60e5370183206d62e2a6e6cd',
+          offerPrice: 200,
+          offerStatus: 'pending',
+          createdAt: '2021-07-20T04:40:12.838Z',
+          updatedAt: '2021-07-20T04:40:30.798Z',
+          __v: 0,
+        },
+        {
+          orderItem: {
+            name: '1st Solution Electrical',
+            image: '/images/electrical.jpg',
+            product: '60e5370183206d62e2a6e6d0',
+          },
+          _id: '60f67f6fc0caa40004a2be52',
+          conversation: '60f67f63c0caa40004a2be51',
+          sender: '60e5370183206d62e2a6e6cf',
+          buyer: '60e5370183206d62e2a6e6cf',
+          seller: '60e5370183206d62e2a6e6cd',
+          offerPrice: 5000,
+          offerStatus: 'accepted',
+          createdAt: '2021-07-20T07:46:55.644Z',
+          updatedAt: '2021-07-20T07:46:55.644Z',
+          __v: 0,
+        },
+      ],
+    },
+    store = configureStore({
+      reducer,
+      preloadedState,
+    }),
+    ...renderOptions
+  } = {}
+) {
+  function Wrapper({ children }) {
+    return (
+      <Provider store={store}>
+        <Router>{children}</Router>
+      </Provider>
+    )
+  }
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
+}
+
 // re-export everything
 export * from '@testing-library/react'
 // override render method
@@ -279,4 +374,5 @@ export {
   renderWithOwnership,
   renderWithCartFull,
   renderWithCart,
+  renderWithOffer,
 }

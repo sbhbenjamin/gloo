@@ -51,7 +51,7 @@ const Rating = ({ value, text, color }) => {
           ></i>
         </span>
       </div>
-      <span>{text}</span>
+      <span data-testid='rating-text'>{text}</span>
     </div>
   )
 }

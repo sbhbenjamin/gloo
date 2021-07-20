@@ -13,7 +13,6 @@ import {
 } from 'react-bootstrap'
 import Rating from '../Rating'
 import Message from '../Message'
-import Loader from '../Loader'
 import {
   acceptOffer,
   createOffer,
@@ -42,29 +41,24 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
   const { name, image, rating, numReviews } = currentChat.product
 
   const offerList = useSelector((state) => state.offerList)
-  const {
-    loading: loadingOffers,
-    error: errorOffers,
-    success: offersSuccess,
-    offers,
-  } = offerList
+  const { offers, loading: loadingOffers, error: errorOffers } = offerList
 
   const offerCreate = useSelector((state) => state.offerCreate)
   const {
-    // loading: loadingCreate,
     offer: createdOffer,
+    loading: loadingCreate,
     error: errorCreate,
   } = offerCreate
 
   const offerAccept = useSelector((state) => state.offerAccept)
   const {
-    // loading: loadingAccept,
-    error: errorAccept,
     offer: acceptedOffer,
+    loading: loadingAccept,
+    error: errorAccept,
   } = offerAccept
 
   const orderDetails = useSelector((state) => state.orderDetails)
-  const { order, loading, error } = orderDetails
+  const { order, loading: loadingDetails, error: errorDetails } = orderDetails
 
   // lift errors to parent
   useEffect(() => {
@@ -194,7 +188,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
 
   return (
     <>
-      {loadingOffers ? (
+      {loadingOffers || loadingCreate || loadingAccept || loadingDetails ? (
         <Spinner
           animation='border'
           role='status'
@@ -212,6 +206,11 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
           <Card.Body>
             <Row>
               {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+              {errorAccept && <Message variant='danger'>{errorAccept}</Message>}
+              {errorOffers && <Message variant='danger'>{errorOffers}</Message>}
+              {errorDetails && (
+                <Message variant='danger'>{errorDetails}</Message>
+              )}
               <Col xs={1}>
                 <img
                   className='chatBoxProductImage'
