@@ -208,9 +208,6 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
               {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
               {errorAccept && <Message variant='danger'>{errorAccept}</Message>}
               {errorOffers && <Message variant='danger'>{errorOffers}</Message>}
-              {errorDetails && (
-                <Message variant='danger'>{errorDetails}</Message>
-              )}
               <Col xs={1}>
                 <img
                   className='chatBoxProductImage'
