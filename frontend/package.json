@@ -62,6 +62,6 @@
     "webpack-dev-server": "^3.11.1"
   },
   "jest": {
-    "coveragePathIgnorePatterns": ["/node_modules/", "/stubs/"]
+    "testMatch": [ "**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)", "!**/stubs/**", "!**/test-utils.js"]
   }
 }
