@@ -39,7 +39,6 @@ const PlaceOrderScreen = ({ history }) => {
   // let { seller } = orderSeller
 
   useEffect(() => {
-    console.log('(placeorder) current state = ', cart)
     if (!userInfo) {
       history.push('/login')
     } else if (success) {

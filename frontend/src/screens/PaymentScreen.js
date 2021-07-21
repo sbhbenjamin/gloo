@@ -29,7 +29,6 @@ const PaymentScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    console.log('(payment) current state = ', cart)
     if (!userInfo) {
       history.push('/login')
     }

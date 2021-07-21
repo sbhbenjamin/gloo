@@ -28,8 +28,6 @@ const ShippingScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    console.log('(shipping) current cart state = ', cart)
-    console.log('cart offer', cart.offer)
     if (!userInfo) {
       history.push('/login')
     }
