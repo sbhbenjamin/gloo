@@ -1,12 +1,13 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Row, Col } from "react-bootstrap"
-import Product from "../components/Product"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import Meta from "../components/Meta"
-import { listUserProducts } from "../actions/productActions"
-import { getUserDetailsPublic } from "../actions/userActions"
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Row, Col, NavDropdown, Badge } from 'react-bootstrap'
+import Product from '../components/Product'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import Meta from '../components/Meta'
+import { listUserProducts } from '../actions/productActions'
+import { getUserDetailsPublic } from '../actions/userActions'
+import { listUserCerts } from '../actions/certActions'
 
 const UserProfileScreen = ({ match }) => {
   const userId = match.params.id
@@ -30,9 +31,13 @@ const UserProfileScreen = ({ match }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  const certListUser = useSelector((state) => state.certListUser)
+  const { certs } = certListUser
+
   useEffect(() => {
     dispatch(listUserProducts(userId))
     dispatch(getUserDetailsPublic(userId))
+    dispatch(listUserCerts(userId))
   }, [dispatch, userId])
 
   return (
@@ -40,16 +45,40 @@ const UserProfileScreen = ({ match }) => {
       <Meta title={userId} />
       {(loadingUserDetails || loadingProducts) && <Loader />}
       {loadingUserDetails ? (
-        "" // <Loader />
+        '' // <Loader />
       ) : errorUserDetails ? (
         <Message variant='danger'>{errorUserDetails}</Message>
       ) : (
-        <Row>
-          <h1 className='text-4xl font-semibold'>{user.name}</h1>
-        </Row>
+        <>
+          <Row>
+            <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <h1 className='mr-4'>{user.name}</h1>
+              {certs &&
+                certs.filter((cert) => cert.status === 'Approved').length >
+                  0 && (
+                  <h3 style={{ paddingLeft: '15px' }}>
+                    <i className='fas fa-check-circle'></i>
+                  </h3>
+                )}
+            </span>
+          </Row>
+          <Row>
+            {certs &&
+              certs.filter((cert) => cert.status === 'Approved').length > 0 && (
+                <>
+                  <h5>Verified Certificates</h5>
+                  {certs
+                    .filter((cert) => cert.status === 'Approved')
+                    .map((cert) => (
+                      <li>{cert.name}</li>
+                    ))}
+                </>
+              )}
+          </Row>
+        </>
       )}
       {loadingProducts ? (
-        "" //<Loader />
+        '' //<Loader />
       ) : errorProducts ? (
         <Message variant='danger'>{errorProducts}</Message>
       ) : (
@@ -58,9 +87,9 @@ const UserProfileScreen = ({ match }) => {
             <p>
               {userInfo
                 ? userInfo._id === user._id
-                  ? "You do not have any listings"
-                  : "This user does not currently have any listings"
-                : "This user does not currently have any listings"}
+                  ? 'You do not have any listings'
+                  : 'This user does not currently have any listings'
+                : 'This user does not currently have any listings'}
             </p>
           ) : (
             products.map((product) => (

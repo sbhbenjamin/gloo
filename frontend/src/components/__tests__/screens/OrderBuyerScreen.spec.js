@@ -9,7 +9,7 @@ import {
 } from '../test-utils'
 import OrderBuyerScreen from '../../../screens/OrderBuyerScreen'
 import '@testing-library/jest-dom/extend-expect'
-import { waitForElementToBeRemoved, cleanup } from '@testing-library/react'
+import { cleanup, waitFor } from '@testing-library/react'
 import { sampleOrderArray } from '../stubs/orderStub'
 import { createMemoryHistory } from 'history'
 
@@ -33,49 +33,36 @@ afterAll(() => server.close())
 
 test('should redirect if not logged in', async () => {
   render(<OrderBuyerScreen history={history} />)
-  expect(screen.queryByText('60d82fb65ab70e8b14f7fb79')).toBeNull()
-  expect(screen.queryByText('2021-06-27')).toBeNull()
+  expect(screen.queryByText('60f2cbdc65269381686fe9d3')).toBeNull()
+  expect(screen.queryByText('2021-07-17')).toBeNull()
 
-  expect(screen.queryByText('60d82fdf5ab70e8b14f7fb7c')).toBeNull()
-  expect(screen.queryByText('2021-04-17')).toBeNull()
+  expect(screen.queryByText('60f2e375909eb2810c4f6e88')).toBeNull()
+  expect(screen.queryByText('2021-07-17')).toBeNull()
 
-  expect(screen.queryByText('60d8303d5ab70e8b14f7fb7e')).toBeNull()
-  expect(screen.queryByText('2021-04-30')).toBeNull()
+  expect(screen.queryByText('60f653d808c5080004c4eaae')).toBeNull()
+  expect(screen.queryByText('2019-06-16')).toBeNull()
 
-  expect(screen.queryByText('60d8304d5ab70e8b14f7fb80')).toBeNull()
-  expect(screen.queryByText('2021-05-15')).toBeNull()
   expect(history.location.pathname).toBe('/login')
 })
 
-test('should redirect if logged in as regular user', async () => {
+test('should render correct details if logged in as regular user', async () => {
   renderWithLogin(<OrderBuyerScreen history={history} />)
-  expect(screen.queryByText('60d82fb65ab70e8b14f7fb79')).toBeNull()
-  expect(screen.queryByText('2021-06-27')).toBeNull()
-
-  expect(screen.queryByText('60d82fdf5ab70e8b14f7fb7c')).toBeNull()
-  expect(screen.queryByText('2021-04-17')).toBeNull()
-
-  expect(screen.queryByText('60d8303d5ab70e8b14f7fb7e')).toBeNull()
-  expect(screen.queryByText('2021-04-30')).toBeNull()
-
-  expect(screen.queryByText('60d8304d5ab70e8b14f7fb80')).toBeNull()
-  expect(screen.queryByText('2021-05-15')).toBeNull()
+  await waitFor(() => {
+    expect(screen.getByText('60f2cbdc65269381686fe9d3')).toBeInTheDocument()
+    expect(screen.getByText('60f2e375909eb2810c4f6e88')).toBeInTheDocument()
+    expect(screen.getAllByText('2021-07-17').length).toBe(4)
+    expect(screen.getByText('60f653d808c5080004c4eaae')).toBeInTheDocument()
+    expect(screen.getByText('2019-06-16')).toBeInTheDocument()
+  })
 })
 
 test('should display relevant details if logged in as admin', async () => {
   renderWithOwnership(<OrderBuyerScreen history={history} />)
-  expect(screen.getByRole('status')).toHaveTextContent('Loading...')
-  await waitForElementToBeRemoved(() => screen.getByText(/Loading/i))
-
-  expect(screen.getByText('60d82fb65ab70e8b14f7fb79')).toBeInTheDocument()
-  expect(screen.queryAllByText('2021-06-27').length).toEqual(3)
-
-  expect(screen.getByText('60d82fdf5ab70e8b14f7fb7c')).toBeInTheDocument()
-  expect(screen.getByText('2021-04-17')).toBeInTheDocument()
-
-  expect(screen.getByText('60d8303d5ab70e8b14f7fb7e')).toBeInTheDocument()
-  expect(screen.getByText('2021-04-30')).toBeInTheDocument()
-
-  expect(screen.getByText('60d8304d5ab70e8b14f7fb80')).toBeInTheDocument()
-  expect(screen.getByText('2021-05-15')).toBeInTheDocument()
+  await waitFor(() => {
+    expect(screen.getByText('60f2cbdc65269381686fe9d3')).toBeInTheDocument()
+    expect(screen.getByText('60f2e375909eb2810c4f6e88')).toBeInTheDocument()
+    expect(screen.getAllByText('2021-07-17').length).toBe(4)
+    expect(screen.getByText('60f653d808c5080004c4eaae')).toBeInTheDocument()
+    expect(screen.getByText('2019-06-16')).toBeInTheDocument()
+  })
 })

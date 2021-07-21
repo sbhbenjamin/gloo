@@ -1,25 +1,25 @@
-import axios from "axios"
-import React, { useState, useEffect } from "react"
-import { Form, Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import FormContainer from "../components/FormContainer"
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import { Form, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import FormContainer from '../components/FormContainer'
 import {
   CERT_DELETE_RESET,
   CERT_UPDATE_RESET,
-} from "../constants/certConstants"
-import { deleteCert, listCertDetails, updateCert } from "../actions/certActions"
+} from '../constants/certConstants'
+import { deleteCert, listCertDetails, updateCert } from '../actions/certActions'
 
 const CertEditScreen = ({ match, history }) => {
   const certId = match.params.id
 
-  const [name, setName] = useState("")
-  const [status, setStatus] = useState("")
-  const [issuer, setIssuer] = useState("")
-  const [date, setDate] = useState("")
-  const [image, setImage] = useState("")
+  const [name, setName] = useState('')
+  const [status, setStatus] = useState('')
+  const [issuer, setIssuer] = useState('')
+  const [date, setDate] = useState('')
+  const [image, setImage] = useState('')
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
@@ -46,13 +46,13 @@ const CertEditScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/")
+      history.push('/')
     } else if (successUpdate) {
       dispatch({ type: CERT_UPDATE_RESET })
-      history.push("/certificates")
+      history.push('/certificates')
     } else if (successDelete) {
       dispatch({ type: CERT_DELETE_RESET })
-      history.push("/certificates")
+      history.push('/certificates')
     } else {
       if (!cert.name || cert._id !== certId) {
         dispatch(listCertDetails(certId))
@@ -69,17 +69,17 @@ const CertEditScreen = ({ match, history }) => {
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
     const formData = new FormData()
-    formData.append("image", file)
+    formData.append('image', file)
     setUploading(true)
 
     try {
       const config = {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       }
 
-      const { data } = await axios.post("/api/certUpload", formData, config)
+      const { data } = await axios.post('/api/certUpload', formData, config)
 
       setImage(data)
       setUploading(false)
@@ -89,17 +89,26 @@ const CertEditScreen = ({ match, history }) => {
     }
   }
 
-  const approveStatusHandler = () => {
-    setStatus("Approved")
-  }
-
-  const rejectStatusHandler = () => {
-    setStatus("Rejected")
-  }
-
   const submitHandler = (e) => {
     e.preventDefault()
-    if (userInfo.isAdmin) {
+    if (cert.status === 'Approved') {
+      if (
+        window.confirm(
+          'Your certificate has already been approved. Changing certificate details will revert the status to Pending. Are you sure you want to do this?'
+        )
+      ) {
+        dispatch(
+          updateCert({
+            _id: certId,
+            name,
+            status: 'Pending',
+            issuer,
+            date,
+            image,
+          })
+        )
+      }
+    } else {
       dispatch(
         updateCert({
           _id: certId,
@@ -110,48 +119,18 @@ const CertEditScreen = ({ match, history }) => {
           image,
         })
       )
-    } else {
-      if (cert.status === "Approved") {
-        if (
-          window.confirm(
-            "Your certificate has already been approved. Changing certificate details will revert the status to Pending. Are you sure you want to do this?"
-          )
-        ) {
-          dispatch(
-            updateCert({
-              _id: certId,
-              name,
-              status: "Pending",
-              issuer,
-              date,
-              image,
-            })
-          )
-        }
-      } else {
-        dispatch(
-          updateCert({
-            _id: certId,
-            name,
-            status,
-            issuer,
-            date,
-            image,
-          })
-        )
-      }
     }
   }
 
   const deleteHandler = () => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm('Are you sure?')) {
       dispatch(deleteCert(certId))
     }
   }
 
   return userInfo ? (
     cert.user ? (
-      userInfo._id === cert.user._id || userInfo.isAdmin ? (
+      userInfo._id === cert.user._id ? (
         <>
           <Link
             to={`/certificates/${cert._id}`}
@@ -220,32 +199,7 @@ const CertEditScreen = ({ match, history }) => {
                   ></Form.File>
                   {uploading && <Loader />}
                 </Form.Group>
-                {userInfo.isAdmin && (
-                  <Form.Group>
-                    <div className='form-check form-check-inline'>
-                      <label className='form-check-label'>Approve</label>
-                      <input
-                        name='status'
-                        type='radio'
-                        checked={status === "Approved"}
-                        onChange={approveStatusHandler}
-                        className='form-check-input'
-                        data-testid='approve-cert'
-                      />
-                    </div>
-                    <div className='form-check form-check-inline'>
-                      <label className='form-check-label'>Reject</label>
-                      <input
-                        name='status'
-                        type='radio'
-                        checked={status === "Rejected"}
-                        onChange={rejectStatusHandler}
-                        className='form-check-input'
-                        data-testid='reject-cert'
-                      />
-                    </div>
-                  </Form.Group>
-                )}
+
                 <Button
                   data-testid='edit-submit'
                   type='submit'

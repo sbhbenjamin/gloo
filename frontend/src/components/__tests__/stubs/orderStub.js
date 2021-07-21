@@ -75,4 +75,38 @@ export const sampleOrderArray = [
     updatedAt: '2021-07-17T14:04:37.999Z',
     __v: 0,
   },
+  {
+    orderItem: {
+      name: 'SZ Painting Singapore',
+      image: '/images/painting.jpg',
+      product: '60e5370183206d62e2a6e6d7',
+    },
+    shippingAddress: {
+      address: '26 College East Ave',
+      city: 'Singapore',
+      postalCode: '123456',
+      country: 'Singapore',
+    },
+    itemPrice: 300,
+    taxPrice: 7,
+    shippingPrice: 15,
+    totalPrice: 322,
+    isPaid: false,
+    isDelivered: false,
+    _id: '60f653d808c5080004c4eaae',
+    buyer: {
+      _id: '60bde864ee22a3fe9466639d',
+      name: 'John Doe',
+      email: 'john@example.com',
+    },
+    seller: {
+      _id: '60bde864ee22a3fe9466639c',
+      name: 'Admin User',
+    },
+    paymentMethod: 'PayPal',
+    offer: '60f2e358909eb2810c4f6e87',
+    createdAt: '2019-06-16T14:04:37.999Z',
+    updatedAt: '2019-06-16T14:04:37.999Z',
+    __v: 0,
+  },
 ]

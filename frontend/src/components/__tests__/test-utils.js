@@ -34,11 +34,11 @@ import {
   orderDetailsReducer,
   orderPayReducer,
   orderListMyReducer,
+  orderSellerListMyReducer,
   orderListReducer,
   orderDeliverReducer,
   orderDeleteReducer,
   orderSellerReducer,
-  orderSellerListMyReducer,
 } from '../../reducers/orderReducers'
 import {
   certListReducer,
@@ -90,9 +90,9 @@ const reducer = {
   orderPay: orderPayReducer,
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
+  orderSellerListMy: orderSellerListMyReducer,
   orderList: orderListReducer,
   orderSeller: orderSellerReducer,
-  orderSellerListMy: orderSellerListMyReducer,
   certList: certListReducer,
   certDetails: certDetailsReducer,
   certDelete: certDeleteReducer,
