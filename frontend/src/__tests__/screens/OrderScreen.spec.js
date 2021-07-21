@@ -30,6 +30,7 @@ afterEach(() => {
   server.resetHandlers()
   cleanup()
 })
+
 afterAll(() => server.close())
 
 let history
@@ -46,6 +47,11 @@ const match = {
   },
 }
 
+function defuse(promise) {
+  promise.catch(() => {})
+  return promise
+}
+
 it('should be blank if not logged in', async () => {
   render(<OrderScreen match={match} history={history} />)
   expect(history.location.pathname).toBe('/login')
@@ -53,12 +59,27 @@ it('should be blank if not logged in', async () => {
 
 it('should display error message if logged in user is not owner', async () => {
   renderWithLogin(<OrderScreen match={match} history={history} />)
-
   await waitFor(() => {
     expect(
       screen.getByText('You are unauthorised to access this page.')
     ).toBeInTheDocument()
   })
+
+  const promise = defuse(
+    new Promise((resolve, reject) =>
+      setTimeout(
+        () =>
+          reject(
+            new Error('Promise not handled as Jest jumps out of execution')
+          ),
+        0
+      )
+    )
+  )
+  await new Promise((resolve) => setTimeout(resolve, 10))
+  await expect(promise).rejects.toThrow(
+    'Promise not handled as Jest jumps out of execution'
+  )
 })
 
 it('should display order if logged in user is owner', async () => {
@@ -89,4 +110,20 @@ it('should display order if logged in user is owner', async () => {
     expect(screen.getByTestId('order-summary-tax')).toHaveTextContent('7')
     expect(screen.getByTestId('order-summary-total')).toHaveTextContent('122')
   })
+
+  const promise = defuse(
+    new Promise((resolve, reject) =>
+      setTimeout(
+        () =>
+          reject(
+            new Error('Promise not handled as Jest jumps out of execution')
+          ),
+        0
+      )
+    )
+  )
+  await new Promise((resolve) => setTimeout(resolve, 10))
+  await expect(promise).rejects.toThrow(
+    'Promise not handled as Jest jumps out of execution'
+  )
 })
