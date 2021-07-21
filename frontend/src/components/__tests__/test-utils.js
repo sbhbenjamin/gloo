@@ -298,55 +298,41 @@ function renderWithCart(
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
-function renderWithOffer(
+function renderWithConversation(
   ui,
   {
     preloadedState = {
       userLogin: {
         userInfo: {
-          _id: '60d55c4cd97a74d6bd80cb1f',
-          name: 'Admin user',
-          email: 'admin@example.com',
+          _id: '60d55c4cd97a74d6bd80cb20',
+          name: 'John Doe',
+          email: 'john@example.com',
           isAdmin: true,
           token: process.env.OWNER_TOKEN,
         },
       },
-      offerList: [
-        {
-          orderItem: {
-            name: '1st Solution Electrical',
-            image: '/images/electrical.jpg',
-            product: '60e5370183206d62e2a6e6d0',
+      conversationList: {
+        conversations: [
+          {
+            _id: '60f653a608c5080004c4eaac',
+            buyer: {
+              _id: '60d55c4cd97a74d6bd80cb20',
+              name: 'John Doe',
+            },
+            seller: {
+              _id: '60d55c4cd97a74d6bd80cb1f',
+              name: 'Admin user',
+            },
+            product: {
+              rating: 4.5,
+              numReviews: 12,
+              _id: '60e5370183206d62e2a6e6d0',
+              name: '1st Solution Electrical',
+              image: '/images/electrical.jpg',
+            },
           },
-          _id: '60f2cbb065269381686fe9d2',
-          conversation: '60f653a608c5080004c4eaac',
-          sender: '60e5370183206d62e2a6e6ce',
-          buyer: '60e5370183206d62e2a6e6ce',
-          seller: '60e5370183206d62e2a6e6cd',
-          offerPrice: 200,
-          offerStatus: 'pending',
-          createdAt: '2021-07-20T04:40:12.838Z',
-          updatedAt: '2021-07-20T04:40:30.798Z',
-          __v: 0,
-        },
-        {
-          orderItem: {
-            name: '1st Solution Electrical',
-            image: '/images/electrical.jpg',
-            product: '60e5370183206d62e2a6e6d0',
-          },
-          _id: '60f67f6fc0caa40004a2be52',
-          conversation: '60f67f63c0caa40004a2be51',
-          sender: '60e5370183206d62e2a6e6cf',
-          buyer: '60e5370183206d62e2a6e6cf',
-          seller: '60e5370183206d62e2a6e6cd',
-          offerPrice: 5000,
-          offerStatus: 'accepted',
-          createdAt: '2021-07-20T07:46:55.644Z',
-          updatedAt: '2021-07-20T07:46:55.644Z',
-          __v: 0,
-        },
-      ],
+        ],
+      },
     },
     store = configureStore({
       reducer,
@@ -374,5 +360,5 @@ export {
   renderWithOwnership,
   renderWithCartFull,
   renderWithCart,
-  renderWithOffer,
+  renderWithConversation,
 }

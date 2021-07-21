@@ -13,6 +13,7 @@ import {
   offers,
   orderMatch,
 } from '../stubs/chatStub'
+import { admin, john } from '../stubs/userStub'
 
 // mock props
 let history
@@ -41,11 +42,11 @@ it('should render product name, reviews and image', async () => {
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb20', (_, res, ctx) => {
+    rest.get(`/api/offers/${john._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
   ]
@@ -75,11 +76,11 @@ it('if no existing offer, should render make offer button', async () => {
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb20', (_, res, ctx) => {
+    rest.get(`/api/offers/${john._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
   ]
@@ -102,11 +103,11 @@ it('if offer is made, should render disabled offer made button for initiator', a
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb1f', (_, res, ctx) => {
+    rest.get(`/api/offers/${admin._id}`, (_, res, ctx) => {
       return res(ctx.json(offers))
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
   ]
@@ -129,11 +130,11 @@ it('if offer is made, should render offer accept and reject button for recipient
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb20', (_, res, ctx) => {
+    rest.get(`/api/offers/${john._id}`, (_, res, ctx) => {
       return res(ctx.json(offers))
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
   ]
@@ -157,11 +158,11 @@ it('if offer is accepted, should render checkout button for buyer', async () => 
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb20', (_, res, ctx) => {
+    rest.get(`/api/offers/${john._id}`, (_, res, ctx) => {
       return res(ctx.json(acceptedOffer))
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
   ]
@@ -184,11 +185,11 @@ it('if offer is accepted, should render disabled accepted button for seller', as
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb1f', (_, res, ctx) => {
+    rest.get(`/api/offers/${admin._id}`, (_, res, ctx) => {
       return res(ctx.json(acceptedOffer))
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json())
     }),
   ]
@@ -211,11 +212,11 @@ it('if order has been made, should render view order button for buyer', async ()
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb20', (_, res, ctx) => {
+    rest.get(`/api/offers/${john._id}`, (_, res, ctx) => {
       return res(ctx.json(offers))
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json(orderMatch))
     }),
   ]
@@ -240,11 +241,11 @@ it('if order has been made, should render view order button for seller', async (
     />
   )
   const handlers = [
-    rest.get('/api/offers/60d55c4cd97a74d6bd80cb1f', (_, res, ctx) => {
+    rest.get(`/api/offers/${admin._id}`, (_, res, ctx) => {
       return res(ctx.json(offers))
     }),
 
-    rest.get(`/api/orders/60f653ac08c5080004c4eaad`, (_, res, ctx) => {
+    rest.get(`/api/orders/${offers[0]._id}`, (_, res, ctx) => {
       return res(ctx.json(orderMatch))
     }),
   ]

@@ -85,5 +85,6 @@ export const createConversation = (product) => async (dispatch, getState) => {
           ? error.response.data.message
           : error.message,
     })
+    const { data } = await axios.post(`/api/conversations/${error}`)
   }
 }

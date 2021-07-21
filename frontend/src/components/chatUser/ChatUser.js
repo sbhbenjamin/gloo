@@ -14,11 +14,12 @@ const ChatUser = ({ conversation, currentChat }) => {
       } conversation`}
     >
       <img
+        data-testid='chat-user-img'
         className='conversationImg'
         src={conversation.product.image}
         alt=''
       />
-      <span className='conversationName'>
+      <span className='conversationName' data-testid='chat-user-name'>
         {userInfo?._id === conversation.seller._id
           ? conversation.buyer.name
           : conversation.seller.name}

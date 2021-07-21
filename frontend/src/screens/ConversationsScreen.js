@@ -64,11 +64,7 @@ const ConversationsScreen = ({ history }) => {
     dispatch(listConversations())
 
     // check if user came from product screen
-    if (
-      history.location.state &&
-      history.location.state.product &&
-      conversations
-    ) {
+    if (history.location.state?.product && conversations) {
       const chatExists = conversations?.filter(
         (c) =>
           c.buyer._id === userInfo._id &&
