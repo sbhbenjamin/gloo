@@ -1,9 +1,9 @@
-import React, { useEffect } from "react"
-import { Table, Button, Row } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { deleteCert, listCerts } from "../actions/certActions"
+import React, { useEffect } from 'react'
+import { Table, Button, Row } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { deleteCert, listCerts } from '../actions/certActions'
 
 const CertListScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -23,13 +23,13 @@ const CertListScreen = ({ history }) => {
 
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
-      history.push("/login")
+      history.push('/login')
     }
     dispatch(listCerts())
   }, [dispatch, history, userInfo, successDelete])
 
   const deleteHandler = (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm('Are you sure?')) {
       dispatch(deleteCert(id))
     }
   }
@@ -65,36 +65,37 @@ const CertListScreen = ({ history }) => {
                 </tr>
               </thead>
               <tbody>
-                {certs.map((cert) => (
-                  <tr key={cert._id}>
-                    <td>{cert._id}</td>
-                    <td>
-                      <a
-                        href='true'
-                        className='no-underline hover:underline'
-                        onClick={(e) => {
-                          e.preventDefault()
-                          nameClickHandler(cert._id)
-                        }}
-                      >
-                        {cert.name}
-                      </a>
-                    </td>
-                    <td>{cert.issuer}</td>
-                    <td>{cert.date}</td>
-                    <td>{cert.user.name}</td>
-                    <td>{cert.status}</td>
-                    <td>
-                      <Button
-                        variant='danger'
-                        className='btn-sm'
-                        onClick={() => deleteHandler(cert._id)}
-                      >
-                        <i className='fas fa-trash'></i>
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+                {certs &&
+                  certs.map((cert) => (
+                    <tr key={cert._id}>
+                      <td>{cert._id}</td>
+                      <td>
+                        <a
+                          href='true'
+                          className='no-underline hover:underline'
+                          onClick={(e) => {
+                            e.preventDefault()
+                            nameClickHandler(cert._id)
+                          }}
+                        >
+                          {cert.name}
+                        </a>
+                      </td>
+                      <td>{cert.issuer}</td>
+                      <td>{cert.date}</td>
+                      <td>{cert.user.name}</td>
+                      <td>{cert.status}</td>
+                      <td>
+                        <Button
+                          variant='danger'
+                          className='btn-sm'
+                          onClick={() => deleteHandler(cert._id)}
+                        >
+                          <i className='fas fa-trash'></i>
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </>

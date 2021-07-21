@@ -130,6 +130,7 @@ const CertScreen = ({ history, match }) => {
                           onClick={approveStatusHandler}
                           variant='success'
                           data-testid='approve-cert'
+                          className='me-4'
                         >
                           Approve
                         </Button>

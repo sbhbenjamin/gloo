@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, NavDropdown, Badge } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -57,7 +57,10 @@ const UserProfileScreen = ({ match }) => {
                 certs.filter((cert) => cert.status === 'Approved').length >
                   0 && (
                   <h3 style={{ paddingLeft: '15px' }}>
-                    <i className='fas fa-check-circle'></i>
+                    <i
+                      className='fas fa-check-circle'
+                      data-testid='verified-icon'
+                    ></i>
                   </h3>
                 )}
             </span>
@@ -70,7 +73,7 @@ const UserProfileScreen = ({ match }) => {
                   {certs
                     .filter((cert) => cert.status === 'Approved')
                     .map((cert) => (
-                      <li>{cert.name}</li>
+                      <li key={cert._id}>{cert.name}</li>
                     ))}
                 </>
               )}
@@ -105,11 +108,6 @@ const UserProfileScreen = ({ match }) => {
               </Col>
             ))
           )}
-          {/* {products.map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              <Product product={product} />
-            </Col>
-          ))} */}
         </Row>
       )}
     </>
