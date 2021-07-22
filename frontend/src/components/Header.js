@@ -32,7 +32,11 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            <Route render={({ history }) => <SearchBox history={history} />} />
+            <div className='navbar-searchbox'>
+              <Route
+                render={({ history }) => <SearchBox history={history} />}
+              />
+            </div>
             <Nav className='ms-auto'>
               {userInfo && (
                 <LinkContainer to='/favourites' data-testid='navbar-favourites'>
@@ -131,17 +135,16 @@ const Header = () => {
                 </NavDropdown>
               )}
             </Nav>
+            {userInfo && (
+              <LinkContainer to='/new' className='navbar-addproduct'>
+                <Nav.Link>
+                  <Button variant='primary' data-testid='navbar-addproduct'>
+                    Add Product
+                  </Button>
+                </Nav.Link>
+              </LinkContainer>
+            )}
           </Navbar.Collapse>
-
-          {userInfo && (
-            <LinkContainer to='/new'>
-              <Nav.Link>
-                <Button variant='primary' data-testid='navbar-addproduct'>
-                  Add Product
-                </Button>
-              </Nav.Link>
-            </LinkContainer>
-          )}
         </Container>
       </Navbar>
     </header>

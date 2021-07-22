@@ -204,35 +204,38 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
       ) : (
         <Card className='chatBoxProduct'>
           <Card.Body>
-            <Row>
+            <Row className='gap-4 justify-content-between'>
               {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
               {errorAccept && <Message variant='danger'>{errorAccept}</Message>}
               {errorOffers && <Message variant='danger'>{errorOffers}</Message>}
-              <Col xs={1}>
-                <img
-                  className='chatBoxProductImage'
-                  data-testid='chat-product-img'
-                  src={image}
-                  alt={name}
-                />
+              <Col xs={12} md='auto'>
+                <Row>
+                  <Col xs='auto'>
+                    <img
+                      className='chatBoxProductImage'
+                      data-testid='chat-product-img'
+                      src={image}
+                      alt={name}
+                    />
+                  </Col>
+                  <Col>
+                    <p
+                      className='chatBoxProductName'
+                      data-testid='chat-product-name'
+                    >
+                      {name}
+                    </p>
+                    <Rating
+                      data-testid='product-rating'
+                      value={rating}
+                      text={`${numReviews} reviews`}
+                    />
+                  </Col>
+                </Row>
               </Col>
-              <Col className='flex-grow-1'>
-                <p
-                  className='chatBoxProductName'
-                  data-testid='chat-product-name'
-                >
-                  {name}
-                </p>
-                <Rating
-                  data-testid='product-rating'
-                  value={rating}
-                  text={`${numReviews} reviews`}
-                />
-              </Col>
-              <Col xs={5} className='d-flex chatBoxProductBtnWrapper'>
+              <Col md='auto' className='d-flex align-items-center'>
                 {orderExists ? (
                   <Link
-                    data-testid='checkout-btn'
                     className='btn btn-success'
                     data-testid='chat-product-vieworderbtn'
                     to={`/order/${orderExists._id}`}
@@ -241,7 +244,6 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                   </Link>
                 ) : accepted && userInfo._id === currentOffer.buyer ? (
                   <Button
-                    data-testid='checkout-btn'
                     variant='success'
                     onClick={handleCheckout}
                     data-testid='chat-product-checkoutbtn'
@@ -259,7 +261,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                 ) : // if offer is not made by current user and offer status is pending
                 !rejected && offered === true && offerer === false ? (
                   <Row>
-                    <Col>
+                    <Col className='pe-0'>
                       <Button
                         variant='success'
                         onClick={handleAcceptOffer}
@@ -317,14 +319,14 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                         </Button>
                       </InputGroup.Append>
                     </InputGroup>
-                    <a
-                      href='#'
+                    <Button
+                      variant='link'
                       className='chatBoxProductCancel'
                       onClick={handleOfferCancel}
                       data-testid='chat-product-offercancel'
                     >
                       cancel
-                    </a>
+                    </Button>
                   </div>
                 )}
               </Col>

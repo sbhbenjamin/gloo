@@ -29,7 +29,7 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <Meta />
-      <div className='mb-3'>
+      <div className='mb-2'>
         <h2>Latest Products</h2>
       </div>
       {/* {errorFavourite && <Message variant='danger'>{errorFavourite}</Message>} */}

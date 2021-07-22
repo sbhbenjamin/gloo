@@ -1,3 +1,35 @@
 a {
   text-decoration: none;
 }
+
+main {
+  min-height: 88vh;
+}
+
+header {
+  padding-top: 12px;
+}
+
+footer {
+  padding-bottom: 25px;
+}
+
+footer,
+footer a {
+  color: rgb(118, 118, 118);
+}
+
+/* Small Devices, Tablets equivalent to class sm */
+@media only screen and (max-width: 768px) {
+}
+
+/* Medium Devices, Desktops equivalent to class md */
+@media only screen and (max-width: 992px) {
+  .navbar-searchbox {
+    padding: 14px 0 8px 0;
+  }
+  .navbar-addproduct {
+    padding: 8px 0;
+    margin: 0;
+  }
+}

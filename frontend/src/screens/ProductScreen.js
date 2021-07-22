@@ -182,29 +182,6 @@ const ProductScreen = ({ history, match }) => {
                     </Row>
                   </ListGroup.Item>
 
-                  {/* {product.countInStock > 0 && (
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Qty</Col>
-                        <Col>
-                          <Form.Control
-                            as='select'
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Control>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  )} */}
-
                   {product.user &&
                     userInfo &&
                     (product.user._id === userInfo._id ? (
@@ -230,19 +207,6 @@ const ProductScreen = ({ history, match }) => {
                           >
                             Chat
                           </Button>
-                          {/* <Link
-                            data-testid='chat-btn'
-                            className='btn btn-primary'
-                            disabled={!product.available}
-                            to={{
-                              pathname: '/conversations',
-                              state: {
-                                product,
-                              },
-                            }}
-                          >
-                            Chat
-                          </Link> */}
                         </div>
                       </ListGroup.Item>
                     ))}
@@ -251,10 +215,23 @@ const ProductScreen = ({ history, match }) => {
             </Col>
           </Row>
           <Row>
-            <Col md={6}>
-              <h2>Reviews</h2>
+            <Col md={6} className='mt-5'>
+              <h3>Reviews</h3>
+              <div>
+                {product.reviews.length === 0 && <Message>No Reviews</Message>}
+                <ListGroup variant='flush'>
+                  {product.reviews.map((review) => (
+                    <ListGroup.Item key={review._id}>
+                      <strong>{review.name}</strong>
+                      <Rating value={review.rating} />
+                      <p>{review.createdAt.substring(0, 10)}</p>
+                      <p>{review.comment}</p>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
               <ListGroup.Item>
-                <h2>Write a Customer Review</h2>
+                <h5>Write a Customer Review</h5>
                 {errorProductReview && (
                   <Message variant='danger'>{errorProductReview}</Message>
                 )}
@@ -295,22 +272,11 @@ const ProductScreen = ({ history, match }) => {
                     </Button>
                   </Form>
                 ) : (
-                  <Message>
+                  <span style={{ color: 'rgb(118, 118, 118)' }}>
                     Please <Link to='/login'>sign in</Link> to write a review
-                  </Message>
+                  </span>
                 )}
               </ListGroup.Item>
-              {product.reviews.length === 0 && <Message>No Reviews</Message>}
-              <ListGroup variant='flush'>
-                {product.reviews.map((review) => (
-                  <ListGroup.Item key={review._id}>
-                    <strong>{review.name}</strong>
-                    <Rating value={review.rating} />
-                    <p>{review.createdAt.substring(0, 10)}</p>
-                    <p>{review.comment}</p>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
             </Col>
           </Row>
         </>

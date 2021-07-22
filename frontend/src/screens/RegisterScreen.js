@@ -143,86 +143,90 @@ const RegisterScreen = ({ location, history }) => {
     }
   }
 
-  return userInfo ? (
-    <Message variant='success'>You are already logged in</Message>
-  ) : (
-    <FormContainer>
-      <h1>Sign Up</h1>
-      {message && <Message variant='danger'>{message}</Message>}
-      {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />}
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId='name' className='mb-2'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            data-testid='register-name'
-            type='name'
-            placeholder='Enter Name (Between 6-30 characters)'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+  return (
+    <div className='mt-3'>
+      {userInfo ? (
+        <Message variant='success'>You are already logged in</Message>
+      ) : (
+        <FormContainer>
+          <h1>Sign Up</h1>
+          {message && <Message variant='danger'>{message}</Message>}
+          {error && <Message variant='danger'>{error}</Message>}
+          {loading && <Loader />}
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId='name' className='mb-2'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                data-testid='register-name'
+                type='name'
+                placeholder='Enter Name (Between 6-30 characters)'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-        <Form.Group controlId='email' className='mb-2'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            data-testid='register-email'
-            type='email'
-            placeholder='Enter Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+            <Form.Group controlId='email' className='mb-2'>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                data-testid='register-email'
+                type='email'
+                placeholder='Enter Email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-        <Form.Group controlId='password' className='mb-2'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            data-testid='register-password'
-            type='password'
-            placeholder='Enter Password'
-            value={password.value}
-            onChange={handleOnChange}
-          ></Form.Control>
-          {displayMeter()}
-          <Form.Text className='text-muted'>
-            * Password should be greater than 7 characters and have at least one
-            letter and number.
-          </Form.Text>
-        </Form.Group>
+            <Form.Group controlId='password' className='mb-2'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                data-testid='register-password'
+                type='password'
+                placeholder='Enter Password'
+                value={password.value}
+                onChange={handleOnChange}
+              ></Form.Control>
+              {displayMeter()}
+              <Form.Text className='text-muted'>
+                * Password should be greater than 7 characters and have at least
+                one letter and number.
+              </Form.Text>
+            </Form.Group>
 
-        <Form.Group controlId='confirmPassword' className='mb-2'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            data-testid='register-confirmpassword'
-            type='password'
-            placeholder='Confirm Password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+            <Form.Group controlId='confirmPassword' className='mb-2'>
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                data-testid='register-confirmpassword'
+                type='password'
+                placeholder='Confirm Password'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-        <Button
-          data-testid='register-btn'
-          className='mt-2'
-          type='submit'
-          variant='success'
-        >
-          Register
-        </Button>
-      </Form>
+            <Button
+              data-testid='register-btn'
+              className='mt-2'
+              type='submit'
+              variant='success'
+            >
+              Register
+            </Button>
+          </Form>
 
-      <Row className='mt-3'>
-        <Col>
-          Have an Account?{' '}
-          <Link
-            data-testid='login-redirect'
-            to={redirect ? `/login?redirect=${redirect}` : '/login'}
-          >
-            Login
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+          <Row className='mt-3'>
+            <Col>
+              Have an Account?{' '}
+              <Link
+                data-testid='login-redirect'
+                to={redirect ? `/login?redirect=${redirect}` : '/login'}
+              >
+                Login
+              </Link>
+            </Col>
+          </Row>
+        </FormContainer>
+      )}
+    </div>
   )
 }
 

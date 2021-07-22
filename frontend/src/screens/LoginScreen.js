@@ -31,7 +31,7 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <div className='mb-3'>
+      <div className='mt-5 mb-3'>
         <h1 data-testid='login-title'>Sign In</h1>
       </div>
       {error && <Message variant='danger'>{error}</Message>}
