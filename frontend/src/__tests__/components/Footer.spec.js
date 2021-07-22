@@ -15,7 +15,7 @@ describe('Footer loads correctly', () => {
 
   it('should render correctly', () => {
     expect(component.getByTestId('footer-copy')).toHaveTextContent(
-      'Copyright © Gloo'
+      'A project by @sbhbenjamin and @chrus-chong'
     )
   })
 })

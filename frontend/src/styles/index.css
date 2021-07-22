@@ -21,6 +21,9 @@ footer a {
 
 /* Small Devices, Tablets equivalent to class sm */
 @media only screen and (max-width: 768px) {
+  footer {
+    font-size: 14px;
+  }
 }
 
 /* Medium Devices, Desktops equivalent to class md */

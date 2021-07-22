@@ -13,7 +13,7 @@ const Footer = () => {
           </Col>
           <Col xs='auto'>
             <a href='https://github.com/sbhbenjamin/gloo'>
-              <i class='fab fa-lg fa-github'></i>
+              <i className='fab fa-lg fa-github'></i>
             </a>
           </Col>
         </Row>
