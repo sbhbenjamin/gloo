@@ -6,7 +6,7 @@ main {
   min-height: 88vh;
 }
 
-header {
+.navbar {
   padding-top: 12px;
 }
 
@@ -16,7 +16,11 @@ footer {
 
 footer,
 footer a {
-  color: rgb(118, 118, 118);
+  color: #717171;
+}
+
+.font-secondary {
+  color: #717171;
 }
 
 /* Small Devices, Tablets equivalent to class sm */

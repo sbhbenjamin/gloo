@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
+import './userprofilescreen.css'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Rating from '../components/Rating'
 import Meta from '../components/Meta'
 import { listUserProducts } from '../actions/productActions'
 import { getUserDetailsPublic } from '../actions/userActions'
 import { listUserCerts } from '../actions/certActions'
 
 const UserProfileScreen = ({ match }) => {
+  const [rating, setRating] = useState(null)
   const userId = match.params.id
 
   const dispatch = useDispatch()
@@ -65,11 +68,34 @@ const UserProfileScreen = ({ match }) => {
                 )}
             </span>
           </Row>
+          {products && (
+            <Row className='mb-4'>
+              <div className='d-flex flex-row align-items-center'>
+                <p className='mb-0 me-1'>
+                  {(
+                    products.reduce((acc, product) => acc + product.rating, 0) /
+                    products.length
+                  ).toFixed(1)}
+                </p>
+                <Rating
+                  className='font-secondary'
+                  value={
+                    products.reduce((acc, product) => acc + product.rating, 0) /
+                    products.length
+                  }
+                  text={`(${products.reduce(
+                    (acc, product) => acc + product.numReviews,
+                    0
+                  )})`}
+                />
+              </div>
+            </Row>
+          )}
           <Row>
             {certs &&
               certs.filter((cert) => cert.status === 'Approved').length > 0 && (
                 <>
-                  <h5>Verified Certificates</h5>
+                  <h5 className='mb-0'>Verified Certificates</h5>
                   {certs
                     .filter((cert) => cert.status === 'Approved')
                     .map((cert) => (

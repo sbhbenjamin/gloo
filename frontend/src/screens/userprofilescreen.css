@@ -1,0 +1,9 @@
+.profile-wrapper {
+  display: inline-flex;
+  alignitems: center;
+}
+
+.profile-rating-wrapper {
+  display: flex;
+  align-items: center;
+}

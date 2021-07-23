@@ -1,3 +1,4 @@
+import './productscreen.css'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,14 +15,7 @@ import {
   PRODUCT_CREATE_REVIEW_RESET,
   PRODUCT_DETAILS_RESET,
 } from '../constants/productConstants'
-import {
-  createConversation,
-  listConversations,
-} from '../actions/conversationActions'
-import {
-  CONVERSATION_CREATE_RESET,
-  CONVERSATION_SET,
-} from '../constants/conversationConstants'
+import { CONVERSATION_CREATE_RESET } from '../constants/conversationConstants'
 
 const ProductScreen = ({ history, match }) => {
   const [rating, setRating] = useState(0)
@@ -60,10 +54,6 @@ const ProductScreen = ({ history, match }) => {
 
     dispatch(listProductDetails(match.params.id))
   }, [dispatch, match, successProductReview, history, product._id, userInfo])
-
-  const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}`)
-  }
 
   const editHandler = () => {
     history.push(`/product/${product._id}/edit`)
@@ -131,10 +121,6 @@ const ProductScreen = ({ history, match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                {/* <ListGroup.Item>
-                  Price: $
-                  <span data-testid='product-price'>{product.price}</span>
-                </ListGroup.Item> */}
                 <ListGroup.Item data-testid='product-description'>
                   Description: {product.description}
                 </ListGroup.Item>

@@ -11,24 +11,33 @@
   background-color: rgb(234, 234, 234);
 }
 
-.conversationImg {
+.conversation-image-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.conversation-image {
   width: 50px;
   height: 50px;
   border-radius: 10%;
   object-fit: cover;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 
-.conversationName {
-  font-weight: 500;
+.conversation-name {
+  color: #717171;
+  font-size: 12px;
 }
 
-.conversationSelect {
+.conversation-product-name {
+}
+
+.conversation-active {
   background-color: #d2e4f7;
 }
 
 @media screen and (max-width: 768px) {
-  .conversationName {
+  .conversation-name-product {
     display: none;
   }
 }
