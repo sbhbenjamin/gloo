@@ -8,6 +8,17 @@ main {
 
 .navbar {
   padding-top: 12px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  background-color: hsl(34, 48%, 87%);
+  /* background-color: hsl(40, 99%, 64%); */
+}
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+.navbar-searchbox {
+  width: 450px;
 }
 
 footer {

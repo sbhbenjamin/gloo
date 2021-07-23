@@ -1,0 +1,11 @@
+.navbar-categories {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  background-color: rgb(244, 244, 244);
+  /* margin: 12px; */
+}
+
+.navbar-categories a {
+  color: black;
+}

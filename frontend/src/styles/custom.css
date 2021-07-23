@@ -1,0 +1,32 @@
+.btn-primary,
+.btn-primary:focus {
+  color: white;
+  /* background-color: rgb(21, 3, 137); */
+  /* background-color: #1b8096; */
+  background-color: rgb(0, 93, 86);
+  border: rgb(0, 93, 86);
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  color: white;
+  background-color: rgb(8, 1, 82);
+  background-color: rgb(1, 52, 1);
+}
+
+.btn-outline-primary {
+  color: rgb(0, 93, 86);
+  border: 1px rgb(0, 93, 86) solid;
+  /* background-color: rgb(1, 52, 1); */
+}
+.btn-outline-primary:hover {
+  color: white;
+  border: 1px rgb(0, 93, 86) solid;
+  background-color: rgb(0, 93, 86);
+}
+
+.navbar-brand,
+.nav-link i,
+.nav-link span {
+  /* color: #40a8c4; */
+}

@@ -71,6 +71,7 @@ const Product = ({ product }) => {
 
           <div>
             <Rating
+              color='rgb(42, 147, 138)'
               data-testid='product-rating'
               value={product.rating}
               text={`${product.numReviews} reviews`}
@@ -84,7 +85,10 @@ const Product = ({ product }) => {
                   onClick={(e) => removeFromFavouritesHandler(e)}
                   className='productHeart'
                 >
-                  <i className='fas fa-heart fa-lg'></i>
+                  <i
+                    className='fas fa-heart fa-lg'
+                    style={{ color: 'rgb(0, 93, 86)' }}
+                  ></i>
                 </a>
               ) : (
                 <a
