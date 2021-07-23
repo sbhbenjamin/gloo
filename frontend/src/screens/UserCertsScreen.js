@@ -52,6 +52,7 @@ const UserCertsScreen = ({ history }) => {
         </Col>
         <Col className='text-end'>
           <Button
+            variant='success'
             className='my-3'
             onClick={createCertHandler}
             data-testid='create-cert-btn'

@@ -116,6 +116,7 @@ const ProductScreen = ({ history, match }) => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
+                    color='#f47a60'
                     data-testid='product-rating'
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
@@ -252,7 +253,8 @@ const ProductScreen = ({ history, match }) => {
                     <Button
                       data-testid='rating-submit'
                       type='submit'
-                      variant='primary'
+                      variant='success'
+                      className='mt-3 mb-2'
                     >
                       Submit
                     </Button>

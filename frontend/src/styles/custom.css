@@ -1,32 +1,52 @@
+/* primary button */
 .btn-primary,
 .btn-primary:focus {
   color: white;
-  /* background-color: rgb(21, 3, 137); */
-  /* background-color: #1b8096; */
-  background-color: rgb(0, 93, 86);
-  border: rgb(0, 93, 86);
+  background-color: #f47a60;
+  border: #f47a60;
 }
 
 .btn-primary:hover,
 .btn-primary:active {
   color: white;
-  background-color: rgb(8, 1, 82);
-  background-color: rgb(1, 52, 1);
+  background-color: #f16748;
 }
 
+/* outline-primary button */
 .btn-outline-primary {
-  color: rgb(0, 93, 86);
-  border: 1px rgb(0, 93, 86) solid;
+  font-weight: 300;
+  color: #fff;
+  border: 1px #fff solid;
   /* background-color: rgb(1, 52, 1); */
 }
+
 .btn-outline-primary:hover {
   color: white;
-  border: 1px rgb(0, 93, 86) solid;
-  background-color: rgb(0, 93, 86);
+  border: 1px #f16748 solid;
+  background-color: #f16748;
 }
 
-.navbar-brand,
-.nav-link i,
-.nav-link span {
-  /* color: #40a8c4; */
+.btn-success,
+.btn-success:focus {
+  color: white;
+  background-color: #246b80;
+  border: #246b80;
+}
+
+.btn-success:hover,
+.btn-success:active {
+  color: white;
+  background-color: #1b5263;
+}
+
+.navbar-brand {
+  color: #f47a60 !important;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.alert-info {
+  background-color: #ced7d8;
+  border: 1px #bec8c9 solid;
+  color: #82898a;
 }

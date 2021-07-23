@@ -19,6 +19,11 @@ const NavbarCategory = () => {
         <Col xs='auto'>
           <a href='http://localhost:3000/search/Renovation'>Renovation</a>
         </Col>
+        <Col xs='auto'>
+          <a href='http://localhost:3000/search/Air-Conditioning'>
+            Air-Conditioning
+          </a>
+        </Col>
       </Row>
     </div>
   )

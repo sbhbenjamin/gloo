@@ -20,7 +20,7 @@ const Header = () => {
     <header>
       <Navbar
         className='p-3 navbar'
-        variant='light'
+        variant='dark'
         expand='lg'
         collapseOnSelect
       >

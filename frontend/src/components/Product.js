@@ -71,7 +71,7 @@ const Product = ({ product }) => {
 
           <div>
             <Rating
-              color='rgb(42, 147, 138)'
+              color='#f47a60'
               data-testid='product-rating'
               value={product.rating}
               text={`${product.numReviews} reviews`}

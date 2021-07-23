@@ -1,7 +1,7 @@
 import './conversationscreen.css'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Nav, Button } from 'react-bootstrap'
+import { Nav, Button, InputGroup, FormControl } from 'react-bootstrap'
 import {
   createConversation,
   listConversations,
@@ -186,21 +186,32 @@ const ConversationsScreen = ({ history }) => {
                         ))}
                       </div>
                       <div className='chatBoxBottom'>
-                        <textarea
+                        {/* <textarea
                           className='chatMessageInput'
                           placeholder='write something...'
                           onChange={(e) => setNewMessage(e.target.value)}
                           value={newMessage}
                           data-testid='chat-input'
-                        ></textarea>
-                        <button
+                        ></textarea> */}
+                        <InputGroup className='pe-4'>
+                          <FormControl
+                            as='textarea'
+                            aria-label='textarea'
+                            placeholder='write something...'
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            value={newMessage}
+                            data-testid='chat-input'
+                          />
+                        </InputGroup>
+                        <Button
                           type='submit'
-                          className='chatSubmitButton'
+                          variant='success'
+                          // className='chatSubmitButton'
                           onClick={handleSubmit}
                           data-testid='chat-send'
                         >
                           Send
-                        </button>
+                        </Button>
                       </div>
                     </>
                   )

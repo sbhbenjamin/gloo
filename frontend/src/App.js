@@ -7,7 +7,6 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
-import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import OrderBuyerScreen from './screens/OrderBuyerScreen'
@@ -44,7 +43,7 @@ const App = () => {
           exact
         />
         <Route path='/' component={HomeScreen} exact />
-        <Container>
+        <Container className='pt-5'>
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />
