@@ -63,14 +63,14 @@ const UserOrdersScreen = ({ history }) => {
               <Col className='d-flex justify-content-start'>
                 <Button
                   data-testid='purchases-btn'
-                  className='block'
+                  className='block me-2'
                   onClick={getBuyerOrdersHandler}
                 >
                   Purchases
                 </Button>
                 <Button
                   data-testid='sales-btn'
-                  className='block ms-2'
+                  className='block hollow'
                   onClick={getSellerOrdersHandler}
                 >
                   Sales
@@ -143,7 +143,7 @@ const UserOrdersScreen = ({ history }) => {
             <Col className='d-flex justify-content-start'>
               <Button
                 data-testid='purchases-btn'
-                className='block me-2'
+                className='block hollow me-2'
                 onClick={getBuyerOrdersHandler}
               >
                 Purchases

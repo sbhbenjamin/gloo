@@ -126,7 +126,7 @@ describe('Log out and delete account using Admin user', () => {
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
     cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Admin user')
+      .should('include.text', 'Admin User')
       .click()
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout')
   })

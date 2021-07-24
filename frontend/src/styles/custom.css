@@ -118,8 +118,7 @@
   border-radius: 10px;
 }
 
-.me-2,
-.ms-2 {
+.hollow {
   display: block;
   color: #246b80;
   background-color: white;

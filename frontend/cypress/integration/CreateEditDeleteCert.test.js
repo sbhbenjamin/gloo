@@ -1,7 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 before(() => {
   cy.viewport(1280, 1200)
-  cy.visit('localhost:3000')
+  cy.visit('https://gloo-dev.herokuapp.com/')
+  // cy.visit('localhost:3000')
 })
 
 //CREATE CERTIFICATE

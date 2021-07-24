@@ -1,8 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 before(() => {
   cy.viewport(1280, 720)
-  // cy.visit('https://gloo-dev.herokuapp.com/')
-  cy.visit('localhost:3000')
+  cy.visit('https://gloo-dev.herokuapp.com/')
 })
 
 //CREATE PRODUCT
@@ -66,7 +65,9 @@ describe('View Add Product Using Image URL', () => {
   it('Search for newly created product', () => {
     cy.get('[data-testid=search-input]').type('Add Product Using Image URL')
     cy.get('[data-testid=search-submit]').click()
-    cy.contains('Add Product Using Image URL', { timeout: 8 * 1000 }).click()
+    cy.get('[class=row]')
+      .contains('Add Product Using Image URL', { timeout: 8 * 1000 })
+      .click()
   })
 
   it('Redirected to product page url', () => {
@@ -208,10 +209,15 @@ describe('Logout of Jane Account and Login to John Account', () => {
 
 describe('View Add Product Using Image URL Edited', () => {
   it('Search for newly created product', () => {
+    cy.get('[data-testid=search-input]').type(
+      'Add Product Using Image URL Edited'
+    )
     cy.get('[data-testid=search-submit]').click()
-    cy.contains('Add Product Using Image URL Edited', {
-      timeout: 8 * 1000,
-    }).click()
+    cy.get('[class=row]')
+      .contains('Add Product Using Image URL Edited', {
+        timeout: 8 * 1000,
+      })
+      .click()
   })
 
   it('Redirected to product page url', () => {
@@ -248,6 +254,8 @@ describe('Delete listing', () => {
   it('No results for deleted product', () => {
     cy.get('[data-testid=search-input]').type('Add Product Using Image URL')
     cy.get('[data-testid=search-submit]').click()
-    cy.contains('Add Product Using Image URL').should('not.exist')
+    cy.get('[class=row]')
+      .contains('Add Product Using Image URL')
+      .should('not.exist')
   })
 })
