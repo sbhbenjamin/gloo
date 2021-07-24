@@ -9,17 +9,11 @@ main {
 .navbar {
   padding-top: 12px;
   border-bottom: 1px solid rgb(0, 0, 0);
-  /* background-color: hsl(34, 48%, 87%); */
-  /* background-color: rgb(0, 93, 86); */
-  background-color: #1b4856;
+  background-color: #1b5263;
 }
 
 .navbar-brand {
   font-weight: 600;
-}
-
-.navbar-searchbox {
-  width: 450px;
 }
 
 footer {
@@ -32,6 +26,14 @@ footer a {
   color: #717171;
 }
 
+.color-primary {
+  color: #f47a60;
+}
+
+.color-secondary {
+  color: #1b5263;
+}
+
 .font-secondary {
   color: #717171;
 }
@@ -41,15 +43,28 @@ footer a {
   footer {
     font-size: 14px;
   }
+
+  .navbar-categories {
+    display: none;
+  }
 }
 
 /* Medium Devices, Desktops equivalent to class md */
 @media only screen and (max-width: 992px) {
   .navbar-searchbox {
     padding: 14px 0 8px 0;
+    /* width: 600px; */
   }
   .navbar-addproduct {
     padding: 8px 0;
     margin: 0;
+  }
+}
+
+/* Medium Devices, Desktops equivalent to class md */
+@media only screen and (min-width: 1440px) {
+  .navbar-searchbox {
+    /* margin-left: 200px; */
+    /* width: 700px; */
   }
 }

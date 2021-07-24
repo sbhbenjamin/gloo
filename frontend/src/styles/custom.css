@@ -15,8 +15,8 @@
 /* outline-primary button */
 .btn-outline-primary {
   font-weight: 300;
-  color: #fff;
-  border: 1px #fff solid;
+  color: #f16748;
+  border: 1px #f16748 solid;
   /* background-color: rgb(1, 52, 1); */
 }
 
@@ -26,6 +26,7 @@
   background-color: #f16748;
 }
 
+/* success button */
 .btn-success,
 .btn-success:focus {
   color: white;
@@ -37,6 +38,32 @@
 .btn-success:active {
   color: white;
   background-color: #1b5263;
+}
+
+/* outline-success button */
+.btn-outline-primary {
+  color: #1b5263;
+  border: 1px #1b5263 solid;
+  /* background-color: rgb(1, 52, 1); */
+}
+
+.btn-outline-primary:hover {
+  color: white;
+  border: 1px #1b5263 solid;
+  background-color: #1b5263;
+}
+
+/* outline-info button */
+.btn-outline-info {
+  color: white;
+  border: 1px white solid;
+  /* background-color: rgb(1, 52, 1); */
+}
+
+.btn-outline-info:hover {
+  color: white;
+  border: 1px #f47a60 solid;
+  background-color: #f47a60;
 }
 
 .navbar-brand {

@@ -79,6 +79,7 @@ const UserProfileScreen = ({ match }) => {
                 </p>
                 <Rating
                   className='font-secondary'
+                  color='#f47a60'
                   value={
                     products.reduce((acc, product) => acc + product.rating, 0) /
                     products.length

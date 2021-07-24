@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
+import { Route } from 'react-router-dom'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -9,6 +10,7 @@ import Meta from '../components/Meta'
 import { listProducts } from '../actions/productActions'
 import { getFavourites } from '../actions/userActions'
 import NavbarCategory from './NavbarCategory'
+import SearchBox from '../components/SearchBox'
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -33,13 +35,18 @@ const HomeScreen = ({ match }) => {
       <NavbarCategory />
       <Container>
         <Meta />
-        <div className='mt-5 mb-2'>
-          {match.params.keyword ? (
-            <h2>{match.params.keyword}</h2>
-          ) : (
-            <h2>Latest Products</h2>
-          )}
-        </div>
+        <Row className='mt-5 mb-2'>
+          <Col>
+            {match.params.keyword ? (
+              <h2>{match.params.keyword}</h2>
+            ) : (
+              <h2>Latest Products</h2>
+            )}
+          </Col>
+          {/* <Col className='home-search'>
+            <Route render={({ history }) => <SearchBox history={history} />} />
+          </Col> */}
+        </Row>
         {/* {errorFavourite && <Message variant='danger'>{errorFavourite}</Message>} */}
         {loading ? (
           <Loader />

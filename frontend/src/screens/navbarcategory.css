@@ -10,3 +10,7 @@
 .navbar-categories a {
   color: black;
 }
+
+.navbar-category-active {
+  font-weight: 900;
+}

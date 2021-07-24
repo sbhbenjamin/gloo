@@ -3,7 +3,14 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Button, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import {
+  Row,
+  Button,
+  Navbar,
+  Nav,
+  Container,
+  NavDropdown,
+} from 'react-bootstrap'
 import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
 
@@ -24,7 +31,7 @@ const Header = () => {
         expand='lg'
         collapseOnSelect
       >
-        <Container>
+        <Container className='d-flex'>
           <LinkContainer to='/'>
             <Navbar.Brand className='navbar-brand' data-testid='navbar-brand'>
               Gloo
@@ -32,35 +39,43 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            <div className='navbar-searchbox'>
+            <div className='navbar-searchbox mx-auto'>
               <Route
                 render={({ history }) => <SearchBox history={history} />}
               />
             </div>
-            <Nav className='ms-auto'>
+            <Nav xs='auto'>
               {userInfo && (
-                <LinkContainer to='/favourites' data-testid='navbar-favourites'>
-                  <Nav.Link>
-                    <i className='fas fa-heart me-1'></i>
-                    Favourites
-                  </Nav.Link>
-                </LinkContainer>
-              )}
-              {userInfo && (
-                <LinkContainer to='/conversations' data-testid='navbar-chat'>
-                  <Nav.Link>
-                    <i className='fas fa-comment-alt me-1'></i>
-                    Chats
-                  </Nav.Link>
-                </LinkContainer>
+                <>
+                  <LinkContainer
+                    to='/favourites'
+                    data-testid='navbar-favourites'
+                  >
+                    <Nav.Link>
+                      <i className='fas fa-heart me-1'></i>
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/conversations' data-testid='navbar-chat'>
+                    <Nav.Link>
+                      <i className='fas fa-comment-alt me-1'></i>
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer
+                    to='/orders/buyer'
+                    data-testid='navbar-buyerorders'
+                  >
+                    <Nav.Link>
+                      <i className='fas fa-clipboard me-1'></i>
+                    </Nav.Link>
+                  </LinkContainer>
+                </>
               )}
 
-              {userInfo && (
+              {/* {userInfo && (
                 <NavDropdown
                   title={
                     <>
                       <i className='fas fa-clipboard me-1'></i>
-                      Orders
                     </>
                   }
                   id='username'
@@ -77,11 +92,12 @@ const Header = () => {
                     </NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
-              )}
+              )} */}
 
-              {userInfo ? (
+              {/* {userInfo ? (
                 <NavDropdown
-                  title={userInfo.name}
+                  // title={userInfo.name}
+                  title={<i class='far fa-user-circle'></i>}
                   id='username'
                   data-testid='navbar-username'
                 >
@@ -109,7 +125,78 @@ const Header = () => {
                     Sign In
                   </Nav.Link>
                 </LinkContainer>
+              )} */}
+
+              {userInfo ? (
+                <li class='nav-item dropdown' id='myDropdown'>
+                  <a
+                    href='#'
+                    className='nav-link dropdown-toggle btn-toggle'
+                    variant='link'
+                    data-bs-toggle='dropdown'
+                  >
+                    {userInfo.name}
+                    {/* <i class='far fa-user-circle'></i> */}
+                  </a>
+                  <ul class='dropdown-menu'>
+                    {/* <li>
+                    <a class='dropdown-item' href='#'>
+                      Buyer &raquo;
+                    </a>
+                    <ul class='submenu dropdown-menu'>
+                      <li>
+                        <a class='dropdown-item' href='#'>
+                          Orders
+                        </a>
+                      </li>
+                    </ul>
+                  </li> */}
+
+                    <li>
+                      <a class='dropdown-item' variant='link'>
+                        <i class='fas fa-caret-left pe-2'></i> Seller
+                      </a>
+                      <ul class='submenu dropdown-menu'>
+                        <LinkContainer
+                          to={`/new`}
+                          data-testid='navbar-addproduct'
+                        >
+                          <li className='dropdown-item'>Create Listing</li>
+                        </LinkContainer>
+                        <LinkContainer
+                          to={`/user/${userInfo._id}/listings`}
+                          data-testid='navbar-certs'
+                        >
+                          <li className='dropdown-item'>My Listings</li>
+                        </LinkContainer>
+
+                        <LinkContainer
+                          to={`/certificates`}
+                          data-testid='navbar-certs'
+                        >
+                          <li className='dropdown-item'>My Certificates</li>
+                        </LinkContainer>
+                      </ul>
+                    </li>
+                    <li>
+                      <NavDropdown.Item
+                        onClick={logoutHandler}
+                        data-testid='navbar-logout'
+                      >
+                        Logout
+                      </NavDropdown.Item>
+                    </li>
+                  </ul>
+                </li>
+              ) : (
+                <LinkContainer to='/login' data-testid='navbar-signin'>
+                  <Nav.Link>
+                    <i className='fas fa-user me-1'></i>
+                    Sign In
+                  </Nav.Link>
+                </LinkContainer>
               )}
+
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' data-testid='admin-menu'>
                   <LinkContainer to='/admin/userlist'>
@@ -135,7 +222,7 @@ const Header = () => {
                 </NavDropdown>
               )}
             </Nav>
-            {userInfo && (
+            {/* {userInfo && (
               <LinkContainer to='/new' className='navbar-addproduct'>
                 <Nav.Link>
                   <Button variant='primary' data-testid='navbar-addproduct'>
@@ -143,7 +230,7 @@ const Header = () => {
                   </Button>
                 </Nav.Link>
               </LinkContainer>
-            )}
+            )} */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
