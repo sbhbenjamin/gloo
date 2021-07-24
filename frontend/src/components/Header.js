@@ -16,7 +16,6 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logout())
   }
-
   return (
     <header>
       <Navbar
@@ -40,125 +39,55 @@ const Header = () => {
             </div>
             <Nav xs='auto'>
               {userInfo && (
-                <>
-                  <LinkContainer
-                    to='/favourites'
-                    data-testid='navbar-favourites'
-                  >
-                    <Nav.Link>
-                      <i className='fas fa-heart me-1'></i>
-                      <span className='d-md-inline d-lg-none'>Favourites</span>
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to='/conversations' data-testid='navbar-chat'>
-                    <Nav.Link>
-                      <i className='fas fa-comment-alt me-1'></i>
-                      <span className='d-md-inline d-lg-none'>
-                        Conversations
-                      </span>
-                    </Nav.Link>
-                  </LinkContainer>
-                  {/* <LinkContainer to='/orders' data-testid='navbar-orders'>
-                    <Nav.Link>
-                      <i className='fas fa-clipboard me-1'></i>
-                      <span className='d-md-inline d-lg-none'>Orders</span>
-                    </Nav.Link>
-                  </LinkContainer> */}
-                </>
+                <LinkContainer to='/favourites' data-testid='navbar-favourites'>
+                  <Nav.Link>
+                    <i className='fas fa-heart me-1'></i>
+                    <span className='d-md-inline d-lg-none'>Favourites</span>
+                  </Nav.Link>
+                </LinkContainer>
+              )}
+              {userInfo && (
+                <LinkContainer to='/conversations' data-testid='navbar-chat'>
+                  <Nav.Link>
+                    <i className='fas fa-comment-alt me-1'></i>
+                    <span className='d-md-inline d-lg-none'>Conversations</span>
+                  </Nav.Link>
+                </LinkContainer>
               )}
 
               {userInfo ? (
-                <>
-                  {/* <li className='nav-item dropdown' id='myDropdown'>
-                    <a
-                      href='/'
-                      className='nav-link dropdown-toggle btn-toggle'
-                      variant='link'
-                      data-testid='navbar-username'
-                      data-bs-toggle='dropdown'
-                    >
-                      {userInfo.name}
-                    </a>
-                    <ul className='dropdown-menu'>
-                      <li>
-                        <a
-                          data-testid='navbar-seller'
-                          className='dropdown-item'
-                          variant='link'
-                        >
-                          <i className='fas fa-caret-left pe-2'></i> Seller
-                        </a>
-                        <ul className='submenu dropdown-menu'>
-                          <LinkContainer
-                            to={`/new`}
-                            data-testid='navbar-addproduct'
-                          >
-                            <li className='dropdown-item'>Create Listing</li>
-                          </LinkContainer>
-
-                          <LinkContainer
-                            to={`/user/${userInfo._id}/listings`}
-                            data-testid='navbar-listings'
-                          >
-                            <li className='dropdown-item'>My Listings</li>
-                          </LinkContainer>
-
-                          <LinkContainer
-                            to={`/certificates`}
-                            data-testid='navbar-certs'
-                          >
-                            <li className='dropdown-item'>My Certificates</li>
-                          </LinkContainer>
-                        </ul>
-                      </li>
-                      <li>
-                        <NavDropdown.Item
-                          onClick={logoutHandler}
-                          data-testid='navbar-logout'
-                        >
-                          Logout
-                        </NavDropdown.Item>
-                      </li>
-                    </ul>
-                  </li> */}
-
-                  <NavDropdown
-                    data-testid='navbar-username'
-                    title={userInfo.name}
-                  >
-                    <NavDropdown.Item
-                      href='/new'
-                      data-testid='navbar-addproduct'
-                    >
-                      Create a Listing
+                <NavDropdown
+                  title={userInfo.name}
+                  id='username'
+                  data-testid='navbar-username'
+                >
+                  <LinkContainer to='/new'>
+                    <NavDropdown.Item data-testid='navbar-addproduct'>
+                      Create Listing
                     </NavDropdown.Item>
-                    <NavDropdown.Item
-                      href='/orders/buyer'
-                      data-testid='navbar-orders'
-                    >
-                      Orders
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      data-testid='navbar-listings'
-                      href={`/user/${userInfo._id}/listings`}
-                    >
+                  </LinkContainer>
+                  <LinkContainer to={`/user/${userInfo._id}/listings`}>
+                    <NavDropdown.Item data-testid='navbar-listings'>
                       Profile
                     </NavDropdown.Item>
-                    <NavDropdown.Item
-                      data-testid='navbar-certs'
-                      href='/certificates'
-                    >
+                  </LinkContainer>
+                  <LinkContainer to={`/certificates`}>
+                    <NavDropdown.Item data-testid='navbar-certs'>
                       Certificates
                     </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item
-                      onClick={logoutHandler}
-                      data-testid='navbar-logout'
-                    >
-                      Logout
+                  </LinkContainer>
+                  <LinkContainer to='/orders'>
+                    <NavDropdown.Item data-testid='navbar-orders'>
+                      Transactions
                     </NavDropdown.Item>
-                  </NavDropdown>
-                </>
+                  </LinkContainer>
+                  <NavDropdown.Item
+                    onClick={logoutHandler}
+                    data-testid='navbar-logout'
+                  >
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
               ) : (
                 <LinkContainer to='/login' data-testid='navbar-signin'>
                   <Nav.Link>
@@ -167,9 +96,8 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='Admin' data-testid='admin-menu'>
+                <NavDropdown title='Menu' data-testid='admin-menu'>
                   <LinkContainer to='/admin/userlist'>
                     <NavDropdown.Item data-testid='admin-users'>
                       Users
