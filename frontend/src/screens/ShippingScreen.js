@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import Message from '../components/Message'
@@ -95,29 +94,10 @@ const ShippingScreen = ({ history }) => {
             <Button
               data-testid='shipping-continue-btn'
               type='submit'
-              variant='primary'
+              variant='success'
             >
               Continue
             </Button>
-            {/* <Link
-              data-testid='shipping-continue-btn'
-              type='submit'
-              className='btn btn-primary'
-              to={{
-                pathname: '/payment',
-                state: {
-                  offer: history.location.state.offer,
-                  shipping: {
-                    address,
-                    city,
-                    postalCode,
-                    country,
-                  },
-                },
-              }}
-            >
-              Continue
-            </Link> */}
           </Form>
         </FormContainer>
       )}

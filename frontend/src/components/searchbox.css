@@ -4,7 +4,7 @@ label {
 }
 
 .search-input {
-  width: 600px;
+  width: 550px;
   height: 20px;
   border: 2px #f47b6000 solid;
   outline: none;
@@ -12,7 +12,6 @@ label {
   border-radius: 8px;
   font-size: 1em;
   transition: 0.5s;
-  /* color: #1b5263; */
   color: #2b2b2b;
   background-color: #447d8f;
   padding-left: 15px;
@@ -21,7 +20,7 @@ label {
 
 .search-icon {
   position: absolute;
-  left: 575px;
+  left: 525px;
   top: 10px;
   bottom: 0px;
   color: #1b5263;
@@ -57,6 +56,18 @@ label {
 
   .search-icon {
     left: 275px;
+    top: 10px;
+  }
+}
+
+/* Medium Devices, Desktops equivalent to class md */
+@media only screen and (min-width: 1440px) {
+  .search-input {
+    width: 700px;
+  }
+
+  .search-icon {
+    left: 675px;
     top: 10px;
   }
 }

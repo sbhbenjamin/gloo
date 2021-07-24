@@ -133,7 +133,7 @@ const ProductScreen = ({ history, match }) => {
                   <ListGroup.Item>
                     {product.user && (
                       <Row>
-                        <Col>Seller: </Col>
+                        <Col xs={5}>Seller: </Col>
                         <Col>
                           <Link
                             to={`/user/${product.user._id}/listings`}
@@ -146,7 +146,7 @@ const ProductScreen = ({ history, match }) => {
                       </Row>
                     )}
                   </ListGroup.Item>
-                  <ListGroup.Item>
+                  {/* <ListGroup.Item>
                     <Row>
                       <Col>Price: </Col>
                       <Col>
@@ -158,7 +158,7 @@ const ProductScreen = ({ history, match }) => {
                         </strong>
                       </Col>
                     </Row>
-                  </ListGroup.Item>
+                  </ListGroup.Item> */}
 
                   {product.user &&
                     userInfo &&

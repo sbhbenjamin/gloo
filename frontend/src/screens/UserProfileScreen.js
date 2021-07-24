@@ -1,7 +1,7 @@
 import './userprofilescreen.css'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
+import { Button, Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -11,7 +11,7 @@ import { listUserProducts } from '../actions/productActions'
 import { getUserDetailsPublic } from '../actions/userActions'
 import { listUserCerts } from '../actions/certActions'
 
-const UserProfileScreen = ({ match }) => {
+const UserProfileScreen = ({ history, match }) => {
   const [rating, setRating] = useState(null)
   const userId = match.params.id
 
@@ -45,6 +45,14 @@ const UserProfileScreen = ({ match }) => {
 
   return (
     <>
+      <Button
+        data-testid='navigate-back-btn'
+        onClick={history.goBack}
+        variant='outline-secondary'
+        className='mb-4'
+      >
+        Go Back
+      </Button>
       <Meta title={userId} />
       {(loadingUserDetails || loadingProducts) && <Loader />}
       {loadingUserDetails ? (
@@ -112,30 +120,35 @@ const UserProfileScreen = ({ match }) => {
       ) : errorProducts ? (
         <Message variant='danger'>{errorProducts}</Message>
       ) : (
-        <Row>
-          {products.length === 0 ? (
-            <p>
-              {userInfo
-                ? userInfo._id === user._id
-                  ? 'You do not have any listings'
-                  : 'This user does not currently have any listings'
-                : 'This user does not currently have any listings'}
-            </p>
-          ) : (
-            products.map((product) => (
-              <Col
-                key={product._id}
-                sm={12}
-                md={6}
-                lg={4}
-                xl={3}
-                className='d-flex align-items-stretch'
-              >
-                <Product product={product} />
-              </Col>
-            ))
-          )}
-        </Row>
+        <>
+          <Row className='mt-2'>
+            <h2>Listings ({products.length})</h2>
+          </Row>
+          <Row>
+            {products.length === 0 ? (
+              <p>
+                {userInfo
+                  ? userInfo._id === user._id
+                    ? 'You do not have any listings'
+                    : 'This user does not currently have any listings'
+                  : 'This user does not currently have any listings'}
+              </p>
+            ) : (
+              products.map((product) => (
+                <Col
+                  key={product._id}
+                  sm={12}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  className='d-flex align-items-stretch'
+                >
+                  <Product product={product} />
+                </Col>
+              ))
+            )}
+          </Row>
+        </>
       )}
     </>
   )

@@ -311,7 +311,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                       />
                       <InputGroup.Append>
                         <Button
-                          variant='outline-success'
+                          variant='outline-primary'
                           onClick={handleOfferSubmit}
                           data-testid='chat-product-offersubmit'
                         >

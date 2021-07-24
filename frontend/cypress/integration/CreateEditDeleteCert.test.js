@@ -1,8 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 before(() => {
   cy.viewport(1280, 1200)
-  cy.visit('https://gloo-dev.herokuapp.com/')
-  // cy.visit('localhost:3000')
+  // cy.visit('https://gloo-dev.herokuapp.com/')
+  cy.visit('localhost:3000')
 })
 
 //CREATE CERTIFICATE
@@ -33,11 +33,9 @@ describe('Login feature works as expected', () => {
 
 describe('Create Certificate Screen', () => {
   it('Click on Certificates', () => {
+    // cy.contains('Jane Doe').click()
     cy.get('[data-testid=navbar-username]').click()
     cy.get('[data-testid=navbar-certs]').click({ force: true })
-  })
-
-  it('Redirected to correct url', () => {
     cy.url().should('include', '/certificates')
   })
 

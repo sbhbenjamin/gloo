@@ -5,3 +5,14 @@
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
+.product-seller {
+  /* background-color: #ffc9bd; */
+  color: #2a7f99;
+}
+
+/* .product-seller:hover {
+  background-color: #fc9882;
+  color: white;
+  transition: 0.2s;
+} */

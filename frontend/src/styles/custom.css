@@ -41,13 +41,13 @@
 }
 
 /* outline-success button */
-.btn-outline-primary {
+.btn-outline-success {
   color: #1b5263;
   border: 1px #1b5263 solid;
   /* background-color: rgb(1, 52, 1); */
 }
 
-.btn-outline-primary:hover {
+.btn-outline-success:hover {
   color: white;
   border: 1px #1b5263 solid;
   background-color: #1b5263;

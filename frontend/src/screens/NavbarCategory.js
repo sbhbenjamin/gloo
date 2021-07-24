@@ -5,7 +5,7 @@ import React from 'react'
 
 const NavbarCategory = () => {
   return (
-    <Row className='mt-0 navbar-categories py-3 d-none d-sm-flex justify-content-center gap-4 font-secondary'>
+    <Row className='mt-0 navbar-categories py-3 d-none d-sm-flex justify-content-center gap-4'>
       <Col xs='auto'>
         <a href='http://localhost:3000/search/Electrical'>Electrical</a>
       </Col>

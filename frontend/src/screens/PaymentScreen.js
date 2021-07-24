@@ -58,39 +58,16 @@ const PaymentScreen = ({ history }) => {
                   checked
                   onChange={(e) => setPaymentMethod('PayPal')}
                 />
-                {/* <Form.Check
-              type='radio'
-              label='Stripe'
-              id='Stripe'
-              name='paymentMethod'
-              value='Stripe'
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            /> */}
               </Col>
             </Form.Group>
 
             <Button
               data-testid='payment-continue-btn'
               type='submit'
-              variant='primary'
+              variant='success'
             >
               Continue
             </Button>
-            {/* <Link
-              data-testid='payment-continue-btn'
-              type='submit'
-              className='btn btn-primary'
-              to={{
-                pathname: '/placeorder',
-                state: {
-                  offer: history.location.state.offer,
-                  shipping: history.location.state.shipping,
-                  paymentMethod,
-                },
-              }}
-            >
-              Continue
-            </Link> */}
           </Form>
         </FormContainer>
       )}
