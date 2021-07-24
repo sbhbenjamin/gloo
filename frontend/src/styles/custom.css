@@ -89,6 +89,9 @@
   color: white;
   background-color: #f47a60;
 }
+.dropdown-menu :visited {
+  background-color: #f47a60;
+}
 
 .submenu {
   background-color: white !important;

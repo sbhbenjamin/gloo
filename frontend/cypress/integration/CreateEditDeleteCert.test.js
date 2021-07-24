@@ -292,7 +292,7 @@ describe('Sign in as admin to view and approve the Certificate', () => {
   })
 
   it('Go to admin all certificates screen', () => {
-    cy.get('[data-testid=admin-menu]').should('have.text', 'Admin').click()
+    cy.get('[data-testid=admin-menu]').click()
     cy.get('[data-testid=admin-certs]')
       .should('have.text', 'Certificates')
       .click()
