@@ -70,73 +70,8 @@ const Header = () => {
                   </LinkContainer>
                 </>
               )}
-
-              {/* {userInfo && (
-                <NavDropdown
-                  title={
-                    <>
-                      <i className='fas fa-clipboard me-1'></i>
-<<<<<<< Updated upstream
-=======
-                      <span>Orders</span>
->>>>>>> Stashed changes
-                    </>
-                  }
-                  id='username'
-                  data-testid='navbar-orders'
-                >
-                  <LinkContainer to='/orders/buyer'>
-                    <NavDropdown.Item data-testid='navbar-buyerorders'>
-                      Buyer
-                    </NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to={`/orders/seller`}>
-                    <NavDropdown.Item data-testid='navbar-sellerorders'>
-                      Seller
-                    </NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
-              )} */}
-
-              {/* {userInfo ? (
-                <NavDropdown
-<<<<<<< Updated upstream
-                  // title={userInfo.name}
-                  title={<i class='far fa-user-circle'></i>}
-=======
-                  title={<span>{userInfo.name}</span>}
->>>>>>> Stashed changes
-                  id='username'
-                  data-testid='navbar-username'
-                >
-                  <LinkContainer to={`/user/${userInfo._id}/listings`}>
-                    <NavDropdown.Item data-testid='navbar-listings'>
-                      Listings
-                    </NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to={`/certificates`}>
-                    <NavDropdown.Item data-testid='navbar-certs'>
-                      Certificates
-                    </NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item
-                    onClick={logoutHandler}
-                    data-testid='navbar-logout'
-                  >
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              ) : (
-                <LinkContainer to='/login' data-testid='navbar-signin'>
-                  <Nav.Link>
-                    <i className='fas fa-user me-1'></i>
-                    <span>Sign In</span>
-                  </Nav.Link>
-                </LinkContainer>
-              )} */}
-
               {userInfo ? (
-                <li class='nav-item dropdown' id='myDropdown'>
+                <li className='nav-item dropdown' id='myDropdown'>
                   <a
                     href='/'
                     className='nav-link dropdown-toggle btn-toggle'
@@ -144,22 +79,8 @@ const Header = () => {
                     data-bs-toggle='dropdown'
                   >
                     {userInfo.name}
-                    {/* <i class='far fa-user-circle'></i> */}
                   </a>
                   <ul className='dropdown-menu'>
-                    {/* <li>
-                    <a class='dropdown-item' href='#'>
-                      Buyer &raquo;
-                    </a>
-                    <ul class='submenu dropdown-menu'>
-                      <li>
-                        <a class='dropdown-item' href='#'>
-                          Orders
-                        </a>
-                      </li>
-                    </ul>
-                  </li> */}
-
                     <li>
                       <a className='dropdown-item' variant='link'>
                         <i className='fas fa-caret-left pe-2'></i> Seller
@@ -230,15 +151,6 @@ const Header = () => {
                 </NavDropdown>
               )}
             </Nav>
-            {/* {userInfo && (
-              <LinkContainer to='/new' className='navbar-addproduct'>
-                <Nav.Link>
-                  <Button variant='primary' data-testid='navbar-addproduct'>
-                    <span>Add Product</span>
-                  </Button>
-                </Nav.Link>
-              </LinkContainer>
-            )} */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

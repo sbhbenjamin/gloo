@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
-import { Route } from 'react-router-dom'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -10,7 +9,6 @@ import Meta from '../components/Meta'
 import { listProducts } from '../actions/productActions'
 import { getFavourites } from '../actions/userActions'
 import NavbarCategory from './NavbarCategory'
-import SearchBox from '../components/SearchBox'
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -27,7 +25,6 @@ const HomeScreen = ({ match }) => {
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
     dispatch(getFavourites())
-    console.log(match.params.keyword)
   }, [dispatch, keyword, pageNumber, userInfo])
 
   return (

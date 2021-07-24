@@ -16,16 +16,21 @@ const SearchBox = ({ history }) => {
   }
 
   return (
-    <Form onSubmit={submitHandler} autocomplete='off' className='d-flex'>
+    <Form onSubmit={submitHandler} autoComplete='off' className='d-flex'>
       <label>
         <input
           type='text'
+          data-testid='search-input'
           className='search-input'
           placeholder='Search by name or category...'
           onChange={(e) => setKeyword(e.target.value)}
           value={keyword}
         ></input>
-        <i className='fas fa-search search-icon' onClick={submitHandler}></i>
+        <i
+          data-testid='search-submit'
+          className='fas fa-search search-icon'
+          onClick={submitHandler}
+        ></i>
       </label>
     </Form>
   )
