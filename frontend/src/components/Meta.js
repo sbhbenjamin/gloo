@@ -12,7 +12,7 @@ const Meta = ({ title, description, keywords }) => {
 }
 
 Meta.defaultProps = {
-  title: 'Welcome To Gloo',
+  title: 'Gloo',
   description:
     'A one-stop platform connecting handymen and customers looking for services.',
   keywords:
