@@ -11,8 +11,7 @@ import { listUserProducts } from '../actions/productActions'
 import { getUserDetailsPublic } from '../actions/userActions'
 import { listUserCerts } from '../actions/certActions'
 
-const UserProfileScreen = ({ history, match }) => {
-  const [rating, setRating] = useState(null)
+const UserProfileScreen = ({ match }) => {
   const userId = match.params.id
 
   const dispatch = useDispatch()
@@ -45,14 +44,6 @@ const UserProfileScreen = ({ history, match }) => {
 
   return (
     <>
-      <Button
-        data-testid='navigate-back-btn'
-        onClick={history.goBack}
-        variant='outline-secondary'
-        className='mb-4'
-      >
-        Go Back
-      </Button>
       <Meta title={userId} />
       {(loadingUserDetails || loadingProducts) && <Loader />}
       {loadingUserDetails ? (

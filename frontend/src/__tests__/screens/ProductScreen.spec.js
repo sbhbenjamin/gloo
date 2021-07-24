@@ -57,7 +57,6 @@ it('should render product details with correct rating, seller, and image without
   expect(screen.getByTestId('product-name')).toHaveTextContent(
     '1st Solution Electrical'
   )
-  expect(screen.getByTestId('product-price')).toHaveTextContent('89.99')
   expect(screen.getByTestId('product-image')).toHaveAttribute(
     'src',
     '/images/electrical.jpg'
@@ -82,7 +81,6 @@ it('should render correct details, rating, image, and contain add to cart when l
   expect(screen.getByTestId('product-name')).toHaveTextContent(
     '1st Solution Electrical'
   )
-  expect(screen.getByTestId('product-price')).toHaveTextContent('89.99')
   expect(screen.getByTestId('product-image')).toHaveAttribute(
     'src',
     '/images/electrical.jpg'
@@ -107,7 +105,6 @@ it('should render correct details, rating, image, and contain edit listing when 
   expect(screen.getByTestId('product-name')).toHaveTextContent(
     '1st Solution Electrical'
   )
-  expect(screen.getByTestId('product-price')).toHaveTextContent('89.99')
   expect(screen.getByTestId('product-image')).toHaveAttribute(
     'src',
     '/images/electrical.jpg'
