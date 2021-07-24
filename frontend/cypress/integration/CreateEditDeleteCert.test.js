@@ -1,7 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 before(() => {
-  cy.viewport(1280, 720)
-  cy.visit('https://gloo-dev.herokuapp.com/')
+  cy.viewport(1280, 1200)
+  cy.visit('localhost:3000')
 })
 
 //CREATE CERTIFICATE
@@ -25,16 +25,15 @@ describe('Login feature works as expected', () => {
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Jane Doe')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout')
   })
 })
 
 describe('Create Certificate Screen', () => {
   it('Click on Certificates', () => {
-    cy.get('[data-testid=navbar-certs]').should('exist').click()
+    cy.get('[data-testid=navbar-username]').click()
+    cy.get('[data-testid=navbar-certs]').click({ force: true })
   })
 
   it('Redirected to correct url', () => {
@@ -144,9 +143,7 @@ describe('Redirect to certificates page', () => {
 
 describe('Check that logged out users are not able to view certificates screen', () => {
   it('Logout', () => {
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Jane Doe')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
 
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout').click()
   })
@@ -166,11 +163,10 @@ describe('Sign in as admin to view and reject the Certificate', () => {
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]').should('include.text', 'Admin user')
   })
 
   it('Go to admin all certificates screen', () => {
-    cy.get('[data-testid=admin-menu]').should('have.text', 'Admin').click()
+    cy.get('[data-testid=admin-menu]').click()
     cy.get('[data-testid=admin-certs]')
       .should('have.text', 'Certificates')
       .click()
@@ -212,9 +208,7 @@ describe('Sign in as admin to view and reject the Certificate', () => {
 
 describe('Logout of Admin user Account and Login to jane Account to view rejected certificate', () => {
   it('Logout of Admin', () => {
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Admin user')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
 
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout').click()
   })
@@ -232,15 +226,14 @@ describe('Logout of Admin user Account and Login to jane Account to view rejecte
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Jane Doe')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
   })
 })
 
 describe('View update in rejected certificate status', () => {
   it('Click on Certificates', () => {
-    cy.get('[data-testid=navbar-certs]').should('exist').click()
+    cy.get('[data-testid=navbar-username]').click()
+    cy.get('[data-testid=navbar-certs]').click({ force: true })
   })
 
   it('Redirected to correct url', () => {
@@ -265,8 +258,8 @@ describe('View update in rejected certificate status', () => {
 
 describe('Certification should not be present in jane listings page', () => {
   it('Click on listings', () => {
-    cy.get('[data-testid=navbar-username]').should('exist').click()
-    cy.get('[data-testid=navbar-listings]').should('exist').click()
+    cy.get('[data-testid=navbar-username]').click()
+    cy.get('[data-testid=navbar-listings]').click({ force: true })
   })
 
   it('Properly redirected to listings screen', () => {
@@ -297,7 +290,6 @@ describe('Sign in as admin to view and approve the Certificate', () => {
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]').should('include.text', 'Admin user')
   })
 
   it('Go to admin all certificates screen', () => {
@@ -343,9 +335,7 @@ describe('Sign in as admin to view and approve the Certificate', () => {
 
 describe('Logout of Admin user Account and Login to jane Account to view approved certificate', () => {
   it('Logout of Admin', () => {
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Admin user')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
 
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout').click()
   })
@@ -363,15 +353,14 @@ describe('Logout of Admin user Account and Login to jane Account to view approve
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Jane Doe')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
   })
 })
 
 describe('Certification is present in jane listings page', () => {
   it('Go to listings screen', () => {
-    cy.get('[data-testid=navbar-listings]').should('exist').click()
+    cy.get('[data-testid=navbar-username]').click()
+    cy.get('[data-testid=navbar-listings]').click({ force: true })
     cy.url().should('include', '/listings')
   })
   it('jane Approved certifications present', () => {
@@ -382,8 +371,8 @@ describe('Certification is present in jane listings page', () => {
 
 describe('View update in approved certificate status', () => {
   it('Click on Certificates', () => {
-    cy.get('[data-testid=navbar-username]').should('exist').click()
-    cy.get('[data-testid=navbar-certs]').should('exist').click()
+    cy.get('[data-testid=navbar-username]').click()
+    cy.get('[data-testid=navbar-certs]').click({ force: true })
   })
 
   it('Redirected to correct url', () => {

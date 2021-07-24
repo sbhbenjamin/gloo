@@ -1,7 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 before(() => {
   cy.viewport(1280, 720)
-  cy.visit('https://gloo-dev.herokuapp.com/')
+  // cy.visit('https://gloo-dev.herokuapp.com/')
+  cy.visit('localhost:3000')
 })
 
 //CREATE PRODUCT
@@ -26,16 +27,13 @@ describe('Login feature works as expected', () => {
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'John Doe')
-      .click()
-    cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout')
   })
 })
 
 describe('Add Product Screen', () => {
   it('Click on Add Product', () => {
-    cy.get('[data-testid=navbar-addproduct]').should('exist').click()
+    cy.get('[data-testid=navbar-username]').click()
+    cy.get('[data-testid=navbar-addproduct]').click({ force: true })
   })
 
   it('Redirected to correct url', () => {
@@ -88,10 +86,8 @@ describe('View Add Product Using Image URL', () => {
 
 describe('View My Listings', () => {
   it('Listings button can be clicked', () => {
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'John Doe')
-      .click()
-    cy.get('[data-testid=navbar-listings]').click()
+    cy.get('[data-testid=navbar-username]').click()
+    cy.get('[data-testid=navbar-listings]').click({ force: true })
   })
 
   it('Go to Product Page of Johns Product', () => {
@@ -140,9 +136,7 @@ describe('Redirect to product page', () => {
 
 describe('Check if logged out users are able to view updated title', () => {
   it('Logout', () => {
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'John Doe')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
 
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout').click()
     cy.reload()
@@ -168,7 +162,7 @@ describe('Check if other logged in users are able to view updated title', () => 
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]').should('include.text', 'Jane Doe')
+    cy.contains('Jane Doe').should('exist')
   })
 
   it('Search for newly updated product', () => {
@@ -189,9 +183,8 @@ describe('Check if other logged in users are able to view updated title', () => 
 
 describe('Logout of Jane Account and Login to John Account', () => {
   it('Logout of Jane', () => {
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Jane Doe')
-      .click()
+    cy.contains('Jane Doe').should('exist')
+    cy.get('[data-testid=navbar-username]').click()
 
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout').click()
   })
@@ -209,9 +202,7 @@ describe('Logout of Jane Account and Login to John Account', () => {
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'John Doe')
-      .click()
+    cy.get('[data-testid=navbar-username]').click()
   })
 })
 

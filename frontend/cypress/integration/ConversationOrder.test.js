@@ -1,7 +1,7 @@
 // <reference types="cypress" />
 
-// const URL = 'http://localhost:3000/'
-const URL = 'https://gloo-dev.herokuapp.com/'
+const URL = 'http://localhost:3000/'
+// const URL = 'https://gloo-dev.herokuapp.com/'
 
 const login = (email, password) => {
   cy.visit(URL)
@@ -20,7 +20,7 @@ const listingName = '1st Solution Electrical'
 describe('should be able to send and receive messages through the chat', () => {
   it('user should be able to start a chat with a seller', () => {
     login('john@example.com', 123456)
-    cy.contains(listingName).click()
+    cy.contains(listingName, { timeout: 5000 }).click()
     cy.get('[data-testid=chat-btn]').click()
     cy.get('[data-testid=chat-product-name]')
       .contains(listingName)
@@ -231,7 +231,7 @@ describe('should be able to send and receive messages through the chat', () => {
     // eslint-disable-next-line jest/valid-expect-in-promise
     cy.get('[data-testid=order-id]').then(($span) => {
       cy.get('[data-testid=navbar-orders]').click()
-      cy.get('[data-testid=navbar-sellerorders]').click()
+      cy.get('[data-testid=sales-btn]').click()
       cy.contains($span.text()).parent().contains('Details').click()
       cy.url().should('include', $span.text())
       cy.contains($span.text()).should('exist')
@@ -248,7 +248,6 @@ describe('should be able to send and receive messages through the chat', () => {
     cy.get('[data-testid=order-id]').then(($span) => {
       cy.visit(URL) // fix for paypal button causing script error
       cy.get('[data-testid=navbar-orders]').click()
-      cy.get('[data-testid=navbar-buyerorders]').click()
       cy.contains($span.text()).parent().contains('Details').click()
       cy.url().should('include', $span.text())
       cy.contains($span.text()).should('exist')

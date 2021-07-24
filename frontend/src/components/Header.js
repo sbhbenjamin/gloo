@@ -53,19 +53,21 @@ const Header = () => {
                   >
                     <Nav.Link>
                       <i className='fas fa-heart me-1'></i>
+                      <span className='d-md-inline d-lg-none'>Favourites</span>
                     </Nav.Link>
                   </LinkContainer>
                   <LinkContainer to='/conversations' data-testid='navbar-chat'>
                     <Nav.Link>
                       <i className='fas fa-comment-alt me-1'></i>
+                      <span className='d-md-inline d-lg-none'>
+                        Conversations
+                      </span>
                     </Nav.Link>
                   </LinkContainer>
-                  <LinkContainer
-                    to='/orders/buyer'
-                    data-testid='navbar-buyerorders'
-                  >
+                  <LinkContainer to='/orders/buyer' data-testid='navbar-orders'>
                     <Nav.Link>
                       <i className='fas fa-clipboard me-1'></i>
+                      <span className='d-md-inline d-lg-none'>Orders</span>
                     </Nav.Link>
                   </LinkContainer>
                 </>
@@ -76,13 +78,18 @@ const Header = () => {
                     href='/'
                     className='nav-link dropdown-toggle btn-toggle'
                     variant='link'
+                    data-testid='navbar-username'
                     data-bs-toggle='dropdown'
                   >
                     {userInfo.name}
                   </a>
                   <ul className='dropdown-menu'>
                     <li>
-                      <a className='dropdown-item' variant='link'>
+                      <a
+                        data-testid='navbar-seller'
+                        className='dropdown-item'
+                        variant='link'
+                      >
                         <i className='fas fa-caret-left pe-2'></i> Seller
                       </a>
                       <ul className='submenu dropdown-menu'>
@@ -94,7 +101,7 @@ const Header = () => {
                         </LinkContainer>
                         <LinkContainer
                           to={`/user/${userInfo._id}/listings`}
-                          data-testid='navbar-certs'
+                          data-testid='navbar-listings'
                         >
                           <li className='dropdown-item'>My Listings</li>
                         </LinkContainer>

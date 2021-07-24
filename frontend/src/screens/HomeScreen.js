@@ -40,9 +40,6 @@ const HomeScreen = ({ match }) => {
               <h2>Latest Products</h2>
             )}
           </Col>
-          {/* <Col className='home-search'>
-            <Route render={({ history }) => <SearchBox history={history} />} />
-          </Col> */}
         </Row>
         {/* {errorFavourite && <Message variant='danger'>{errorFavourite}</Message>} */}
         {loading ? (

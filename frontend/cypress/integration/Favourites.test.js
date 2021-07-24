@@ -19,9 +19,7 @@ describe('Login feature works as expected', () => {
     cy.get("[type='password']").type('123456')
     cy.get('Button').contains('Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]')
-      .should('have.text', 'Jane Doe')
-      .click()
+    cy.contains('Jane Doe').click()
     cy.contains('Logout').should('exist')
   })
 })
@@ -45,9 +43,7 @@ describe('Hearts should render upon sign in', () => {
 
 describe('Jane Favourites is empty intially', () => {
   it('Go to favourites page', () => {
-    cy.get('[data-testid=navbar-favourites]')
-      .should('have.text', 'Favourites')
-      .click()
+    cy.get('[data-testid=navbar-favourites]').click()
   })
   it('Renders No favourites message', () => {
     cy.contains('You do not have any favourite products.').should('exist')
@@ -101,9 +97,7 @@ describe('Favourite some products', () => {
 
 describe('Jane Favourites contains favourited products', () => {
   it('Go to favourites page', () => {
-    cy.get('[data-testid=navbar-favourites]')
-      .should('have.text', 'Favourites')
-      .click()
+    cy.get('[data-testid=navbar-favourites]').click()
     cy.url().should('include', '/favourites')
     cy.wait(1000) // wait for both products to load
   })
