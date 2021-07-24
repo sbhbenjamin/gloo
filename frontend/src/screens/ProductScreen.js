@@ -160,15 +160,6 @@ const ProductScreen = ({ history, match }) => {
                     </Row>
                   </ListGroup.Item>
 
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Status: </Col>
-                      <Col data-testid='availability'>
-                        {product.available ? 'In Stock' : 'Out Of Stock'}
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-
                   {product.user &&
                     userInfo &&
                     (product.user._id === userInfo._id ? (

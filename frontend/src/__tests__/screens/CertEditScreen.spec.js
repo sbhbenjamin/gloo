@@ -56,14 +56,6 @@ beforeEach(() => {
   history = createMemoryHistory()
 })
 
-// const mockPush = jest.fn()
-// const mockGoBack = jest.fn()
-
-// const history = {
-//   push: mockPush,
-//   goBack: mockGoBack,
-// }
-
 const johnMatch = {
   params: {
     id: '60e671c7c161a060d4e7d493',

@@ -15,7 +15,7 @@ import {
   cleanup,
   fireEvent,
 } from '@testing-library/react'
-import { exampleCert, approvedExampleCert } from '../stubs/certStub'
+import { exampleCert, approvedExampleCert, janeCert } from '../stubs/certStub'
 
 export const handlers = [
   rest.get('/api/certs/60e671c7c161a060d4e7d493', (req, res, ctx) => {
@@ -24,6 +24,10 @@ export const handlers = [
 
   rest.put('/api/certs/60e671c7c161a060d4e7d493', (req, res, ctx) => {
     return res(ctx.json(approvedExampleCert))
+  }),
+
+  rest.get('/api/certs/60e3edbb93d34b6444bc9b00', (req, res, ctx) => {
+    return res(ctx.json(janeCert))
   }),
 ]
 
@@ -42,6 +46,12 @@ const match = {
   },
 }
 
+const janeCertMatch = {
+  params: {
+    id: '60e3edbb93d34b6444bc9b00',
+  },
+}
+
 const mockPush = jest.fn()
 const mockGoBack = jest.fn()
 
@@ -52,6 +62,25 @@ const history = {
 
 it('should render Unauthorised Access message without login', async () => {
   render(<CertScreen match={match} history={history} />)
+  expect(screen.getByRole('alert')).toHaveTextContent(
+    'Unauthorised Access of Certificate Page'
+  )
+
+  expect(screen.queryByTestId('back-btn')).toBeNull()
+  expect(screen.queryByTestId('cert-image')).toBeNull()
+  expect(screen.queryByTestId('cert-image')).toBeNull()
+  expect(screen.queryByTestId('cert-issuer')).toBeNull()
+
+  expect(screen.queryByTestId('cert-date')).toBeNull()
+  expect(screen.queryByTestId('cert-status')).toBeNull()
+
+  expect(screen.queryByTestId('cert-edit-btn')).toBeNull()
+  expect(screen.queryByTestId('approve-cert')).toBeNull()
+  expect(screen.queryByTestId('reject-cert')).toBeNull()
+})
+
+it('should render Unauthorised Access message when logged in as a user that is not the cert owner', async () => {
+  render(<CertScreen match={janeCertMatch} history={history} />)
   expect(screen.getByRole('alert')).toHaveTextContent(
     'Unauthorised Access of Certificate Page'
   )

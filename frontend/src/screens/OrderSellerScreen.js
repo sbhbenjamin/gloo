@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listMySellerOrders } from '../actions/orderActions'
+import { listMyOrders, listMySellerOrders } from '../actions/orderActions'
 
 const OrderSellerScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -23,6 +23,7 @@ const OrderSellerScreen = ({ history }) => {
     if (!userInfo) {
       history.push('/login')
     } else {
+      dispatch(listMyOrders())
       dispatch(listMySellerOrders())
     }
   }, [dispatch, history, userInfo])
@@ -74,7 +75,7 @@ const OrderSellerScreen = ({ history }) => {
                   <LinkContainer to={`/order/${order._id}`}>
                     <Button
                       data-testid='order-details'
-                      variant='outline-secondary'
+                      variant='outline-success'
                       className='btn-sm'
                     >
                       Details

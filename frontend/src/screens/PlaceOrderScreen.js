@@ -75,7 +75,7 @@ const PlaceOrderScreen = ({ history }) => {
       ) : (
         <>
           <CheckoutSteps step1 step2 step3 step4 />
-          <Row>
+          <Row className='justify-content-evenly'>
             <Col md={8}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
@@ -147,7 +147,7 @@ const PlaceOrderScreen = ({ history }) => {
               </ListGroup>
             </Col>
 
-            <Col md={4}>
+            <Col md={3}>
               <Card>
                 <ListGroup variant='flush'>
                   <ListGroup.Item>

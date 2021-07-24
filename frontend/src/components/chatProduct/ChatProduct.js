@@ -244,7 +244,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
                   </Link>
                 ) : accepted && userInfo._id === currentOffer.buyer ? (
                   <Button
-                    variant='success'
+                    variant='primary'
                     onClick={handleCheckout}
                     data-testid='chat-product-checkoutbtn'
                   >

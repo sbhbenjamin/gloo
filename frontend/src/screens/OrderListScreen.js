@@ -1,10 +1,10 @@
-import React, { useEffect } from "react"
-import { LinkContainer } from "react-router-bootstrap"
-import { Table, Button, Row } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { deleteOrder, listOrders } from "../actions/orderActions"
+import React, { useEffect } from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button, Row } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { deleteOrder, listOrders } from '../actions/orderActions'
 
 const OrderListScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -24,13 +24,13 @@ const OrderListScreen = ({ history }) => {
 
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
-      history.push("/login")
+      history.push('/login')
     }
     dispatch(listOrders())
   }, [dispatch, history, userInfo, successDelete])
 
   const deleteHandler = (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm('Are you sure?')) {
       dispatch(deleteOrder(id))
     }
   }
@@ -72,25 +72,25 @@ const OrderListScreen = ({ history }) => {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: "red" }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button className='btn-sm' variant='outline-success'>
                       Details
                     </Button>
                   </LinkContainer>
                 </td>
                 <td>
-                  {" "}
+                  {' '}
                   <Button
                     variant='danger'
                     className='btn-sm'

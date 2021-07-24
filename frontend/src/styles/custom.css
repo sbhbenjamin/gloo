@@ -66,14 +66,55 @@
   background-color: #f47a60;
 }
 
+.btn-outline-success,
+.btn-outline-success :focus {
+  color: black;
+  border-color: black;
+}
+
+.btn-outline-success:hover,
+.btn-outline-success:active {
+  color: white;
+  background-color: #246b80;
+  border-color: #246b80;
+}
+
 .navbar-brand {
   color: #f47a60 !important;
   font-weight: 700;
   font-size: 30px;
 }
 
+.dropdown-menu :hover {
+  color: white;
+  background-color: #f47a60;
+}
+
+.submenu {
+  background-color: white !important;
+}
+.submenu .active {
+  color: white;
+  background-color: #f47a60;
+}
+.submenu :hover {
+  color: white;
+  background-color: #f47a60 !important;
+}
+
 .alert-info {
   background-color: #ced7d8;
   border: 1px #bec8c9 solid;
   color: #82898a;
+}
+
+.block {
+  display: block;
+  width: 60%;
+  color: white;
+  background-color: #246b80;
+  border-color: #246b80;
+  padding: 14px 28px;
+  margin-bottom: 25px;
+  text-align: center;
 }

@@ -76,6 +76,10 @@ const Header = () => {
                   title={
                     <>
                       <i className='fas fa-clipboard me-1'></i>
+<<<<<<< Updated upstream
+=======
+                      <span>Orders</span>
+>>>>>>> Stashed changes
                     </>
                   }
                   id='username'
@@ -96,8 +100,12 @@ const Header = () => {
 
               {/* {userInfo ? (
                 <NavDropdown
+<<<<<<< Updated upstream
                   // title={userInfo.name}
                   title={<i class='far fa-user-circle'></i>}
+=======
+                  title={<span>{userInfo.name}</span>}
+>>>>>>> Stashed changes
                   id='username'
                   data-testid='navbar-username'
                 >
@@ -122,7 +130,7 @@ const Header = () => {
                 <LinkContainer to='/login' data-testid='navbar-signin'>
                   <Nav.Link>
                     <i className='fas fa-user me-1'></i>
-                    Sign In
+                    <span>Sign In</span>
                   </Nav.Link>
                 </LinkContainer>
               )} */}
@@ -130,7 +138,7 @@ const Header = () => {
               {userInfo ? (
                 <li class='nav-item dropdown' id='myDropdown'>
                   <a
-                    href='#'
+                    href='/'
                     className='nav-link dropdown-toggle btn-toggle'
                     variant='link'
                     data-bs-toggle='dropdown'
@@ -138,7 +146,7 @@ const Header = () => {
                     {userInfo.name}
                     {/* <i class='far fa-user-circle'></i> */}
                   </a>
-                  <ul class='dropdown-menu'>
+                  <ul className='dropdown-menu'>
                     {/* <li>
                     <a class='dropdown-item' href='#'>
                       Buyer &raquo;
@@ -153,10 +161,10 @@ const Header = () => {
                   </li> */}
 
                     <li>
-                      <a class='dropdown-item' variant='link'>
-                        <i class='fas fa-caret-left pe-2'></i> Seller
+                      <a className='dropdown-item' variant='link'>
+                        <i className='fas fa-caret-left pe-2'></i> Seller
                       </a>
-                      <ul class='submenu dropdown-menu'>
+                      <ul className='submenu dropdown-menu'>
                         <LinkContainer
                           to={`/new`}
                           data-testid='navbar-addproduct'
@@ -226,7 +234,7 @@ const Header = () => {
               <LinkContainer to='/new' className='navbar-addproduct'>
                 <Nav.Link>
                   <Button variant='primary' data-testid='navbar-addproduct'>
-                    Add Product
+                    <span>Add Product</span>
                   </Button>
                 </Nav.Link>
               </LinkContainer>
