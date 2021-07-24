@@ -6,7 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listMyOrders, listMySellerOrders } from '../actions/orderActions'
 
-const OrderBuyerScreen = ({ history }) => {
+const UserOrdersScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const [isBuyerOrdersView, setBuyerOrdersView] = useState(true)
@@ -60,7 +60,7 @@ const OrderBuyerScreen = ({ history }) => {
         ) : (
           <>
             <Row>
-              <Col className='d-flex justify-content-center'>
+              <Col className='d-flex justify-content-start'>
                 <Button
                   data-testid='purchases-btn'
                   className='block'
@@ -68,11 +68,9 @@ const OrderBuyerScreen = ({ history }) => {
                 >
                   Purchases
                 </Button>
-              </Col>
-              <Col className='d-flex justify-content-center'>
                 <Button
                   data-testid='sales-btn'
-                  className='block'
+                  className='block ms-2'
                   onClick={getSellerOrdersHandler}
                 >
                   Sales
@@ -142,16 +140,14 @@ const OrderBuyerScreen = ({ history }) => {
       ) : (
         <>
           <Row>
-            <Col className='d-flex justify-content-center'>
+            <Col className='d-flex justify-content-start'>
               <Button
                 data-testid='purchases-btn'
-                className='block'
+                className='block me-2'
                 onClick={getBuyerOrdersHandler}
               >
                 Purchases
               </Button>
-            </Col>
-            <Col className='d-flex justify-content-center'>
               <Button
                 data-testid='sales-btn'
                 className='block'
@@ -215,4 +211,4 @@ const OrderBuyerScreen = ({ history }) => {
   )
 }
 
-export default OrderBuyerScreen
+export default UserOrdersScreen

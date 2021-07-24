@@ -64,7 +64,7 @@ const Header = () => {
                       </span>
                     </Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to='/orders/buyer' data-testid='navbar-orders'>
+                  <LinkContainer to='/orders' data-testid='navbar-orders'>
                     <Nav.Link>
                       <i className='fas fa-clipboard me-1'></i>
                       <span className='d-md-inline d-lg-none'>Orders</span>

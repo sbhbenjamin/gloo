@@ -110,11 +110,27 @@
 
 .block {
   display: block;
-  width: 60%;
   color: white;
   background-color: #246b80;
   border-color: #246b80;
-  padding: 14px 28px;
   margin-bottom: 25px;
   text-align: center;
+  border-radius: 10px;
+}
+
+.me-2,
+.ms-2 {
+  display: block;
+  color: #246b80;
+  background-color: white;
+  border-color: #246b80;
+  margin-bottom: 25px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.success-outline,
+.success-outline :focus {
+  color: black;
+  border-color: black;
 }

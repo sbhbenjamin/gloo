@@ -110,3 +110,48 @@ export const sampleOrderArray = [
     __v: 0,
   },
 ]
+
+export const sampleOrderSellerArray = [
+  {
+    orderItem: {
+      name: 'Basic Electrics',
+      image: '/images/aircon.jpg',
+      product: '60aae864ee22a3fe12345678',
+    },
+    shippingAddress: {
+      address: '26 College East Ave',
+      city: 'Singapore',
+      postalCode: '123456',
+      country: 'Singapore',
+    },
+    paymentResult: {
+      id: '04X41548UY101480T',
+      status: 'COMPLETED',
+      update_time: '2021-09-31T12:24:12Z',
+      email_address: 'sb-rg7po6147151@personal.example.com',
+    },
+    itemPrice: 300,
+    taxPrice: 21,
+    shippingPrice: 15,
+    totalPrice: 336,
+    isPaid: true,
+    isDelivered: true,
+    _id: '60aae864ee22a3fe12345678',
+    buyer: {
+      _id: '60bde864ee22a3fe9466639e',
+      name: 'Steve Smith',
+      email: 'steve@example.com',
+    },
+    seller: {
+      _id: '60bde864ee22a3fe9466639c',
+      name: 'Admin User',
+    },
+    paymentMethod: 'PayPal',
+    offer: '60f2cbb065269381686fe9d2',
+    createdAt: '2021-09-31T12:23:56.303Z',
+    updatedAt: '2021-09-31T12:26:17.396Z',
+    __v: 0,
+    paidAt: '2021-09-31T12:24:13.618Z',
+    deliveredAt: '2021-09-31T12:26:17.395Z',
+  },
+]
