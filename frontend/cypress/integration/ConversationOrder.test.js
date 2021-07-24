@@ -230,6 +230,7 @@ describe('should be able to send and receive messages through the chat', () => {
 
     // eslint-disable-next-line jest/valid-expect-in-promise
     cy.get('[data-testid=order-id]').then(($span) => {
+      cy.get('[data-testid=navbar-username]').click()
       cy.get('[data-testid=navbar-orders]').click()
       cy.get('[data-testid=sales-btn]').click()
       cy.contains($span.text()).parent().contains('Details').click()
@@ -247,6 +248,7 @@ describe('should be able to send and receive messages through the chat', () => {
     // eslint-disable-next-line jest/valid-expect-in-promise
     cy.get('[data-testid=order-id]').then(($span) => {
       cy.visit(URL) // fix for paypal button causing script error
+      cy.get('[data-testid=navbar-username]').click()
       cy.get('[data-testid=navbar-orders]').click()
       cy.contains($span.text()).parent().contains('Details').click()
       cy.url().should('include', $span.text())

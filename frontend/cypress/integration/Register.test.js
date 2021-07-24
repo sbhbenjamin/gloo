@@ -99,9 +99,8 @@ describe('Input new account details into RegisterScreen', () => {
   })
 
   it('Able to login with correct email and password', () => {
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Steve Smith')
-      .click()
+    cy.contains('Steve Smith').should('exist')
+    cy.get('[data-testid=navbar-username]').click()
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout')
   })
 })
@@ -125,9 +124,8 @@ describe('Log out and delete account using Admin user', () => {
     cy.get('[data-testid=login-password]').type('123456')
     cy.get('[data-testid=login-btn]').should('have.text', 'Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
-    cy.get('[data-testid=navbar-username]')
-      .should('include.text', 'Admin User')
-      .click()
+    cy.contains('Admin user').should('exist')
+    cy.get('[data-testid=navbar-username]').click()
     cy.get('[data-testid=navbar-logout]').should('have.text', 'Logout')
   })
 

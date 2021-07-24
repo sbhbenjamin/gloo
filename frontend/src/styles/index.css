@@ -3,7 +3,7 @@ a {
 }
 
 main {
-  min-height: 82vh;
+  min-height: 85vh;
 }
 
 .navbar {
@@ -17,7 +17,7 @@ main {
 }
 
 footer {
-  padding: 40px 0px;
+  padding: 30px 0px;
   background-color: #ced7d8;
 }
 
@@ -28,6 +28,9 @@ footer a {
 
 .color-primary {
   color: #f47a60;
+}
+.color-primary-dark {
+  color: #f46343;
 }
 
 .color-secondary {
@@ -51,10 +54,6 @@ footer a {
 
 /* Medium Devices, Desktops equivalent to class md */
 @media only screen and (max-width: 992px) {
-  .navbar-searchbox {
-    /* padding: 14px 0 8px 0; */
-    /* width: 600px; */
-  }
   .navbar-addproduct {
     padding: 8px 0;
     margin: 0;

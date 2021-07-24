@@ -1,7 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 before(() => {
   cy.viewport(1280, 720)
-  cy.visit('https://gloo-dev.herokuapp.com/')
+  // cy.visit('https://gloo-dev.herokuapp.com/')
+  cy.visit('localhost:3000')
 })
 
 //CREATE PRODUCT
@@ -88,7 +89,7 @@ describe('View Add Product Using Image URL', () => {
 describe('View My Listings', () => {
   it('Listings button can be clicked', () => {
     cy.get('[data-testid=navbar-username]').click()
-    cy.get('[data-testid=navbar-listings]').click({ force: true })
+    cy.get('[data-testid=navbar-listings]').click()
   })
 
   it('Go to Product Page of Johns Product', () => {

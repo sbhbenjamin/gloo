@@ -14,8 +14,6 @@
     top: -7px;
   }
   .nav-item .submenu-left {
-    /* right: 100%;
-    left: auto; */
     left: 100%;
     right: auto;
   }
@@ -26,10 +24,8 @@
     display: block;
   }
 }
-/* ============ desktop view .end// ============ */
 
-/* ============ small devices ============ */
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .dropdown-menu .dropdown-menu {
     margin-left: 0.7rem;
     margin-right: 0.7rem;

@@ -47,3 +47,16 @@ label {
   color: #1b5263;
   transition: 0.5s;
 }
+
+/* Small Devices, Tablets equivalent to class sm */
+@media only screen and (max-width: 768px) {
+  .search-input {
+    width: 300px;
+    margin-bottom: 15px;
+  }
+
+  .search-icon {
+    left: 275px;
+    top: 10px;
+  }
+}
