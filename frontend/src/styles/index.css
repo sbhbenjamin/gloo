@@ -21,6 +21,16 @@ main {
   font-weight: 600;
 }
 
+.pagination > .page-item.active > .page-link {
+  color: white;
+  background-color: #1b5263;
+  border: #1b5263;
+}
+
+.pagination > .page-item > .page-link {
+  color: #1b5263;
+}
+
 footer {
   margin-top: auto;
   padding: 30px 0px;
