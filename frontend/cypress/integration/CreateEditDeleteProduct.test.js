@@ -249,6 +249,11 @@ describe('Delete listing', () => {
 
   it('Delete function should work', () => {
     cy.get('[data-testid=edit-delete]').should('exist').click()
+    cy.wait(1000)
+  })
+
+  it('redirected to home screen', () => {
+    cy.url().should('include', '/')
   })
 
   it('No results for deleted product', () => {

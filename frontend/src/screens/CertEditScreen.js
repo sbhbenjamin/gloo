@@ -203,7 +203,7 @@ const CertEditScreen = ({ match, history }) => {
                 <Button
                   data-testid='edit-submit'
                   type='submit'
-                  variant='primary'
+                  variant='success'
                   className='mt-2 me-2'
                 >
                   Update Certificate
