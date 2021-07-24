@@ -3,7 +3,7 @@ a {
 }
 
 main {
-  min-height: 88vh;
+  min-height: 82vh;
 }
 
 .navbar {
@@ -52,7 +52,7 @@ footer a {
 /* Medium Devices, Desktops equivalent to class md */
 @media only screen and (max-width: 992px) {
   .navbar-searchbox {
-    padding: 14px 0 8px 0;
+    /* padding: 14px 0 8px 0; */
     /* width: 600px; */
   }
   .navbar-addproduct {

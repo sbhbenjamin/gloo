@@ -49,7 +49,7 @@ const FavouritesScreen = ({ history }) => {
             <Row>
               {!productsFavourites || productsFavourites.length === 0 ? (
                 <div className='mt-3'>
-                  <Message variant='primary'>
+                  <Message variant='info'>
                     You do not have any favourite products.
                   </Message>
                 </div>
