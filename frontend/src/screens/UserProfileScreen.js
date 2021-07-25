@@ -94,14 +94,14 @@ const UserProfileScreen = ({ match }) => {
           <Row>
             {certs &&
               certs.filter((cert) => cert.status === 'Approved').length > 0 && (
-                <>
+                <div className='mb-4'>
                   <h5 className='mb-0'>Verified Certificates</h5>
                   {certs
                     .filter((cert) => cert.status === 'Approved')
                     .map((cert) => (
                       <li key={cert._id}>{cert.name}</li>
                     ))}
-                </>
+                </div>
               )}
           </Row>
         </>

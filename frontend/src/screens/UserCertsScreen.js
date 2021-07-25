@@ -46,7 +46,7 @@ const UserCertsScreen = ({ history }) => {
 
   return userInfo ? (
     <>
-      <Row className='align-items-center'>
+      <Row className='justify-content-center'>
         <Col>
           <h1>Certificates</h1>
         </Col>
@@ -77,7 +77,7 @@ const UserCertsScreen = ({ history }) => {
                 <th>ISSUER</th>
                 <th>DATE OF ATTAINMENT</th>
                 <th>STATUS</th>
-                <th>REMOVE</th>
+                <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
@@ -87,7 +87,7 @@ const UserCertsScreen = ({ history }) => {
                   <td>
                     <a
                       href='/'
-                      className='no-underline hover:underline'
+                      className='no-underline hover:underline success-link'
                       onClick={(e) => {
                         e.preventDefault()
                         nameClickHandler(cert._id)
@@ -99,13 +99,23 @@ const UserCertsScreen = ({ history }) => {
                   <td>{cert.issuer}</td>
                   <td>{cert.date}</td>
                   <td>{cert.status}</td>
-                  <td>
+                  <td xs='auto'>
+                    <LinkContainer to={`/certificates/${cert._id}`}>
+                      <Button
+                        data-testid='cert-details'
+                        variant='outline-success'
+                        className='btn-sm me-2'
+                      >
+                        Details
+                      </Button>
+                    </LinkContainer>
                     <Button
-                      variant='danger'
+                      data-testid='cert-delete'
+                      variant='outline-danger'
                       className='btn-sm'
                       onClick={() => deleteHandler(cert._id)}
                     >
-                      <i className='fas fa-trash'></i>
+                      Delete
                     </Button>
                   </td>
                 </tr>

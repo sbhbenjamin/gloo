@@ -74,13 +74,13 @@ const CertScreen = ({ history, match }) => {
     cert.user ? (
       userInfo._id === cert.user._id || userInfo.isAdmin ? (
         <>
-          <Link
-            data-testid='back-btn'
-            className='btn btn-outline-secondary my-3'
-            to='/certificates'
+          <Button
+            data-testid='navigate-back-btn'
+            onClick={history.goBack}
+            variant='outline-secondary'
           >
             Go Back
-          </Link>
+          </Button>
           {loading ? (
             <Loader />
           ) : error ? (

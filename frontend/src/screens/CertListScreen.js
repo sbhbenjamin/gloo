@@ -71,7 +71,7 @@ const CertListScreen = ({ history }) => {
                     <td>
                       <a
                         href='true'
-                        className='no-underline hover:underline'
+                        className='success-link no-underline hover:underline'
                         onClick={(e) => {
                           e.preventDefault()
                           nameClickHandler(cert._id)
