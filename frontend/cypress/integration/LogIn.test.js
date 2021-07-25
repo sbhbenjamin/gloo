@@ -40,6 +40,7 @@ describe('Login feature works as expected', () => {
     cy.get("[type='password']").type('123456')
     cy.get('Button').contains('Sign In').click()
     cy.contains('Invalid Email or Password').should('not.exist')
+    cy.get('[data-testid=navbar-username]').click()
     cy.contains('John Doe').should('exist')
     cy.contains('Logout').should('exist')
   })

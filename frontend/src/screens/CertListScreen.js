@@ -65,37 +65,36 @@ const CertListScreen = ({ history }) => {
                 </tr>
               </thead>
               <tbody>
-                {certs &&
-                  certs.map((cert) => (
-                    <tr key={cert._id}>
-                      <td>{cert._id}</td>
-                      <td>
-                        <a
-                          href='true'
-                          className='no-underline hover:underline'
-                          onClick={(e) => {
-                            e.preventDefault()
-                            nameClickHandler(cert._id)
-                          }}
-                        >
-                          {cert.name}
-                        </a>
-                      </td>
-                      <td>{cert.issuer}</td>
-                      <td>{cert.date}</td>
-                      <td>{cert.user.name}</td>
-                      <td>{cert.status}</td>
-                      <td>
-                        <Button
-                          variant='danger'
-                          className='btn-sm'
-                          onClick={() => deleteHandler(cert._id)}
-                        >
-                          <i className='fas fa-trash'></i>
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
+                {certs.map((cert) => (
+                  <tr key={cert._id}>
+                    <td>{cert._id}</td>
+                    <td>
+                      <a
+                        href='true'
+                        className='no-underline hover:underline'
+                        onClick={(e) => {
+                          e.preventDefault()
+                          nameClickHandler(cert._id)
+                        }}
+                      >
+                        {cert.name}
+                      </a>
+                    </td>
+                    <td>{cert.issuer}</td>
+                    <td>{cert.date}</td>
+                    <td>{cert.user.name}</td>
+                    <td>{cert.status}</td>
+                    <td>
+                      <Button
+                        variant='danger'
+                        className='btn-sm'
+                        onClick={() => deleteHandler(cert._id)}
+                      >
+                        <i className='fas fa-trash'></i>
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </>
