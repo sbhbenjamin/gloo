@@ -46,7 +46,6 @@ describe('Add Product Screen', () => {
 
   it('Details can be filled into form', () => {
     cy.get('[data-testid=product-name]').type('Add Product Using Image URL')
-    cy.get('[data-testid=product-price]').type('9.99')
     cy.get('[data-testid=product-image]').type(
       'https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_960_720.png'
     )

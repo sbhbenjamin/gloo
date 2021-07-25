@@ -10,7 +10,6 @@ import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 const ProductCreateScreen = ({ match, history }) => {
   const [name, setName] = useState('')
-  const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
@@ -68,7 +67,7 @@ const ProductCreateScreen = ({ match, history }) => {
     dispatch(
       createProduct({
         name,
-        price,
+        price: 0,
         image,
         category,
         description,
@@ -100,18 +99,6 @@ const ProductCreateScreen = ({ match, history }) => {
               placeholder='Enter name'
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className='mb-3'
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId='price'>
-            <p className='mb-1'>Price</p>
-            <Form.Control
-              data-testid='product-price'
-              type='number'
-              placeholder='Enter price'
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
               className='mb-3'
             ></Form.Control>
           </Form.Group>
