@@ -61,7 +61,7 @@ describe('Favourite some products', () => {
       .within(() => {
         cy.get("[class='far fa-heart fa-lg']").should('exist').click()
       })
-    cy.wait(1000)
+    cy.wait(3000)
 
     cy.contains('1st Solution Electrical')
       .parent('div')
@@ -91,7 +91,7 @@ describe('Favourite some products', () => {
       .within(() => {
         cy.get("[class='fas fa-heart fa-lg']").should('exist')
       })
-    cy.wait(1000) //if dont wait, cypress browser will immediately move on to favourites screen and will only load 1st Solution Electrical (even though SZ Painting is already within the UserFavourites state. Only shows SZ Painting on refresh)
+    cy.wait(3000) //if dont wait, cypress browser will immediately move on to favourites screen and will only load 1st Solution Electrical (even though SZ Painting is already within the UserFavourites state. Only shows SZ Painting on refresh)
   })
 })
 
@@ -99,7 +99,7 @@ describe('Jane Favourites contains favourited products', () => {
   it('Go to favourites page', () => {
     cy.get('[data-testid=navbar-favourites]').click()
     cy.url().should('include', '/favourites')
-    cy.wait(1000) // wait for both products to load
+    cy.wait(3000) // wait for both products to load
   })
   it('Renders favourited products', () => {
     cy.contains('1st Solution Electrical').should('exist')
@@ -126,7 +126,7 @@ describe('Jane Favourites contains favourited products', () => {
       })
 
     cy.contains('SZ Painting').should('exist')
-    cy.wait(1000) //when the first object is unfavourited, SZ Painting becomes the only item in favourites and moves to the left. without this wait statement, cypress will click on the original location of the heart, which is now nothing
+    cy.wait(3000) //when the first object is unfavourited, SZ Painting becomes the only item in favourites and moves to the left. without this wait statement, cypress will click on the original location of the heart, which is now nothing
     cy.contains('SZ Painting')
       .parent('div')
       .within(() => {

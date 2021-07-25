@@ -108,7 +108,7 @@ const OrderScreen = ({ match, history }) => {
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item className='ps-0'>
-              <h3>Shipping</h3>
+              <h3>Details</h3>
               <p>
                 <strong>Name: </strong>
                 <span data-testid='order-username'>{order.buyer.name}</span>
@@ -224,7 +224,7 @@ const OrderScreen = ({ match, history }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Shipping</Col>
+                  <Col>Administrative Fee</Col>
                   <Col>
                     $
                     <span data-testid='order-summary-shipping'>

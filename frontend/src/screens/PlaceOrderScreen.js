@@ -80,7 +80,7 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <div className='mb-3'>
-                    <h3>Shipping</h3>
+                    <h3>Details</h3>
                   </div>
                   <p>
                     <strong>Address:</strong>{' '}
@@ -167,7 +167,7 @@ const PlaceOrderScreen = ({ history }) => {
 
                   <ListGroup.Item>
                     <Row>
-                      <Col>Shipping</Col>
+                      <Col>Administrative Fees</Col>
                       <Col>
                         $
                         <span data-testid='order-shipping-price'>
