@@ -44,9 +44,6 @@ it('should create product successfully', async () => {
   fireEvent.change(ProductCreate.getByTestId('product-name'), {
     target: { value: '2nd Solution Electrical' },
   })
-  fireEvent.change(ProductCreate.getByTestId('product-price'), {
-    target: { value: 89.99 },
-  })
   fireEvent.change(ProductCreate.getByTestId('product-image'), {
     target: { value: '/images/electrical.jpg' },
   })

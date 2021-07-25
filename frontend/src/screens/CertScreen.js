@@ -75,7 +75,7 @@ const CertScreen = ({ history, match }) => {
       userInfo._id === cert.user._id || userInfo.isAdmin ? (
         <>
           <Button
-            data-testid='navigate-back-btn'
+            data-testid='back-btn'
             onClick={history.goBack}
             variant='outline-secondary'
           >
