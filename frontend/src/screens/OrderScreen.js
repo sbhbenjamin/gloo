@@ -132,14 +132,14 @@ const OrderScreen = ({ match, history }) => {
                   data-testid='order-delivermessage-success'
                   variant='success'
                 >
-                  Delivered on {order.deliveredAt}
+                  Service completed on {order.deliveredAt}
                 </Message>
               ) : (
                 <Message
                   data-testid='order-delivermessage-fail'
                   variant='danger'
                 >
-                  Not Delivered
+                  Not Completed
                 </Message>
               )}
             </ListGroup.Item>
@@ -286,7 +286,7 @@ const OrderScreen = ({ match, history }) => {
                             className='btn btn-block'
                             onClick={deliverHandler}
                           >
-                            Mark As Delivered
+                            Mark As Completed
                           </Button>
                         </Col>
                       </Row>
