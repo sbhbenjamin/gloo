@@ -7,21 +7,19 @@ const NavbarCategory = () => {
   return (
     <Row className='mt-0 navbar-categories py-3 d-none d-sm-flex justify-content-center gap-4'>
       <Col xs='auto'>
-        <a href='http://localhost:3000/search/Electrical'>Electrical</a>
+        <a href='/search/Electrical'>Electrical</a>
       </Col>
       <Col xs='auto'>
-        <a href='http://localhost:3000/search/Plumbing'>Plumbing</a>
+        <a href='/search/Plumbing'>Plumbing</a>
       </Col>
       <Col xs='auto'>
-        <a href='http://localhost:3000/search/Computer'>Computer</a>
+        <a href='/search/Computer'>Computer</a>
       </Col>
       <Col xs='auto'>
-        <a href='http://localhost:3000/search/Renovation'>Renovation</a>
+        <a href='/search/Renovation'>Renovation</a>
       </Col>
       <Col xs='auto'>
-        <a href='http://localhost:3000/search/Air-Conditioning'>
-          Air-Conditioning
-        </a>
+        <a href='/search/Air-Conditioning'>Air-Conditioning</a>
       </Col>
     </Row>
   )

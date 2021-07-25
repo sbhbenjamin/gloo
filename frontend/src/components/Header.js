@@ -81,6 +81,7 @@ const Header = () => {
                       Transactions
                     </NavDropdown.Item>
                   </LinkContainer>
+                  <NavDropdown.Divider />
                   <NavDropdown.Item
                     onClick={logoutHandler}
                     data-testid='navbar-logout'
