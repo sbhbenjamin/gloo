@@ -220,7 +220,7 @@ const RegisterScreen = ({ location, history }) => {
                 data-testid='login-redirect'
                 to={redirect ? `/login?redirect=${redirect}` : '/login'}
               >
-                Login
+                <span className='success-link'>Login</span>
               </Link>
             </Col>
           </Row>

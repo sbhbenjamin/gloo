@@ -137,7 +137,7 @@ const ProductScreen = ({ history, match }) => {
                         <Col>
                           <Link
                             to={`/user/${product.user._id}/listings`}
-                            className='product-seller'
+                            className='success-link'
                             data-testid='product-seller'
                           >
                             {product.user.name}

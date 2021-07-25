@@ -59,7 +59,12 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button data-testid='login-btn' className='mt-3' type='submit'>
+        <Button
+          variant='success'
+          data-testid='login-btn'
+          className='mt-3'
+          type='submit'
+        >
           Sign In
         </Button>
       </Form>
@@ -71,7 +76,7 @@ const LoginScreen = ({ location, history }) => {
             data-testid='register-redirect'
             to={redirect ? `/register?redirect=${redirect}` : '/register'}
           >
-            Register
+            <span className='success-link'>Register</span>
           </Link>
         </Col>
       </Row>

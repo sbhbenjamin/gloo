@@ -7,8 +7,17 @@ a:hover {
   color: #f47a60;
 }
 
+.success-link {
+  color: #f06444;
+}
+
+.success-link:hover {
+  color: #e6411c;
+  transition: 0.2;
+}
+
 main {
-  min-height: 100vh;
+  min-height: 86vh;
 }
 
 .navbar {
@@ -33,7 +42,7 @@ main {
 
 footer {
   margin-top: auto;
-  padding: 30px 0px;
+  padding: 32px 0px;
   background-color: #ced7d8;
 }
 

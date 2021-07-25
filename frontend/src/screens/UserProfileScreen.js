@@ -44,7 +44,7 @@ const UserProfileScreen = ({ match }) => {
 
   return (
     <>
-      <Meta title={userId} />
+      <Meta title={user.name} />
       {(loadingUserDetails || loadingProducts) && <Loader />}
       {loadingUserDetails ? (
         '' // <Loader />
