@@ -11,7 +11,7 @@ import {
   renderWithLogin,
   renderWithOwnership,
 } from '../test-utils'
-import OrderScreen from '../../screens/OrderScreen'
+import OrderScreen from '../../screens/orderScreen/OrderScreen'
 import { sampleOrderArray } from '../stubs/orderStub'
 
 export const handlers = [

@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
-import Rating from '../../components/Rating'
+import Rating from '../../components/rating/Rating'
 
 describe('Product loads correctly', () => {
   let component

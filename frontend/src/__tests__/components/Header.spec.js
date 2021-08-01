@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, renderWithLogin, screen } from '../test-utils'
-import Header from '../../components/Header'
+import Header from '../../components/header/Header'
 import '@testing-library/jest-dom/extend-expect'
 
 it('should render navbar links', () => {

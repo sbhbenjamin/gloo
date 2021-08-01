@@ -9,7 +9,7 @@ import {
   renderWithOwnership,
   screen,
 } from '../test-utils'
-import UserCertsScreen from '../../screens/UserCertsScreen'
+import UserCertsScreen from '../../screens/userCertsScreen/UserCertsScreen'
 import { waitForElementToBeRemoved, cleanup } from '@testing-library/react'
 import { certList } from '../stubs/certStub'
 import { createMemoryHistory } from 'history'

@@ -7,7 +7,7 @@ import {
   renderWithLogin,
   renderWithOwnership,
 } from '../test-utils'
-import UserEditScreen from '../../screens/UserEditScreen'
+import UserEditScreen from '../../screens/userEditScreen/UserEditScreen'
 import '@testing-library/jest-dom/extend-expect'
 import { waitForElementToBeRemoved, cleanup } from '@testing-library/react'
 

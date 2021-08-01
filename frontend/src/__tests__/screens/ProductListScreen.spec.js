@@ -9,7 +9,7 @@ import {
   renderWithOwnership,
   screen,
 } from '../test-utils'
-import ProductListScreen from '../../screens/ProductListScreen'
+import ProductListScreen from '../../screens/productListScreen/ProductListScreen'
 import { productList } from '../stubs/productStub'
 import { cleanup, waitForElementToBeRemoved } from '@testing-library/react'
 import { createMemoryHistory } from 'history'

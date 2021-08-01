@@ -10,7 +10,7 @@ import {
   screen,
   fireEvent,
 } from '../test-utils'
-import ProductEditScreen from '../../screens/ProductEditScreen'
+import ProductEditScreen from '../../screens/productEditScreen/ProductEditScreen'
 import { waitFor, cleanup } from '@testing-library/react'
 import { product } from '../stubs/productStub'
 import { createMemoryHistory } from 'history'

@@ -11,8 +11,8 @@ import {
   FormControl,
   Spinner,
 } from 'react-bootstrap'
-import Rating from '../Rating'
-import Message from '../Message'
+import Rating from '../rating/Rating'
+import Message from '../message/Message'
 import {
   acceptOffer,
   createOffer,

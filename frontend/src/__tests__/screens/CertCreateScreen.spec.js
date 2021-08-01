@@ -10,7 +10,7 @@ import {
   fireEvent,
   renderWithOwnership,
 } from '../test-utils'
-import CertCreateScreen from '../../screens/CertCreateScreen'
+import CertCreateScreen from '../../screens/certCreateScreen/CertCreateScreen'
 import { createCertStub } from '../stubs/certStub'
 import { createMemoryHistory } from 'history'
 

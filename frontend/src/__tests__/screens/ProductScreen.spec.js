@@ -10,7 +10,7 @@ import {
   screen,
   fireEvent,
 } from '../test-utils'
-import ProductScreen from '../../screens/ProductScreen'
+import ProductScreen from '../../screens/productScreen/ProductScreen'
 import {
   waitFor,
   waitForElementToBeRemoved,

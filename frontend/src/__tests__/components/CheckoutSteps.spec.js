@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { screen, render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
-import CheckoutSteps from '../../components/CheckoutSteps'
+import CheckoutSteps from '../../components/checkoutSteps/CheckoutSteps'
 
 afterEach(cleanup)
 

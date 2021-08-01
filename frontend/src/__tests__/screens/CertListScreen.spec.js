@@ -9,7 +9,7 @@ import {
   renderWithOwnership,
   screen,
 } from '../test-utils'
-import CertListScreen from '../../screens/CertListScreen'
+import CertListScreen from '../../screens/certListScreen/CertListScreen'
 import { cleanup, waitFor } from '@testing-library/react'
 import { allCerts, noCerts } from '../stubs/certStub'
 import { createMemoryHistory } from 'history'

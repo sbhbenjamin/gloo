@@ -7,7 +7,7 @@ import {
   renderWithLogin,
   renderWithOwnership,
 } from '../test-utils'
-import OrderListScreen from '../../screens/OrderListScreen'
+import OrderListScreen from '../../screens/orderListScreen/OrderListScreen'
 import '@testing-library/jest-dom/extend-expect'
 import { cleanup, waitFor } from '@testing-library/react'
 import { sampleOrderArray } from '../stubs/orderStub'

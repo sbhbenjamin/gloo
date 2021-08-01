@@ -8,7 +8,7 @@ import {
   renderWithLogin,
   renderWithOwnership,
 } from '../test-utils'
-import RegisterScreen from '../../screens/RegisterScreen'
+import RegisterScreen from '../../screens/registerScreen/RegisterScreen'
 import '@testing-library/jest-dom/extend-expect'
 import { cleanup } from '@testing-library/react'
 

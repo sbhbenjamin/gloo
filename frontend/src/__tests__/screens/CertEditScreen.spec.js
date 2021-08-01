@@ -10,7 +10,7 @@ import {
   screen,
   fireEvent,
 } from '../test-utils'
-import CertEditScreen from '../../screens/CertEditScreen'
+import CertEditScreen from '../../screens/certEditScreen/CertEditScreen'
 import {
   waitFor,
   cleanup,

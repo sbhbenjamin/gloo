@@ -9,7 +9,7 @@ import {
   renderWithCart,
   renderWithCartFull,
 } from '../test-utils'
-import PlaceOrderScreen from '../../screens/PlaceOrderScreen'
+import PlaceOrderScreen from '../../screens/placeOrderScreen/PlaceOrderScreen'
 import { createMemoryHistory } from 'history'
 
 let history

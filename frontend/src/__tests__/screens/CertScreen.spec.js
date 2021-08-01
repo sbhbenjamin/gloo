@@ -9,7 +9,7 @@ import {
   renderWithOwnership,
   screen,
 } from '../test-utils'
-import CertScreen from '../../screens/CertScreen'
+import CertScreen from '../../screens/certScreen/CertScreen'
 import {
   waitForElementToBeRemoved,
   cleanup,

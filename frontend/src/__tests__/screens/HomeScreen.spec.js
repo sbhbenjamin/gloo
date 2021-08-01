@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import { setupServer } from 'msw/node'
 import { render, screen } from '../test-utils'
-import HomeScreen from '../../screens/HomeScreen'
+import HomeScreen from '../../screens/homeScreen/HomeScreen'
 import { productList } from '../stubs/productStub'
 import { cleanup, waitForElementToBeRemoved } from '@testing-library/react'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
-import Product from '../../components/Product'
+import Product from '../../components/product/Product'
 import configureStore from 'redux-mock-store'
 import { render, screen } from '../test-utils'
 

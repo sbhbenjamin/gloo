@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import { setupServer } from 'msw/node'
 import { render, renderWithLogin, screen, fireEvent } from '../test-utils'
-import ProductCreateScreen from '../../screens/ProductCreateScreen'
+import ProductCreateScreen from '../../screens/productCreateScreen/ProductCreateScreen'
 import { createProductStub } from '../stubs/productStub'
 import { createMemoryHistory } from 'history'
 

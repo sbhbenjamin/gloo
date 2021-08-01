@@ -2,7 +2,7 @@ import React from 'react'
 import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
-import Message from '../../components/Message'
+import Message from '../../components/message/Message'
 
 afterEach(cleanup)
 

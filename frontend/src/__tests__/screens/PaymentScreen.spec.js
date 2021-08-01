@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import { render, screen, renderWithLogin, renderWithCart } from '../test-utils'
-import PaymentScreen from '../../screens/PaymentScreen'
+import PaymentScreen from '../../screens/paymentScreen/PaymentScreen'
 import { cleanup, waitFor } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 

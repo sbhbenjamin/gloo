@@ -8,7 +8,7 @@ import {
   renderWithLogin,
   renderWithOwnership,
 } from '../test-utils'
-import UserListScreen from '../../screens/UserListScreen'
+import UserListScreen from '../../screens/userListScreen/UserListScreen'
 import '@testing-library/jest-dom/extend-expect'
 import { cleanup, waitForElementToBeRemoved } from '@testing-library/react'
 import { arrayOfUsers } from '../stubs/userStub'

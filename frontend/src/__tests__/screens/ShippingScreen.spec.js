@@ -8,7 +8,7 @@ import {
   renderWithCart,
   renderWithCartFull,
 } from '../test-utils'
-import ShippingScreen from '../../screens/ShippingScreen'
+import ShippingScreen from '../../screens/shippingScreen/ShippingScreen'
 import { cleanup, waitFor } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 

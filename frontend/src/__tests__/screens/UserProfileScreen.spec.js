@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import { setupServer } from 'msw/node'
 import { render, renderWithLogin, screen } from '../test-utils'
-import UserProfileScreen from '../../screens/UserProfileScreen'
+import UserProfileScreen from '../../screens/userProfileScreen/UserProfileScreen'
 import { userProducts } from '../stubs/productStub'
 import {
   cleanup,
