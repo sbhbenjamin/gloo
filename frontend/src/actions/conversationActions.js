@@ -2,13 +2,10 @@ import axios from 'axios'
 import {
   CONVERSATION_CREATE_FAIL,
   CONVERSATION_CREATE_REQUEST,
-  CONVERSATION_CREATE_RESET,
   CONVERSATION_CREATE_SUCCESS,
   CONVERSATION_LIST_FAIL,
   CONVERSATION_LIST_REQUEST,
   CONVERSATION_LIST_SUCCESS,
-  CONVERSATION_SET_REQUEST,
-  CONVERSATION_SET_SUCCESS,
 } from '../constants/conversationConstants'
 
 export const listConversations = () => async (dispatch, getState) => {
@@ -85,6 +82,6 @@ export const createConversation = (product) => async (dispatch, getState) => {
           ? error.response.data.message
           : error.message,
     })
-    const { data } = await axios.post(`/api/conversations/${error}`)
+    await axios.post(`/api/conversations/${error}`)
   }
 }

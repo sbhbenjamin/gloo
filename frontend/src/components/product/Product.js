@@ -1,6 +1,6 @@
 import './product.css'
 import { Link } from 'react-router-dom'
-import { Card, Row, Col } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import Rating from '../rating/Rating'
 import { useSelector, useDispatch } from 'react-redux'
 

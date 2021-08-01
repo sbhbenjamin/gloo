@@ -20,7 +20,6 @@ const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id
 
   const [name, setName] = useState('')
-  const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
@@ -62,7 +61,6 @@ const ProductEditScreen = ({ match, history }) => {
         dispatch(listProductDetails(productId))
       } else {
         setName(product.name)
-        setPrice(product.price)
         setImage(product.image)
         setCategory(product.category)
         setDescription(product.description)

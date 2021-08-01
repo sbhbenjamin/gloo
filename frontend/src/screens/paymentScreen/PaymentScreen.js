@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../components/message/Message'
 import FormContainer from '../../components/formContainer/FormContainer'

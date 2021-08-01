@@ -58,7 +58,7 @@ const ChatProduct = ({ history, currentChat, setChildError, setChildInfo }) => {
   } = offerAccept
 
   const orderDetails = useSelector((state) => state.orderDetails)
-  const { order, loading: loadingDetails, error: errorDetails } = orderDetails
+  const { order, loading: loadingDetails } = orderDetails
 
   // lift errors to parent
   useEffect(() => {
