@@ -4,3 +4,10 @@
   border-bottom: 1px solid black;
   background-color: #e3e3e3;
 }
+
+/* Small Devices, Tablets equivalent to class sm */
+@media only screen and (max-width: 768px) {
+  .navbar-categories {
+    display: none;
+  }
+}

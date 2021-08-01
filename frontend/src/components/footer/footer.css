@@ -1,0 +1,17 @@
+footer {
+  margin-top: auto;
+  padding: 32px 0px;
+  background-color: #ced7d8;
+}
+
+footer,
+footer a {
+  color: #717171;
+}
+
+/* Small Devices, Tablets equivalent to class sm */
+@media only screen and (max-width: 768px) {
+  footer {
+    font-size: 14px;
+  }
+}
